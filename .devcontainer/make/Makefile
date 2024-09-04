@@ -10,8 +10,8 @@ LOGOS_FILES := $(wildcard ./logos/*.*)
 common_dest_files := $(patsubst ./common/%.tex, ${utils_PATH}/common/%.tex, $(COMMON_FILES))
 logos_dest_files := $(patsubst ./logos/%, ${utils_PATH}/logos/%, $(LOGOS_FILES))
 
-git_user := FluffLescure
-git_mail := lucas.lescure1@gmail.com
+git_user := USER HERE
+git_mail := MAIL HERE
 
 
 all : intro directories common logos snippets git
