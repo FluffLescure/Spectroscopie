@@ -1,0 +1,72 @@
+% Mathematics
+
+% Formatting
+\usepackage{amsmath}
+\usepackage{esvect}
+\usepackage{amsfonts}
+\usepackage{tasks,environ}
+\usepackage{xargs}
+\usepackage{esint}
+\usepackage[]{listings}
+
+
+\usepackage[english]{babel}
+\usepackage{amsthm}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{proof}{Proof}
+
+
+
+%Custom Shortcuts
+\newcommand{\eqi}{\Leftrightarrow}
+\newcommand{\lr}[1]{\left( #1 \right)}
+\newcommand{\limit}[1]{\displaystyle{\lim_{#1}}}
+\newcommand{\tab}{\hspace*{7mm}}
+\newcommand{\ds}[1]{\displaystyle{#1}}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\l}{\lambda}
+\newcommand{\seg}[1]{\overline{\rm {#1}}}
+\newcommand{\Int}{\int\limits}
+\newcommand{\ex}{\tab \uline{Example :}\hspace{0.2cm} }
+\newcommand{\vard}{\partial}
+\newcommand{\Q}{\mathcal{Q}}
+\newcommand{\Vect}{\operatorname{Vect}}
+\newcommand{\rg}{\operatorname{rg}}
+\renewcommand{\dim}{\operatorname{dim}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\blr}[1]{\left\{#1\right\}}
+\newcommand{\linecenter}[1]{\par\vspace{2mm} \centerline{#1}\par\vspace{-2mm}}
+\newcommand{\dd}{\textrm{d}}
+\newcommand{\supp}{\operatorname{Supp}}
+\renewcommand{\vec}{\overrightarrow}
+\renewcommand{\epsilon}{\varepsilon}
+
+% Matrix Configurations
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+    \hskip -\arraycolsep
+    \let\@ifnextchar\new@ifnextchar
+    \array{#1}}
+\makeatother
+
+
+% Colors
+\usepackage{xcolor}
+\newcommand{\blu}{\color{blue}}
+\newcommand{\Red}{\color{red}}
+\newcommand{\blac}{\color{black}}
+
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+\usepackage{xcolor,xspace}
+\usepackage{breqn}

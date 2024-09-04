@@ -1,0 +1,29 @@
+@charset "ISO-8859-1";/* CSS Document */
+html{
+	color:#000;
+	background:#FFF;
+}
+
+body{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+}
+
+div {
+	width: 45%;
+	display: flex;
+	justify-content: center;
+}
+
+img {
+	border: 0;
+}
+
+#n {
+	display: flex;
+	background-color: gray;
+	align-items: center;
+	justify-content: center;
+}

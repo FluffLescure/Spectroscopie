@@ -1,0 +1,80 @@
+h1 {
+    font-size: 64px;
+    text-align: center;
+}
+
+p:first-child {
+    margin-top: 0;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+#navbar {
+    text-align: center;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    margin-bottom: 20px;
+}
+
+#navbar a {
+    color: black;
+    text-decoration: none;
+}
+
+#navbar ul {
+    list-style: none;
+}
+
+#navbar li {
+    padding: 0px 10px 0px 10px;
+}
+
+
+#profile,
+#MaritalStatus {
+    height: 120px;
+    border: 1px solid gray;
+}
+
+#profile {
+    width: 100px;
+}
+
+#box {
+    margin-left: 10%;
+}
+
+#MaritalStatus {
+    width: 57%;
+    height: 120px;
+    align-items: center;
+    margin-right: 10%;
+    color: lightgray;
+}
+
+#info {
+    padding: 0 10% 0 10%;
+    margin-top: 30px;
+}
+
+#info h2,
+#info hr {
+    margin: 0 0 0 0;
+}
+
+#info h2 {
+    color: gray;
+}
+
+#info ul {
+    margin-top: 5px;
+}
+
+footer {
+    margin-top: 5px;
+    padding-top: 5px;
+    text-align: center;
+    border-top: 2px solid black;
+}

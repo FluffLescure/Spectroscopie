@@ -1,0 +1,74 @@
+% Table of Contents
+
+\renewcommand*\thechapter{\arabic{chapter}} %Usually Roman
+\renewcommand*\thesection{\arabic{section}}
+\newcommand*\thearsection{\arabic{subsection}}
+\renewcommand*\thesubsubsection{\thesubsection.\alph{subsubsection}}
+\renewcommand*\thefigure{\arabic{figure}}
+\makeatletter
+\@removefromreset{section}{chapter}
+\makeatother
+
+
+% Table of Contents
+
+\usepackage{titletoc}
+\usepackage{ erewhon,cabin}
+\usepackage[linktoc=all]{hyperref}
+\renewcommand*\contentsname{\centerline{\toctitle}}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{\toccount}
+
+\usepackage[subfigure]{tocloft}
+\setlength\cftparskip{0pt}
+
+\usepackage{etoolbox}
+\makeatletter
+\pretocmd{\chapter}{\addtocontents{toc}{\protect\addvspace{5\p@}}\thispagestyle{plain}}{}{}
+\pretocmd{\section}{\addtocontents{toc}{\protect\addvspace{-10\p@}}}{}{}
+\pretocmd{\subsection}{\addtocontents{toc}{\protect\addvspace{1\p@}}}{}{}
+\makeatother
+
+
+% Chapter Style
+\titlecontents{chapter}
+[7em]
+{\bigskip}
+{\bfseries\textsc\tocchapter~\textsc\thecontentslabel : \textsc}
+{\hspace*{-5.5em}\textbf}
+{\titlerule*[1pc]{ }}[\smallskip]
+
+% Section Style
+\titlecontents{section}
+[3em] % i
+{\bigskip\bfseries}
+{\fontsize{11}{13.2}\bfseries\uline{Lesson \thecontentslabel.\enspace}\uline}
+{\hspace*{-4em}\textbf}
+{\hspace{-2mm}\titlerule*[0.5pc]{\uline{\hspace{2.115mm}}}\contentspage}
+
+% Subsection Style
+\titlecontents{subsection}
+[5em] % i
+{\smallskip\bfseries}
+{\fontsize{10}{12}\bfseries\thecontentslabel.\enspace}
+{\hspace*{-4em}}
+{\titlerule*[0.5pc]{.}\contentspage}
+
+
+
+% Subsubsection Style
+\titlecontents{subsubsection}
+[7em] % i
+{\smallskip}
+{\fontsize{10}{12}\thecontentslabel)\enspace}
+{\hspace*{-4em}}
+{\titlerule*[0.5pc]{.}\contentspage}
+
+
+
+
+
+
+
+

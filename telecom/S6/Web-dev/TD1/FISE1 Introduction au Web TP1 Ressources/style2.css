@@ -1,0 +1,27 @@
+@charset "ISO-8859-1";/* CSS Document */
+html{
+	color:#000;
+	background:#FFF;
+}
+
+#h {
+	text-align: right;
+}
+
+#h img {
+	border: 0;
+}
+
+#m {
+	float: left;
+	width: 10em;
+	border: 5px solid yellow;
+}
+
+#n {
+	background-color: gray;
+}
+
+#f {
+	clear:left;
+}

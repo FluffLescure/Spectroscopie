@@ -1,0 +1,125 @@
+\addvspace {5\p@ }
+\contentsline {chapter}{\numberline {I}Modelling and First-Order Ordinary Differential Equations}{5}{chapter.1}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {I}Solving Simple Differential Equations and Modelling}{5}{section.1.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {I.1}Properties}{5}{subsection.1.1.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {I.2}Mathematical Modelling}{6}{subsection.1.1.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {I.3}Systems and Signals}{7}{subsection.1.1.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {I.4}System using Newton's second law}{7}{subsection.1.1.4}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {II}Solving First-2Order Ordinary Differential Equations}{9}{section.1.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {II.1}Separation of Variables}{9}{subsection.1.2.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {II.2}Variation of Parameters}{9}{subsection.1.2.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {II.3}Integrating Factor}{10}{subsection.1.2.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {II.4}Linear Combination}{10}{subsection.1.2.4}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {II.5}Superposition Principle}{10}{subsection.1.2.5}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {II.6}Non-Linear Case}{11}{subsection.1.2.6}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {II.7}Crime Scene Investigation Application}{12}{subsection.1.2.7}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {II.8}Uniqueness and Existence theorem}{12}{subsection.1.2.8}%
+\addvspace {5\p@ }
+\contentsline {chapter}{\numberline {II}Complex Exponential and Ordinary Differential Equation}{13}{chapter.2}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {III}The Complex Exponential Function}{13}{section.2.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {III.1}Definition}{13}{subsection.2.3.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {III.2}Existence and Uniqueness of the Complex Exponential}{14}{subsection.2.3.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {III.3}Graphing the Complex Exponential function}{15}{subsection.2.3.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {III.4}Complex Polynomials}{15}{subsection.2.3.4}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {IV}Homogeneous Second-Order Linear Ordinary Differential Equation}{16}{section.2.4}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {IV.1}Introduction}{16}{subsection.2.4.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {IV.2}Spring Mass Dash-pot system}{17}{subsection.2.4.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {IV.3}Two distinct real roots}{17}{subsection.2.4.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {IV.4}Two distinct complex roots}{18}{subsection.2.4.4}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {IV.5}Spring Mass Solution}{18}{subsection.2.4.5}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {IV.6}Coefficients for the real solution}{19}{subsection.2.4.6}%
+\addvspace {5\p@ }
+\contentsline {chapter}{\numberline {III}Damped Functions}{21}{chapter.3}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {V}Lesson V: Sinusoidal Functions}{21}{section.3.5}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {V.1}Introduction}{21}{subsection.3.5.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {V.2}From rectangular to polar form}{21}{subsection.3.5.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {V.3}Proof of the trigonometric identities}{22}{subsection.3.5.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {V.4}Sketching the solution to an under-damped spring-mass-dashpot system}{22}{subsection.3.5.4}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {VI}Lesson VI: Damped Harmonic Oscillations}{24}{section.3.6}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VI.1}Damping}{24}{subsection.3.6.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VI.2}Sum-up}{26}{subsection.3.6.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VI.3}Stability of a boat}{27}{subsection.3.6.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VI.4}Effects of boat shape}{27}{subsection.3.6.4}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {VII}Higher Order Linear Ordinary Differential Equations}{29}{section.3.7}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VII.1}Motivation}{29}{subsection.3.7.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VII.2}Span of a set of functions}{29}{subsection.3.7.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VII.3}Vector Spaces}{30}{subsection.3.7.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VII.4}Linear Independence}{30}{subsection.3.7.4}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VII.5}A Basis}{31}{subsection.3.7.5}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VII.6}Dimensions}{31}{subsection.3.7.6}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VII.7}Higher order linear ordinary differential equations}{32}{subsection.3.7.7}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VII.8}Complex and Real valued basis}{32}{subsection.3.7.8}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VII.9}Existence and uniqueness}{32}{subsection.3.7.9}%
+\addvspace {5\p@ }
+\contentsline {chapter}{\numberline {IV}Exponential Response and Resonance}{33}{chapter.4}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {VIII}Operators and Exponential Response}{33}{section.4.8}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VIII.1}Linear Operators}{33}{subsection.4.8.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VIII.2}Inhomogeneous Equation}{34}{subsection.4.8.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VIII.3}Particular Solution}{35}{subsection.4.8.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VIII.4}Existence and Uniqueness}{35}{subsection.4.8.4}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VIII.5}Basis of a Higher Order System}{36}{subsection.4.8.5}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VIII.6}Repeated Roots}{37}{subsection.4.8.6}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {VIII.7}Summing Up}{37}{subsection.4.8.7}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {IX}Complex Replacement Gain and Phase Lag Stability}{39}{section.4.9}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {IX.1}Complex Replacement}{39}{subsection.4.9.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {IX.2}Phase Lag}{39}{subsection.4.9.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {IX.3}Tides}{40}{subsection.4.9.3}%
+\contentsfinish 

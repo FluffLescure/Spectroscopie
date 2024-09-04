@@ -1,0 +1,163 @@
+\documentclass[11pt, openright]{book}
+
+    % Cover Variables
+    \newcommand{\ctoptitle}{RAPPORT DE SYNTHÈSE}
+    \newcommand{\ctitle}{STAGE OPERATIONNEL}
+    \newcommand{\cautor}{Lucas Lescure}
+    \newcommand{\cdate}{27.05.2024/21.06.2024}
+    \newcommand{\sectittle}{Capteur à fibre optique}
+    \newcommand{\sectoptittle}{pour les environment extrèmes}
+
+
+    % Header Variables
+        \newcommand{\headRE}{Stage opérationnel}
+        \newcommand{\headLE}{\emph{\rightmark}}
+        \newcommand{\footRE}{Lucas Lescure $-$ \cdate}
+        \newcommand{\footLE}{\emph{\thepage}}
+
+    % TOC Variables
+        \newcommand{\toctitle}{Table des Matières}
+        
+        \newcommand{\tocchapter}{Chapter}
+        \newcommand{\toccount}{2}
+  
+    % Chapter Variables
+        \newcommand{\chvar}{Chapter -}
+
+\input{/home/archlinux/.config/latex-utils/common/style.tex}
+\input{/home/archlinux/.config/latex-utils/common/math.tex}
+\input{/home/archlinux/.config/latex-utils/common/header.tex}
+\input{/home/archlinux/.config/latex-utils/common/toc.tex}
+
+    % figure support
+    \usepackage{import}
+    \usepackage{xifthen}
+    \pdfminorversion=7
+    \usepackage{pdfpages}
+    \usepackage{transparent}
+    \newcommand{\incfig}[1]{%
+            \def\svgwidth{\columnwidth}
+            \import{./figures/}{#1.pdf_tex}
+    }
+
+    \pdfsuppresswarningpagegroup=1
+
+
+\begin{document}
+% Spacing
+\input{/home/archlinux/.config/latex-utils/common/begin.tex}
+
+% Cover
+\input{./cover.tex}
+    
+    \newpage
+
+    \section{Contexte et analyse du travail}
+     \subsection{Contexte du travail}
+
+
+      \begin{table}[ht!]
+         \centering
+         \caption{Tableau de contexte du travail}
+         \label{tab:label}
+         \begin{tabular}{|l|l|}
+            \hline
+            \multicolumn{2}{|c|}{\textbf{Identité de l'entreprise}}\\
+            \hline
+            Intitulé & Laboratoire Hubert-Curien\\
+            \hline
+            Localisation & Saint-Étienne, Loire, France\\
+            \hline
+            Secteur d'activité & Recherche et Développement\\
+            \hline
+            Effectif total & 200\\
+            \hline
+            \multicolumn{2}{|c|}{\textbf{Tuteur entreprise}}\\
+            \hline
+            Nom - Prénom & Emmanuel Marin\\
+            \hline
+            Fonction & Professeur des universités\\
+            \hline
+         \end{tabular}
+     \end{table}
+
+
+    Le laboratoire Hubert-Curien est un laboratoire de recherche. Il se spécialise, en partie, au capteur à fibres optiques construits à partir de réseaux de Bragg. Ces capteurs sont particulièrement utile pour mesurer des températures, des radiation ou des déformations et peuvent être adaptées pour l'application dans des environments extremes(hautes radiations et hautes températures). 
+    
+    Ces capteurs peuvent être construit à partir de réseaux de Bragg à pas court(FBG\footnote[1]{Fiber Bragg Gratings}) ainsi que des réseaux de Bragg à pas long(LPG\footnote[2]{Long Period Gratings}). Les FBG ont déjà été étudiés sous condition de températures et radiation élevés c'est donc pour cela que l'on s'intéressera au LPG et les effets sous des condition extrêmes.  
+    
+    En temps que disposition RSDD, le laboratoire possède un groupe de travail RSE constitué de Mme.Kachan et M.Maselet. Ces derniers s'occupent de résoudre les problématiques de dévelop\-pement durable afin de réduire l'impact environnemental du laboratoire.
+
+    Une partie de son engagement se repose sur les démarches de sécurité mise en place pour les employés. Plusieurs formations sont obligatoires pour l'utilisation de certains équipements scientifiques. Un exemple de ceci est la formation en électronique pour l'utilisation d'équipement spécialisé. Mais ils s'assurent aussi qu'il y ait une sensibilisation envers les danger et risques de ces équipements. Dans mon cas, j'ai du suivre une sensibilisation aux risques lié à l'utilisation de laser femto-seconde. Chaque formation étant suivie par des assistant de prévention pour évaluer les risques et dangers.
+
+    De plus, le laboratoire compartmentalize les zones de travail et d'équipements grâce à des badges d'accès. Chaque badge assurant que les personnes soient autorisées à être dans la zone et que les équipements soient utilisés par des personnes formées. Ceci est notamment important pour des équipements dangerous comme les lasers et les irradiateurs, qui peuvent causer des dommages irréversibles et néfastes pour la santé. 
+
+    Dans le cas des formations liées aux radiations, tout personnel concerné doit participer tout les 3 ans à une formation obligatoire de radioprotection. En plus de cela, ils doivent porter des dosimètres personnels pour mesurer l'exposition aux radiations et ainsi s'assurer que les doses reçues soient en dessous des limites autorisés. Chaque année, un bilan est fait pour évaluer les doses reçues et les risques encourus, suivi par l'agence de sûreté nucléaire(ASN).
+
+    Des tests de santé son également effectués, en particulier pour les opérateurs de lasers, qui sont assujettis à des tests de vision pour s'assurer qu'ils n'ont pas été affectés par des brûlures rétiniennes, qui sont irréversibles et peuvent entraîner une perte de vue partielle ou totale.
+    
+    
+    \subsection{Analyse du travail}
+
+    Mon travail consistait à fabriquer et caractériser des capteurs fait à partir de LPG pour des applications dans des environnements extrêmes. Pour cela il a fallu que je m'informe sur la physique complexe des LPG et des FBG pour comprendre comment ils fonctionnent et les contraintes  de fabrication. Au niveau théorique il a fallu en particulier m'intéresser à la propagation ondulatoire de la lumière dans une fibre, la théorie des modes couplées (et en partie la théorie des perturbations) et la théorie des réseaux de Bragg.
+
+    Une fois ayant compris les bases théoriques, il a fallu que j'effectue une formation obligatoire de sensibilisation aux risques liés à l'utilisation de laser. Cette formation m'a permis de comprendre les dangers liés à l'utilisation de laser femto-seconde et les mesures de sécurité à prendre pour éviter les accidents.
+    
+    Ce n'est qu'après tout ceci que j'ai pu commencer à travailler sur la partie de la photo-inscription des réseaux de Bragg. Pour me former à cela, j'ai assisté un doctorant dans sa thèse d'inscription de FBG  et le contrôle des spectres d'absorption de ce dernier liée au couplage des modes entre le coeur et la gaine de la fibre, pour des applications permettant une pluri-modalité de mesure (à la fois thermique et deformation physiques). 
+
+    Pendant cette période, nous avions eu des problèmes quand à la qualité du spectre de transmission du FBG. Un problème que l'on pense est lié au caractéristiques du faisceau quand à l'étape de photo-inscription. En considérant le faisceau comme un faisceau gaussien, on hypothèse que la puissance et la taille du faisceau qui touche le coeur dans une zone donné de la fibre modifie donc l'index de réfraction de cette zone à partir de l'effet Kerr optique, et induit par la suite un effet d'autofocalisation du faisceau. 
+    Cet effet crée alors sous la zone désirée de photo-inscription des zones de photo-inscription parasites qui dégradent la qualité du spectre de transmission du FBG. 
+
+    Pour tenter de résoudre ce problème nous avons dû revoir la configuration du montage laser, effectuer de nombreux réalignements et ajustements du faisceau afin d'obtenir un faisceau s'approchant le plus possible d'un faisceau gaussien idéal. Il a fallu également revoir les configuration logicielles de la photo-inscription pour s'assurer que les paramètres de photo-inscription soient correctement ajustés, et il a fallu que l'on revoit les condition de génération du faisceau. 
+
+    Chaque composant possédant de nombreux paramètres à ajuster, nous n'avions pas réussi à obtenir des condition de photo-inscription optimales permettant de mitiger ou éliminer les zones parasites.
+
+    La condition de photo-inscription étant un problème majeur, tant pour les FBG que pour les LPG, je n'ai pas encore pu photo-inscrire de LPG. Cependant, j'ai pu observer le processus de photo-inscription et de caractérisation des FBG, ce qui m'a permis de comprendre les étapes de fabrication et de caractérisation des réseaux de Bragg.
+
+     \section{Bilan personnel} 
+
+
+     Bien que la mission de stage n'aie pas été remplie, j'ai pu acquérir de nombreuses compétences techniques et théoriques. J'ai pu comprendre la physique des réseaux de Bragg et des fibres optiques, et j'ai pu apprendre à manipuler des équipements scientifiques complexes. J'ai également pu apprendre à travailler en équipe et à communiquer avec des personnes de différents horizons, en particulier dans un environment de recherche multilinguistique.
+
+     La fortune d'être trilingue m'a permis de communiquer avec des personnes de différentes nationalités et de comprendre les différentes cultures de travail. J'ai pu également apprendre à travailler de manière autonome et à gérer mon temps de travail de manière efficace. 
+
+     Mes savoir-faire en photonique ont été poussées et améliorés bien au delà de ce que j'aurais pu imaginer. J'ai découvert la rigueur et la précision indispensable à avoir dans un contexte de manipulation de laser ainsi qu'une disposition et une discipline de reflection face au problèmes complexes de la photo-inscription des réseaux de Bragg.
+
+     Grâce à ce stage j'ai pû contraster l'environment de travail en entreprise et en laboratoire. Ceci implique les contraintes de travailler sur un sujet de recherche auparavant non exploré, le ritme de découverte et d'apprentissage lié à la recherche, et la résolution autonome de problèmes apparaissant dans des condition d'experiences uniques. Cela étant bien différent du travail en entreprise, où les problèmes sont souvent déjà résolus et où le travail est plus orienté vers la production et la rentabilité, vis à vis d'un projet définit et déterminé, et d'un respect d'attribution hiérarchique des tâches.
+
+     Ayant adoré le fait d'apprendre tout les jours, je me suis souvent retrouvé à passer plus de temps que prévu au laboratoire ainsi que durant une partie de mon temps libre sur le projet de recherche.
+
+     Dans un contexte de projet professionnel d’ingénieur industriel en photonique, je n'ai jamais entretenu l'idée de la recherche. Ce stage m'as très agréablement surpris et m'as donné une nouvelle perspective sur la recherche en photonique. J'ai pu découvrir un monde de recherche passionnant et enrichissant, ce qui m'encourage désormais à entretenir l'idée de poursuivre une carrière en recherche, ou du moins à forte proximité de la recherche.
+     
+     Les compétences et les connaissance acquises durant ce stage sont précieuses pour mon projet professionnel, et ont réveillé une passion en photonique que je n'ai que ressenti il y a 5 ans durant un stage sur la caractérisation d'un faisceau gaussien. L'idée et le fait que l'on peut contrôler la lumière pour en faire des applications utiles et innovantes m'as toujours fasciné, et ce stage m'as permis de me rapprocher de cette passion.
+     
+     
+      \begin{table}[ht!]
+         \centering
+         \caption{Tableau de compétences}
+         \label{tab:label}
+         \begin{tabular}{|l|c|l|}
+        \hline
+         \multicolumn{1}{|c}{\textbf{Compétence}} & \multicolumn{1}{|c}{\textbf{Connaisances}} & \multicolumn{1}{|c|}{\textbf{Application}} \\
+        \hline
+        \multirow{3}{*}{\textbf{Photonique}} & \multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}Propagation ondulatoire de la lumière\\ Modes couplés\\ Réseaux de Bragg\end{tabular}} & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}} Charactérisation et simulation\\ du couplage et propagation\\ de la lumière \end{tabular}} \\
+         & & \\
+         & & \\
+        \hline 
+        \multirow{3}{*}{\textbf{Sécurité}} & \multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}Sensibilisation aux risques\\ liés à l'utilisation de laser\\ Formation en radioprotection\end{tabular}} & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Application des règles de sécurité\\ lors de l'utilisation de laser\\ et de radiations\end{tabular}} \\
+            & & \\
+            & & \\
+        \hline
+        \multirow{3}{*}{\textbf{Travail en équipe}} & \multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}Communication interculturelle\\ Travail en équipe\\ Gestion du temps\end{tabular}} & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}} Resolution de problèmes\\
+        Apports de connaissance et aide\\ \end{tabular}} \\
+            & & \\
+            & & \\
+        \hline 
+        \multirow{2}{*}{\textbf{Autonomie}} & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Travail autonome\\ Rigueur et précision\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}Recherche \\ Résolution de problèmes\end{tabular}} \\
+            & & \\
+        \hline
+         \end{tabular}
+     \end{table}
+
+
+\end{document}

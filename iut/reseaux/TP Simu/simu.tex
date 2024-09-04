@@ -1,0 +1,217 @@
+\documentclass[11pt]{book}
+
+\input{../.style.tex}
+
+\input{../.math.tex}
+
+\input{../.header.tex}
+	\pagestyle{fancy}
+	\fancyhf{}
+	\fancyhead[RE, LO]{\textbf{TP Réseau \hfill Semestre 3}}
+	\fancyfoot[LE, RO]{\textbf{Page \thepage}}
+	\fancyfoot[LO, RE]{\text{\rightmark}}
+	
+\input{../.toc.tex}
+
+% figure support
+\usepackage{import}
+\usepackage{xifthen}
+\pdfminorversion=7
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+	\def\svgwidth{\columnwidth}
+	\import{./figures/}{#1.pdf_tex}
+}
+
+\pdfsuppresswarningpagegroup=1
+
+\begin{document}
+	% Spacing 
+	\input{../.begin.tex}
+
+	%Cover
+	\input {../.cover.tex}
+
+    \section{Exercise 1 : Transmission Ethernet}
+
+        \begin{dent}{Q1 :} Quels types de câbles peut-on utiliser?\\
+            Nous avons le choix entre 4 types de cables différents: 
+            \begin{items}{-15pt}{-15pt}
+                \item Paire de cables torsadées droit 
+                \item Paire de cables torsadées croisé
+                \item Câble coaxial
+                \item Ligne telecom
+            \end{items}
+            On voit qu'avec la paire de cables torsadée droit, et ligne telecom il n'y a pas de transmission entre les deux machines, alors que pour la paire de cable torsadées croisé et le cable coaxial il y a une transmission entre les deux machines.
+         \end{dent}
+
+        \begin{dent}{Q2 :} Que se passe-t-il quand un système émet vers l'autre(broadcast-unicast)? Que se passe-t-il quand les 2 systèmes émettent l'un vers l'autre\\
+            \begin{enum}{-15pt}{-15pt}
+                \item[a.] Lorsqu'une machine émet une trame, celle-ci est émise à la deuxième machine dans son réseau. De même avec une transmission \texttt{unicast}.
+                \item[b.] Avec une paire torsadé croisé on voit que les deux trames sont envoyés sur un fil différent il n'y a pas de collision de la trame. Avec une paire de cable coaxial on voit que ces deux trames sont transmises sur un même fil, il y a donc une collision. Les deux machines attendes un moment aléatoire avant que l'une d'elle ne renvoi la trame. S'il n'y a pas encore une collision, la première trame est transmise en premier, puis une fois finie, la deuxième trame est envoyée. 
+            \end{enum}
+         \end{dent}
+
+        \begin{dent}{Q3 :} Après avoir vider les tables ARP de chaque machine, on effectue un ping de \texttt{st1} à \texttt{st2}\\
+            Quelles sont les trames mises en oeuvre lorsque \texttt{st1} fait un ping vers \texttt{st2}?\\
+            Quelle est la différence si on renouvelle ce ping (cache ARP)?
+
+            \begin{enum}{-15pt}{-15pt}
+                \item[a.] \texttt{st1} verifie sa table de routage pour savoir où envoyer la trame. Ensuite il envoi une requête ARP en broadcast vers tout les appareil. Quand \texttt{st2} reçois la trame il cherche l'IP source dans son cache, puisqu'elle n'y est pas, il rajoute l'IP avec l'adresse mac associé. Il examine ensuite la trame pour savoir si elle lui est destinée puis après avoir traité la trame il la renvoi une réponse ARP à la machine \texttt{st1}. Celle-ci ne reconnais pas la source et l'ajoute donc dans son cache. Après traitement du signal elle envoi une trame IP "\texttt{echo}" qui ping la machine \texttt{st2}, qui la renvoi ensuite après avoir traité et reconnue l'adresse source. Le paquet \texttt{EchoResponse} est lu par \texttt{st1} il sait donc que sont ping à bien été transmis. 
+                \item[b.] Quand leur table ARP est déjà remplie, c'est à dire que les deux machine se connaissent, il n'y a pas de requête ARP, on passe directement à l'envoi de la trame \texttt{echo} par transmission IP.
+            \end{enum}
+         \end{dent}
+        
+    \section{Exercise 2 : Plusieurs systèmes raccordés par un HUB}
+        
+        \begin{dent}{Q1 :} Quel type de câble peut-on utiliser?\\
+            On ne peut utiliser que la paire de cable torsadée droit. Ce qui est logique car en présence d'un HUB on ne passe plus par une connection entre deux appareil de même type, la liaison se fait entre de appareils de type différent. 
+         \end{dent}
+
+        \begin{dent}{Q2 \& Q3 :} Quels systèmes reçoivent la trame(\texttt{broadcast}/\texttt{unicast}), et lesquelles la traitent?
+
+            Lorsque l'on envoi une trame en \texttt{broadcast}, cette trame atteint toutes les machines liés au HUB, et elle est lu par tout le monde. En \texttt{unicast}, tout le monde reçois mais seulement la machine destinataire lit le message transmis.     
+         \end{dent}
+        
+        \begin{dent}{Q4 :}
+            Lorsque l'on a deux machines qui envoi simultanément une trame, lorsque les deux trames atteignent le HUB, il y a collision sur toutes les autres transmission. On attend un temps aléatoire avant que l'une n'envoi sa trame, s'il n'y a pas encore de collision alors la deuxième enverra sa trame une fois que la première se fasse traiter. 
+         \end{dent} 
+       
+
+	\newpage
+
+    \section{Exercise 3 : Plusieurs systèmes raccordés par un SWITCH}
+        
+        \begin{dent}{Q1 :} Quel type de cable faut-il utiliser?\\
+            Comme dans l'exercise précédent on doit utiliser le cable torsadée droit
+         \end{dent}
+
+        \begin{dent}{Q2 :} Différence entre "on the fly" et "store and forward"
+            \begin{enum}{-15pt}{-15pt}
+                \item[a.] Lorsque l'on met le switch en mode "on the fly" on voit que les trames sont à la fois routés vers le réseaux et sauvegardées en mémoire par la switch pour être sur qu'il n'y ai pas de collision sur les transmissions.  
+                \item[b.] En mode "store and forward" il attend d'avoir reçu la trame entièrement avant de les renvoyer sur les machines du réseau, on évite aussi les collision entre les trames. 
+            \end{enum}
+         \end{dent}
+
+        \begin{dent}{Q3 :} On affiche la table MAC/Port du switch :
+            \begin{figure}[ht]
+                \centering
+                \begin{tabular}{c|c|c}
+                    Addresse & Port & TTL\\
+                    \hline
+                    MAC01 & 1 & Elevé \\
+                    \hline
+                    MAC02 & 2 & Elevé \\
+                    \hline
+                    MAC03 & 3 & Elevé \\
+                    \hline
+                    MAC04 & 4 & Elevé \\
+                \end{tabular}
+                \caption{\ul{Table MAC/Port SWITCH}}
+            \end{figure}
+         \end{dent}
+        
+         \begin{dent}{Q4 \& Q5:} Que fait le switch?\\
+            Le switch transmet directement d'une machine à l'autre agissant comme un pont, seulement la machine destinée reçoit la trame.
+             
+          \end{dent}
+         
+
+        \begin{dent}{Q7 :} On affiche la table MAC/Port suite aux 3 transmissions:
+            \begin{figure}[ht]
+                \centering
+                \begin{tabular}{c|c|c}
+                    Addresse & Port & TTL\\
+                    \hline
+                    MAC01 & 1 & Élevé \\
+                    \hline
+                    MAC03 & 3 & Moyen \\
+                \end{tabular}
+                \caption{\ul{Table MAC/Port SWITCH}}
+            \end{figure}
+         \end{dent}
+        
+	\section{Exercise 4 : Système Complet}
+
+	On relève les IP de \texttt{st1} et \texttt{st5} :
+	\begin{items}{-15pt}{-15pt}
+		\item \texttt{st1} : 194.214.131.1 (Masque : 255.255.255.0)
+		\item \texttt{st5} : 161.3.1.5 (Masque : 255.255.0.0)
+	\end{items}
+	
+	\begin{figure}[ht!]
+		\centering
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			No. & Destination & Masque & Passerelle & Interface \\
+			\hline
+			1 & 194.214.131.1 & 255.255.255.255 & 194.214.131.1 & 194.214.131.1\\
+			\hline
+			2 & 194.214.131.0 & 255.255.255.0 & 194.214.131.1 & 194.214.131.1\\
+			\hline
+			3 & 194.214.131.255 & 255.255.255.255 & 194.214.131.1 & 194.214.131.1\\
+			\hline
+			4 & 0.0.0.0 & 0.0.0.0 & 194.214.131.4 & 192.214.131.1\\
+			\hline
+			
+		\end{tabular}
+		\caption{\ul{Table routage de \texttt{st1}}}
+	\end{figure}
+	
+	\begin{figure}[ht!]
+		\centering
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			No. & Destination & Masque & Passerelle & Interface \\
+			\hline
+			1 & 161.3.1.5 & 255.255.255.255 & 161.3.1.5 & 161.3.1.5\\
+			\hline
+			2 & 161.3.0.0 & 255.255.255.0 & 161.3.1.5 & 161.3.1.5\\
+			\hline
+			3 & 161.3.255.255 & 255.255.255.255 & 161.3.1.5 & 161.3.1.5\\
+			\hline
+			4 & 0.0.0.0 & 0.0.0.0 & 161.3.1.4 & 161.3.1.5\\
+			\hline
+			
+		\end{tabular}
+		\caption{\ul{Table routage de \texttt{st5}}}
+	\end{figure}
+	
+	\begin{figure}[ht!]
+		\centering
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			No. & Destination & Masque & Passerelle & Interface\\
+			\hline
+			1 & 161.3.1.4 & 255.255.255.255 & 161.3.1.4 & 161.3.1.4\\
+			\hline
+			2 & 161.3.0.0 & 255.255.255.0 & 161.3.1.4 & 161.3.1.4\\
+			\hline
+			3 & 161.3.255.255 & 255.255.255.255 & 161.3.1.4 & 161.3.1.4\\
+			\hline
+			4 & 194.214.131.4 & 255.255.255.255 & 194.214.131.4 & 194.214.131.4\\
+			\hline
+			5 & 194.214.131.0 & 255.255.255.0 & 194.214.131.4 & 194.214.131.4\\
+			\hline
+			6 & 194.214.131.255 & 255.255.255.255 & 194.214.131.4 & 194.214.131.4\\
+			\hline
+			
+		\end{tabular}
+		\caption{Table routage de \texttt{st4}}
+	\end{figure}
+	
+	Explain::
+
+	FAIRE EXO 
+
+	\section{Exercise 5}
+
+	On relève les adresses IP des machines \texttt{st1} et \texttt{st9}:
+	\begin{items}{-15pt}{-15pt}
+	\item \texttt{st1} : 194.214.131.4(255.255.255.0)
+	\item \texttt{st9} : 173.174.40.9(255.255.0.0)
+	\end{items}
+
+
+\end{document}

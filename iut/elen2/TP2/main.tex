@@ -1,0 +1,375 @@
+\documentclass[11pt, openright]{book}
+
+    % Cover Variables
+    \newcommand{\ctitle}{COMPTE-RENDU TP ELEN2}
+    \newcommand{\cautor}{Author}
+    \newcommand{\ctoptitle}{}
+
+    % Header Variables
+        \newcommand{\headRE}{\emph{\thepage}}
+        \newcommand{\headLE}{\emph{\thesection. \rightmark}}
+        \newcommand{\footRE}{}
+        \newcommand{\footLE}{}
+
+    % TOC Variables
+        \newcommand{\toctitle}{Table of Content}
+        \newcommand{\tocchapter}{Chapter}
+        \newcommand{\toccount}{3}
+  
+    % Chapter Variables
+        \newcommand{\chvar}{Chapter -}
+
+\input{/root/.config/latex-utils/common/style.tex}
+\input{/root/.config/latex-utils/common/math.tex}
+\input{/root/.config/latex-utils/common/header.tex}
+\input{/root/.config/latex-utils/common/toc.tex}
+
+
+\begin{document}
+% Spacing
+\input{/root/.config/latex-utils/common/begin.tex}
+
+% Cover
+\input{/root/.config/latex-utils/common/cover.tex}
+
+\newpage
+
+\section{Astable Functions}
+\subsection{Astable with NAND Logic Gate (4093)}
+
+\begin{figure}[ht]
+    \begin{floatrow}
+        \ffigbox{
+            \adjustbox{scale=0.8}{
+            
+                \includegraphics{./Circuits/C1.jpeg}
+                
+                \caption{Astable NAND Logic Gate Circuit}
+                
+            }
+        }
+        
+        \ffigbox{
+            \adjustbox{scale=0.8}{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                            legend pos=south east,
+                            legend entries={$V_s$, $V_c$},
+                            axis lines = middle,
+                            ytick={15,12.5, 10, 7.5, 5, 2.5, 0, -2.5, -5, -7.5, -10, -12.5, -15},
+                            yticklabels={ , ,10, , 5, , 0, , -5, , -10, , },
+                            xtick={-0.015, -0.0125, -0.01, -0.0075, -0.005, -0.0025, 0.0025, 0.005, 0.0075, 0.01, 0.0125, 0.015},
+                            xticklabels={ -15 , , -10, , -5, , , 5, , 10, ,15 },
+                            xmin=-0.012, xmax=0.012,
+                            ymin=-3, ymax=16, height=0.3\textwidth, width=0.5\textwidth,
+                            change x base,
+                            x SI prefix=milli,x unit=s,
+                            ylabel=\large{$V$},
+                            label style ={at={(ticklabel cs:1.15)}}]
+                        
+                        \addplot[orange, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/1.txt};
+                        \addplot[blue, smooth] table[x=TIME, y=Ve, col sep=space]{./Data/1.txt};
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Signal Response $V_c$ and $V_s$}
+            }
+        }
+        
+    \end{floatrow}
+\end{figure}
+
+According to theory, while the logic gate outputs $+15V$, pin 5 will be set to \verb|HIGH|, and the capacitor will start charging itself. When the capacitor meets its threshold voltage $9.4V$ the output flops to $0V$ at which point pin 5 is set to \verb|LOW| and pin 6 discharges from \verb|HIGH| until the negative threshold volatge of $7.3V$.
+
+This cycle repeats itself indefinetely creating a clock which can be seen on the signal response graph, and corresponds to the theoretical values.
+
+\subsection{Astable with NAND Logic Gate (4011)}
+
+\begin{figure}[ht]
+    \begin{floatrow}
+        \ffigbox{
+            \adjustbox{scale=0.8}{
+            
+                \includegraphics{./Circuits/C2.jpeg}
+                
+                \caption{Astable NAND Logic Gate Circuit}
+                
+            }
+        }
+        
+        \ffigbox{
+            \adjustbox{scale=0.8}{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                            legend pos=south east,
+                            legend entries={$V_a$, $V_s$,$V_c$,$V_b$},
+                            axis lines = middle,
+                            ytick={17.5, 15, 12.5, 10, 7.5, 5, 2.5, 0, -2.5, -5, -7.5, -12.5, -15},
+                            yticklabels={ , 15, ,10, , 5, , 0, , -5, , , , },
+                            xtick={-0.004, -0.003, -0.002, -0.001, 0.001, 0.002, 0.003, 0.004, 0.005},
+                            xticklabels={ -4, , -2, , , , 2, , 4, ,},
+                            xmin=-0.0032, xmax=0.0038,
+                            ymin=-10, ymax=20, height=0.3\textwidth, width=0.5\textwidth,
+                            change x base,
+                            x SI prefix=milli,x unit=s,
+                            ylabel=\large{$V$},
+                            label style ={at={(ticklabel cs:1.15)}}]
+                        
+                        \addplot[blue, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/2.txt};
+                        \addplot[orange, smooth] table[x=TIME, y=Ve, col sep=space]{./Data/2.txt};
+                        \addplot[red, smooth] table[x=TIME, y=Vc, col sep=space]{./Data/2.txt};
+                        \addplot[green, smooth] table[x=TIME, y=Va, col sep=space]{./Data/21.txt};
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Signal Response $V_a$, $V_b$, $V_c$ and $V_s$}
+            }
+        }
+        
+    \end{floatrow}
+\end{figure}
+
+Inicially the logic gates output $15V$ on pin 4 and pin 3. This in turn charges the capacitor allowing current to pass through and results in a spike in voltage at $V_a$, setting logic levels at pin 1 and 2 to \verb|HIGH|, returning $0V$  at output 3.
+
+As the voltage spike $V_a$ falls down to the threshold $6.8V$ for pins 5 and 6 the logic gate outputs $0V$ on pin 4, discharging the capcitor. A negative voltage spike on $V_a$ is then induced due to the capacitor, the output on pin 3 then flips to  $15V$ setting pin 6 to a \verb|LOW| logic level until the voltage rises to the $6.8V$ threshold as a result of the discharging capacitor.
+
+This cycle repeats itself indefinetely creating a clock which can be seen on the signal response graph, and corresponds to the theoretical values.
+
+\begin{figure}[ht]
+    \begin{floatrow}
+        \ffigbox{
+            \adjustbox{scale=0.8}{
+            
+                \includegraphics{./Circuits/C21.jpeg}
+                
+                \caption{Astable NAND Logic Gate Circuit with Enable Probe}
+                
+            }
+        }
+        
+        \ffigbox{
+            \adjustbox{scale=0.8}{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                            legend pos=south east,
+                            legend entries={$V_s$ (H), $V_a$ (H),$V_s$ (L),$V_a$ (L)},
+                            axis lines = middle,
+                            ytick={17.5, 15, 12.5, 10, 7.5, 5, 2.5, 0, -2.5, -5, -7.5, -12.5, -15},
+                            yticklabels={ , 15, ,10, , 5, , 0, , -5, , , , },
+                            xtick={-0.004, -0.003, -0.002, -0.001, 0.001, 0.002, 0.003, 0.004, 0.005},
+                            xticklabels={ -4, , -2, , , , 2, , 4, ,},
+                            xmin=-0.0032, xmax=0.0038,
+                            ymin=-10, ymax=20, height=0.3\textwidth, width=0.5\textwidth,
+                            change x base,
+                            x SI prefix=milli,x unit=s,
+                            ylabel=\large{$V$},
+                            label style ={at={(ticklabel cs:1.15)}}]
+                        
+                        
+                        \addplot[orange, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/22H.txt};
+                        \addplot[blue, smooth] table[x=TIME, y=Va, col sep=space]{./Data/22H.txt};
+                        \addplot[gray, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/22L.txt};
+                        \addplot[green, smooth] table[x=TIME, y=Va, col sep=space]{./Data/22L.txt};
+                        
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Signal Response $V_a$ and $V_s$ for P1 High and Low}
+            }
+        }
+        
+    \end{floatrow}
+\end{figure}
+
+As the probe \verb|P1| is set to a \verb|HIGH| logic state, the circuit appears to be functionning properly with no issues. The same however is not to be said when \verb|P1| is at a \verb|LOW| logic state, in which case the astable circuit no longer outputs a clock signal.
+
+Due to this particular functionality we can quickly spot that \verb|P1| acts as an enabling signal that can decide whether to turn the clock on or off. 
+
+\subsection{Astable with NE555}
+
+
+\begin{figure}[ht]
+    \begin{floatrow}
+        \ffigbox{
+            \adjustbox{scale=0.8}{
+            
+                \includegraphics{./Circuits/C3.jpeg}
+                
+                \caption{Astable NE555 Circuit}
+                
+            }
+        }
+        
+        \ffigbox{
+            \adjustbox{scale=0.8}{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                            legend pos=south east,
+                            legend entries={$V_s$, $V_c$},
+                            axis lines = middle,
+                            ytick={17.5, 15, 12.5, 10, 7.5, 5, 2.5, 0, -2.5, -5, -7.5, -12.5, -15},
+                            yticklabels={ , 15, ,10, , 5, , 0, , -5, , , , },
+                            xtick={0.0006, 0.00065, 0.0007, 0.00075, 0.0008, 0.00085, 0.0009, 0.00095, 0.001},
+                            xticklabels={ 600, , 700, , 800, , 900, , ,},
+                            xmin=0.00055, xmax=0.001,
+                            ymin=-10, ymax=20, height=0.3\textwidth, width=0.5\textwidth,
+                            change x base,
+                            x SI prefix=micro,x unit=s,
+                            ylabel=\large{$V$},
+                            label style ={at={(ticklabel cs:1.15)}}]
+                        
+                        
+                        \addplot[orange, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/3.txt};
+                        \addplot[blue, smooth] table[x=TIME, y=Va, col sep=space]{./Data/3.txt};
+                        
+                        \draw[orange,dashed] (0.000584,-10) -- (0.000584,20);
+                        \draw[orange,dashed] (0.000655,-10) -- (0.000655,20);
+                        \draw[orange, dashed] (0.000802,-10) -- (0.000802,20);
+                        
+                        \draw[orange, stealth-stealth] (0.000594, 16) -- (0.000645, 16);
+                        \draw[orange, stealth-stealth] (0.000665, 16) -- (0.000792, 16);
+                        
+                        
+                        \node at (0.000619,18) {\large{$T_L$}};
+                        \node at (0.000728,18) {\large{$T_H$}};                   
+                    \end{axis}
+                    
+                \end{tikzpicture}
+                \caption{Signal Response $V_c$ and $V_s$}
+            }
+        }
+        
+    \end{floatrow}
+\end{figure}
+
+After having set the circuit up, we carefully measure $T_L=70\ \mu s$ and $T_H=148\ \mu s$ with which we deduce the period $T=T_H+T_L=218\ \mu s$ and by extension the frequency $f=\frac{1}{T}=4.6\ kH_z$. The duty cycle can be easily obtained as $\tau=\frac{T_H}{T}=67.9\%$\\
+Level triggers are also measured to be around $10.2V$ for the positive threshold and $4.8V$ for the negative threshold.
+
+\begin{figure}[ht]
+    \begin{floatrow}
+        \ffigbox{
+            \begin{tabular}{|c|c|}
+                \hline
+                Properties       & Values       \\
+                \hline
+                $T_H$            & $148\ \mu s$ \\
+                $T_L$            & $70\ \mu s$  \\
+                \hline
+                Period           & $218\ \mu s$ \\
+                \hline
+                Duty Cycle       & $67.9\ \%$   \\
+                \hline
+                Frequency        & $4.6\ kH_z$  \\
+                \hline
+                Positive Trigger & $10.2\ V$    \\
+                Negative Trigger & $4.8\ V$     \\
+                \hline
+                
+            \end{tabular}
+            \caption{Measured Properties Summary}
+        }
+        
+        \ffigbox{
+            \begin{tabular}{|c|c|}
+                \hline
+                Properties       & Values        \\
+                \hline
+                $T_H$            & $138\ \mu s$  \\
+                $T_L$            & $69.3\ \mu s$ \\
+                \hline
+                Period           & $231\ \mu s$  \\
+                \hline
+                Duty Cycle       & $66.5\ \%$    \\
+                \hline
+                Frequency        & $4.5\ kH_z$   \\
+                \hline
+                Positive Trigger & $10\ V$       \\
+                Negative Trigger & $5\ V$        \\
+                \hline
+                
+            \end{tabular}
+            \caption{Datasheet Properties Summary}
+        }
+        
+    \end{floatrow}
+\end{figure}
+
+All mesured values correspond with those from the datasheet.
+
+As the \verb|Trigger| voltage rises due to the charging capacitor, the comparator compares its value to the threshold $\frac{2}{3}V_{CC}$, as it does the voltage outputed to the flipflop sets the \verb|Output| to \verb|+VCC|. 
+
+Once it reaches the threshold the capacitor starts to discharge and the comparator no longer outputs to the flipflop causing the second comparator to compare its value to the \verb|Threshold|, and since the latter is alway above $\frac{1}{3}V_{CC}$ the \verb|Output| signal is set to $0V$. Upon meeting the $\frac{1}{3}V_{CC}$ threshold the cycle then repeats itself as the capcitor charges and \verb|Output| is set back to \verb|+VCC|.
+
+This process can be seen on the signal response graph, as the capacitor charges, $V_s$ is at $15V$, and as it discharges, i$V_s$ falls down to $0V$.
+
+This type of astable circuit is particularly useful since the pulse width can easily be modulated by changing the values of the resistors or capacitors using the datasheet as a refferal.
+
+\subsection{Astable with Operational Amplifier}
+
+\begin{figure}[ht]
+    \begin{floatrow}
+        \ffigbox{
+            \adjustbox{scale=0.8}{
+            
+                \includegraphics{./Circuits/C4.jpeg}
+                
+                \caption{Astable Operational Amplifier Circuit}
+                
+            }
+        }
+        
+        \ffigbox{
+            \adjustbox{scale=0.8}{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                            legend pos=south east,
+                            legend entries={$V_s$, $V_c$},
+                            axis lines = middle,
+                            ytick={ 15, 12.5, 10, 7.5, 5, 2.5, 0, -2.5, -5, -7.5, -10, -12.5, -15},
+                            yticklabels={ 15, ,10, , 5, , , , -5, , -10, , -15},
+                            xtick={-0.0004, -0.0002, 0.0002, 0.0004, 0.0006, 0.0008, 0.001, 0.0012, 0.0014, 0.0016, 0.0018},
+                            xticklabels={ -4, , , 4, , 8, , 12, , 16, , },
+                            xmin=-0.00045, xmax=0.002,
+                            ymin=-16, ymax=16, height=0.3\textwidth, width=0.5\textwidth,
+                            change x base,
+                            x SI prefix=micro,x unit=s,
+                            ylabel=\large{$V$},
+                            label style ={at={(ticklabel cs:1.15)}}]
+                        
+                        
+                        \addplot[orange, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/4.txt};
+                        \addplot[blue, smooth] table[x=TIME, y=Vc, col sep=space]{./Data/4.txt};
+                        
+                    \end{axis}
+                    
+                \end{tikzpicture}
+                \caption{Signal Response $V_c$ and $V_s$}
+            }
+        }
+        
+    \end{floatrow}
+\end{figure}
+
+As the operational amplifier incicially outputs $15V$, a positive threshold value $7.5V$ is set on the positive input pin whilst on the negative pin the capacitor charges itself from $0V$. Upon reaching the set threshold, the output flops to $-15V$ setting the negative threshold value at $-7.5V$. 
+
+As a result of the negative voltage the capacitor discharges itself until  the negative threshold to which point the cycle repeats itself as the output of the operational amplifier is back at $15V$.
+
+This process can be seen on the signal response graph, as the capacitor charges, $V_s$ is at $15V$, and as it discharges, $V_s$ falls down to $-15V$.
+
+
+\section{Summary}
+
+\begin{enumerate}
+    \item The first circuit with the NAND logic gate (4093) is convenient as it requires minimal component to set a function clock, with so however, the pulse width modulation needs to be repeatedly calculated and the circuit itself offers no signal input that can act as an enbaling function for the clock.
+    \item The second circuit with the NAND logic gate (4011) offer the same features as the previous 4093 NAND gate, in addition to the possibility to enable to clock using an external signal input at \verb|P1|. The main drawback being that it requires two logic gates which can result in being more costly for extensive fabrication.
+    \item The NE555 Circuit is much more expensive in terms of cost as the component alone uses 1 flipflop, 2 comparators, and 2 transistor. This comes with a glad payoff were the clock itself can be easily mended with as the pulse width modulation is documented as well as its frequency and trigger levels. The component itself is very versatile and offers many more adjustable functions that other circuits do not have.
+    \item   Lastly, the astable operational amplifier circuit allows for a similar clock as the NAND logic gate (4093), although benefiting from high slew rate and wide output voltage range. With its counterpart it still lacks an enabling input and requires manual computation for its pulse width modulation.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\end{document}

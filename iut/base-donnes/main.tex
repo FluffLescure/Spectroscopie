@@ -1,0 +1,62 @@
+\documentclass[11pt, openright]{book}
+
+    % Cover Variables
+    \newcommand{\ctoptitle}{}
+	\newcommand{\ctitle}{Title}
+        \newcommand{\cautor}{Author}
+
+    % Header Variables
+        \newcommand{\headRE}{\emph{\thepage}}
+        \newcommand{\headLE}{\emph{\thesection. \rightmark}}
+        \newcommand{\footRE}{}
+        \newcommand{\footLE}{}
+
+    % TOC Variables
+        \newcommand{\toctitle}{Table of Content}
+        \newcommand{\tocchapter}{Chapter}
+        \newcommand{\toccount}{3}
+  
+    % Chapter Variables
+        \newcommand{\chvar}{Chapter -}
+
+\input{/root/.config/latex-utils/common/style.tex}
+\input{/root/.config/latex-utils/common/math.tex}
+\input{/root/.config/latex-utils/common/header.tex}
+\input{/root/.config/latex-utils/common/toc.tex}
+
+    % figure support
+	\usepackage{import}
+	\usepackage{xifthen}
+	\pdfminorversion=7
+	\usepackage{pdfpages}
+	\usepackage{transparent}
+	\newcommand{\incfig}[1]{%
+            \def\svgwidth{\columnwidth}
+            \import{./figures/}{#1.pdf_tex}
+	}
+
+	\pdfsuppresswarningpagegroup=1
+
+
+\begin{document}
+% Spacing
+\input{/root/.config/latex-utils/common/begin.tex}
+\newpage
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./object/g1.png}
+    \caption{Exercise vols d'avions}
+\end{figure}
+
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./object/g2.png}
+    \caption{Exercise Lignes}
+\end{figure}
+
+
+
+
+\end{document}

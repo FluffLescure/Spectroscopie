@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    padding: 5px;
+}
+
+#header,
+#main {
+    display: grid;
+    justify-content: space-between;
+}
+
+div {
+    border-width: 2px;
+    border-style: dotted;
+    border-color: red;
+}
+
+#header {
+    width: 80%;
+    margin-left: 10%;
+}
+
+#header h1 {
+    display: none;
+}
+
+#header p {
+    grid-column: 1;
+}
+
+#header img {
+    grid-column: 2;
+}
+
+#main {
+    flex: 1;
+    margin: 0px;
+    grid-template-columns: repeat(20, 1fr);
+}
+
+
+#center {
+    flex: 1;
+    padding: 0px;
+    grid-column: 4 / 20;
+}
+
+#center h2 {
+    margin: 10px;
+}
+
+#center p {
+    margin: 10px 0;
+    background-color: maroon;
+    color: green;
+}
+
+
+
+#center ul li {
+    margin: auto;
+
+}
+
+#center ul li sub {
+    color: red;
+}
+
+#left {
+    width: 15%;
+    background-color: teal;
+    color: aqua;
+    margin: 10px;
+    grid-column: 1 / 4;
+}
+
+#right {
+    width: 150px;
+    background-color: purple;
+    color: white;
+    padding: none;
+    font-size: 20px;
+    grid-column: 20;
+}

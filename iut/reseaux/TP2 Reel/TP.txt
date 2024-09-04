@@ -1,0 +1,111 @@
+== ARP == 
+
+1. Dessiner le réseau 4 machines 2 switch
+
+2.addr IP	addr MAC	type
+192.168.22.203	00-50-56-26-06-02	dynamique
+192.168.22.204	00-50-56-34-76-88	dynamique
+192.168.22.205	00-50-56-39-f3-56	dynamique
+
+3. arp -d <addr IP>
+
+4.On voit que le ping utilise le protocol ICMP et envoi un echo, d'abord demande (src->dest) et ensuite réponse (dest->src).
+
+Il y a un broadcast qui à lieu : 
+192.168.22.106	70:6b:b9:c6:88:0	ARP	192.168.22.206 is at 00:50:56:3c:7a:be
+192.168.22.106	Broadcast	ARP	Who has 192.168.22.205? Tell 192.168.22.206
+...
+192.168.22.205 192.168.22.106	ARP	192.168.22.205 is at 00:50:56:39:f3:56
+
+192.168.22.206	192.168.22.205	ICMP	Echo (ping) request
+192.168.22.205	192.168.22.206	ICMP	Echo (ping) reply
+
+
+
+5.En cliquant dessus on retrouve l'addr MAC de la source et destination. Ex [ping local -> 192.168.22.205(00-50-56-39-f3-56)]
+on retrouve :
+Frame 1088 (74 bytes on wire, 74 bytes captured)
+Ethernet II, Src: 192.168.22.106 (00:50:56:3c:7a:be), Dst 192.168.22.205 (00:50:56:39:f3:56) 
+Internet Protocol, Src: 192.168.22.206 (192.168.22.206), Dst: 192.168.22.205 (192.168.22.205)
+Internet Control Message Protocol
+
+
+6. Oui l'information est contenue comme vu au dessus
+
+7. On observe lors d'un nouveau ping seulement les trames ICMP entre les deux machines.
+
+== TOPOLOGIE RESEAU(théorique) == 
+
+8 & 9. Etude en simu à refaire !!
+
+== UTILISATION D'UN ROUTEUR == 
+
+Routeur 192.168.22.1(local) <-> 194.214.131.1(internet)
+
+On branche le pc 192.168.22.205 sur le reseaux internet, modifiant son ip à 194.214.131.205, avec passerelle à 194.214.131.1 car
+subnet mask à 255.255.255.0 
+
+10. Operating Mode : Router
+Destiniation	Mask	Gateway	Interface
+192.168.22.0	255.255.255.0	0.0.0.0	LAN & Wireless
+194.214.131.0	255.255.255.0	0.0.0.0 WAN (internet)
+0.0.0.0	0.0.0.0	194.214.131.254	WAN (internet)
+
+11.Machine locale
+Source	Destination	Protocol	Info
+192.168.22.106	Broadcast	ARP	Who has 192.168.22.1? Tell 192.168.22.206
+192.168.22.1	Broadcast	ARP	192.168.22.1 is at c8:d7:19:93:32:3d
+192.168.22.206	192.168.22.1	ICMP	Echo (ping) request
+192.168.22.1	192.168.22.206	ICMP	Echo (ping) reply
+
+Machine Internet
+Source	Destination	Protocol	Info
+194.214.131.1	192.168.22.205	IMCP	Echo (ping) request
+192.168.22.205	Broadcast	ARP	Who has 194.214.131.1? Tell 192.168.22.205
+194.214.131.1 192.168.22.105	ARP 	194.214.1131.1 is at c8:d7:19:93:32:3e
+192.168.22.205	194.214.131.1	IMCP	Echo (ping) reply
+
+
+Faire tableau des echanges.
+
+
+Le routeur agit comme une passerelle en ethernet, il se fait prendre pour la machine sur le résaux local.
+
+12. Destination	Mask	Gateway	interface
+0.0.0.0	0.0.0.0	192.168.22.1	192.168.22.1
+127.0.0.0	255.0.0.0	127.0.0.1	127.0.0.1
+192.168.22.0	255.255.255.0	192.168.22.206	192.168.22.206
+192.168.22.206	255.255.255.255 127.0.0.1	127.0.0.1
+
+
+L'ordre de priorité se lit du haut vers le bas
+
+13.Machine locale
+Source	Destination	Protocol	Info
+192.168.22.106	Broadcast	ARP	Who has 192.168.22.1? Tell 192.168.22.206
+192.168.22.1	Broadcast	ARP	192.168.22.1 is at c8:d7:19:93:32:3d
+192.168.22.206	192.168.22.1	ICMP	Echo (ping) request
+192.168.22.1	192.168.22.206	ICMP	Echo (ping) reply
+
+Machine Internet
+Source	Destination	Protocol	Info
+194.214.131.1	192.168.22.205	IMCP	Echo (ping) request
+192.168.22.205	Broadcast	ARP	Who has 194.214.131.1? Tell 192.168.22.205
+194.214.131.1 192.168.22.105	ARP 	194.214.1131.1 is at c8:d7:19:93:32:3e
+192.168.22.205	194.214.131.1	IMCP	Echo (ping) reply
+
+14. Destination	Mask	Gateway	interface
+0.0.0.0	0.0.0.0	192.168.22.1	192.168.22.1
+127.0.0.0	255.0.0.0	127.0.0.1	127.0.0.1
+192.168.22.0	255.255.255.0	192.168.22.206	192.168.22.206
+192.168.22.206	255.255.255.255 127.0.0.1	127.0.0.1
+
+
+L'ordre de priorité se lit du haut vers le bas
+
+15. Le serveur internet renvoi un erreur 404 suite à la demande de la machine.
+
+16. Aller à 194.214.131.205/toto.html
+
+
+

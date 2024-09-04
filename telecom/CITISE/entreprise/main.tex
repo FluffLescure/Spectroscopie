@@ -1,0 +1,91 @@
+\documentclass[11pt, openright]{book}
+
+    % Cover Variables
+	\newcommand{\ctitle}{Title}
+        \newcommand{\cautor}{Author}
+
+    % Header Variables
+        \newcommand{\headLE}{}
+        \newcommand{\headRE}{}
+        \newcommand{\footRE}{}
+        \newcommand{\footLE}{}
+
+    % TOC Variables
+        \newcommand{\toctitle}{Table of Content}
+        \newcommand{\tocchapter}{Chapter}
+        \newcommand{\toccount}{3}
+  
+    % Chapter Variables
+        \newcommand{\chvar}{Chapter -}
+
+\input{\string~/projects/common/style.tex}
+\input{\string~/projects/common/math.tex}
+\input{\string~/projects/common/header.tex}
+\input{\string~/projects/common/toc.tex}
+
+    % figure support
+	\usepackage{import}
+	\usepackage{xifthen}
+	\pdfminorversion=7
+	\usepackage{pdfpages}
+	\usepackage{transparent}
+	\newcommand{\incfig}[1]{%
+            \def\svgwidth{\columnwidth}
+            \import{./figures/}{#1.pdf_tex}
+	}
+
+	\pdfsuppresswarningpagegroup=1
+
+\begin{document}
+    % Spacing
+        \input{\string~/projects/common/begin.tex}
+	
+    \newpage
+
+	\pagestyle{plain}
+
+	\vspace{-2cm}
+
+	\begin{figure}[ht!]
+		\centering 
+		\includegraphics[width=0.5\textwidth]{./Logo.png}
+	\end{figure}
+
+	\vspace{1cm}
+
+Vous cherchez une expérience de plongée inoubliable et magique ? Ne cherchez plus ! Chez notre entreprise DOME, nous sommes passionnés par l'exploration de l'océan et nous sommes déterminés à offrir une expérience unique à nos clients. Inspirés par la façon dont les araignées sous-marines respirent à l'aide de petites bulles d'air, notre solution novatrice permet aux plongeurs occasionnels de respirer sous l'eau sans avoir besoin de remonter à la surface. 
+
+Nous sommes spécialisés dans la recherche et développement (R&D) de dômes sous-marins contenant de l'oxygène. Notre solution novatrice permet aux plongeurs occasionnels de respirer sous l'eau sans avoir besoin de remonter à la surface. Et le meilleur dans tout ça ? Nos dômes ont un impact minimal sur l'écosystème et peuvent être installés près de sites touristiques populaires, offrant ainsi aux visiteurs une vue rapprochée et personnelle de la vie marine comme jamais auparavant.
+
+Notre PME SAS, anciennment une startup, a été créée le 13 juillet 2021 et depuis lors, nous nous sommes engagés à investir dans la recherche et le développement pour fournir la meilleure solution possible à nos clients. 
+
+Actuellement situés à St-Aygulf, nous disposons d'un capital social de 615 000€. Avec un pôle de recherche de 160 personnes et un pôle de développement de 85 personnes, nous avons conçu une technologie de pointe pour des dômes sous-marins contenant de l'oxygène qui minimisent l'impact sur l'écosystème.
+
+Notre pôle commercial de 54 personnes travaille dur pour assurer la satisfaction de nos clients et a contribué à notre chiffre d'affaires de 39 630 100€ en 2022 avec des projets d'expansion vers d'autres destinations touristiques dans un proche avenir.
+
+Rejoignez-nous dans cette aventure passionnante pour explorer les profondeurs de l'océan comme jamais auparavant et créer des souvenirs inoubliables qui dureront toute une vie.
+
+\newpage
+
+	\begin{dent}{Organigramme (85-15\%):} Gestion de l'entreprise
+
+		\begin{figure}[!ht]
+			\centering
+			\begin{tikzpicture}
+				\draw[gray] (-5,2) -- (-2,2) -- (-2,-1) -- (-5,-1) -- (-5,2);
+				\node at (-3.5,1.5) {Pôle Gestion};
+				\node at (-3.5,1) {$\to$ 44 Personnes};
+				\node at (-3.5,0) {Pôle Commercial};
+				\node at (-3.5,-0.5) {$\to$ 10 personnes}
+			\end{tikzpicture}
+		\end{figure}
+		
+	\end{dent}
+
+
+
+
+	
+    
+
+\end{document}

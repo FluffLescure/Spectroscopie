@@ -1,0 +1,29 @@
+global
+function ctxmatcher (scope,name,c) {
+        let v = c.scopes.some(txCntx => txCntx.startsWith(scope));
+        return v
+    };
+    
+    let langs = [
+          [ "source.js"         , "javascript"    ]
+        , [ "source.ts"         , "typescript"    ]
+        , [ "source.shell"      , "shell"         ]
+        , [ "source.c"          , "clang"         ]
+        , [ "source.cpp"        , "cpp"           ]
+        , [ "source.py"         , "py"            ]
+        , [ "source.batchfile"  , "batch"         ]
+        , [ "text.html.markdown", "md"            ]
+    ];
+
+    for (let i=0; i < langs.length - 1; i++) {
+        let [ scope, name ] = langs[i];
+        if(this[name] !== null){
+            this[name] = ctxmatcher.bind(this, scope, name)
+        }
+    };
+
+endglobal
+
+snippet mains iA
+int main() {}
+endsnippet

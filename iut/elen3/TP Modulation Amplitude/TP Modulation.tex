@@ -1,0 +1,231 @@
+\documentclass[11pt, openright]{book}
+
+    % Cover Variables
+    \newcommand{\ctitle}{MODULATION EN AMPLITUDE}
+    \newcommand{\cautor}{Lucas Lescure - Eva Maturana}
+    \newcommand{\ctoptitle}{}
+
+    % Header Variables
+        \newcommand{\headRE}{\emph{\thepage}}
+        \newcommand{\headLE}{\emph{\thesection. \rightmark}}
+        \newcommand{\footRE}{}
+        \newcommand{\footLE}{}
+
+    % TOC Variables
+        \newcommand{\toctitle}{Table of Content}
+        \newcommand{\tocchapter}{Chapter}
+        \newcommand{\toccount}{3}
+  
+    % Chapter Variables
+        \newcommand{\chvar}{Chapter -}
+
+\input{/root/.config/latex-utils/common/style.tex}
+\input{/root/.config/latex-utils/common/math.tex}
+\input{/root/.config/latex-utils/common/header.tex}
+\input{/root/.config/latex-utils/common/toc.tex}
+
+    % figure support
+    \usepackage{import}
+    \usepackage{xifthen}
+    \pdfminorversion=7
+    \usepackage{pdfpages}
+    \usepackage{transparent}
+    \newcommand{\incfig}[1]{%
+            \def\svgwidth{\columnwidth}
+            \import{./figures/}{#1.pdf_tex}
+    }
+
+    \pdfsuppresswarningpagegroup=1
+
+    \newcommand{\tc}[2]{\textcolor{#1}{#2}}
+    
+
+\begin{document}
+% Spacing
+\input{/root/.config/latex-utils/common/begin.tex}
+
+% Cover
+\input{/root/.config/latex-utils/common/cover.tex}
+
+\newpage
+
+\section{Modulation avec porteuse}
+
+On règle un générateur à une fréquence de $450\ kH_z$, de forme sinusoidale et d'amplitude $4\ V_{pp}$ C'est ce que l'on utilisera comme signal porteur.\\
+Le deuxième sera réglé  a une fréquence de $10\ kH_z$ et d'amplitude $8\ V_{pp}$ et servira de signal modulant.
+
+\begin{figure}[ht]
+    \begin{floatrow}
+        \ffigbox{\includegraphics[width=0.45\textwidth]{./object/g1.png}\caption{Signal \tc{yellow}{Modulant} et \tc{blue}{Porteur}}}
+
+        \ffigbox{\includegraphics[width=0.45\textwidth]{./object/g2.png}\caption{Avec augmentation d'amplitude du \tc{yellow}{modulant}}}
+
+    \end{floatrow}
+\end{figure}
+
+On calcule à partir de l'oscilloscope un taux de modulation : $\ds{m=\frac{Y_{max}-Y_{min}}{Y_{max}+Y_{min}}=0.37}$
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./object/g4.png}
+    \caption{Modulation sans porteuse}
+\end{figure}
+
+On voit rapidement que l'amplitude du signal est réduite et que les pulsations sont deux fois plus nombreause par rapport à la modulation avec porteuse.
+
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{./object/g5.png}
+    \caption{Modulation avec porteuse en mode XY}
+\end{figure}
+
+On règle maintenant avec l'oscilloscope l'amplitude du signal modulant afin d'avoir un taux de modulation $m=0.5$. On trouve ainsi une tansion à $10\ V_{pp}$ pour le signal modulant.
+
+\newpage
+
+\section{Analyse Spectrale}
+
+\subsection{Avec porteuse}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.33\textwidth]{./object/g7.png}
+    \includegraphics[width=0.33\textwidth]{./object/g6.png}
+    \includegraphics[width=0.33\textwidth]{./object/g8.png}
+    \caption{Variation d'amplitude du modulant}
+\end{figure}
+
+On voit que plus l'amplitude augmente plus les deux pics sont grand, c'est à dire que leur tensions augmente.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.33\textwidth]{./object/g9.png}
+    \includegraphics[width=0.33\textwidth]{./object/g6.png}
+    \includegraphics[width=0.33\textwidth]{./object/g10.png}
+    \caption{Variation de fréquence du modulant $40\ kH_z$ et $3\ kH_z$}
+\end{figure}
+
+On voit que plus la fréquence augmente plus les deux pics s'éloignent du pic central.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.33\textwidth]{./object/g11.png}
+    \includegraphics[width=0.33\textwidth]{./object/g6.png}
+    \includegraphics[width=0.33\textwidth]{./object/g12.png}
+    \caption{Variation de fréquence de la porteuse $480\ kH_z$ et $420\ kH_z$}
+\end{figure}
+
+On voit que plus on varie la fréquence de la porteuse plus les raies sont décalés vers les fréquences supérieures, le pic central est déplacé à la fréquence de la porteuse.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.33\textwidth]{./object/g13.png}
+    \includegraphics[width=0.33\textwidth]{./object/g6.png}
+    \includegraphics[width=0.33\textwidth]{./object/g14.png}
+    \caption{Variation d'amplitude de la porteuse $7\ V_{pp}$ et $2\ V_{pp}$}
+\end{figure}
+
+Si l'amplitude de la porteuse augmente alors la tension de tout les pics augmente.
+
+\newpage
+
+\subsection{Sans porteuse}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.33\textwidth]{./object/g15.png}
+    \includegraphics[width=0.33\textwidth]{./object/g16.png}
+    \caption{Variation d'amplitude du modulant $20\ V_{pp}$ et $4\ V_{pp}$}
+\end{figure}
+
+Le pic central à disparu puisque celle-ci correspondait à la fréquence de la porteuse.\\
+Si l'on augmente l'amplitude du modulant les deux pics augmentent.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.33\textwidth]{./object/g17.png}
+    \includegraphics[width=0.33\textwidth]{./object/g18.png}
+    \caption{Variation de fréquence du modulant $40\ kH_z$ et $3\ kH_z$}
+\end{figure}
+
+Plus la fréquence augmente plus les deux pics s'éloignent l'un l'autre.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.33\textwidth]{./object/g19.png}
+    \includegraphics[width=0.33\textwidth]{./object/g20.png}
+    \caption{Variation de fréquence de la porteuse $7\ V_{pp}$ et $2\ V_{pp}$}
+\end{figure}
+
+Plus la fréquence de la porteuse est augmenté plus les deux pics sont décalé vers les hautes fréquences.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.33\textwidth]{./object/g21.png}
+    \includegraphics[width=0.33\textwidth]{./object/g22.png}
+    \caption{Variation d'amplitude de la porteuse $20\ V_{pp}$ et $4\ V_{pp}$}
+\end{figure}
+
+Plus l'amplitude augmente plus la tension des deux pics est haute.
+
+
+\newpage
+
+\section{Démodulation}
+
+\subsection{Avec porteuse}
+
+\begin{figure}[ht]
+    \begin{floatrow}
+        \ffigbox{\includegraphics[width=0.45\textwidth]{./object/g23.png}\caption{\tc{purple}{Démodulation} avec filtre RC }}
+
+        \ffigbox{\includegraphics[width=0.45\textwidth]{./object/g24.png}\caption{\tc{purple}{Démodulation} avec filtre RC + supplémentaire}}
+
+    \end{floatrow}
+\end{figure}
+
+On observe qu'avec le filtre supplémentaire le signal démodulé est bien plus propre cependant il perd en amplitude et se fait légèrement déphasé par rapport à son modulant.
+
+\subsection{Sans porteuse}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{./object/g25.png}
+    \caption{Démodulation à diode sans porteuse}
+\end{figure}
+
+Sans la porteuse on voit rapidement que le signal démodulé est porte un fréquence 2 fois plus haute et que l'amplitude est très réduite, d'ou l'imporatnce d'avoir un signal porteur pour mieux transmettre le modulant.
+
+\newpage
+
+\subsection{Démodulation synchrone}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./object/c1.png}
+    \includegraphics[width=0.6\textwidth]{./object/c2.png}
+\end{figure}
+
+En utilisant les fornules qui nous sont accéssibles pour le TP, on retourve un filtre avec $C_1 = 220\ pF$ et $R_1=10\ k\Omega, R_2=22\ k\Omega$.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.4\textwidth]{./object/g26.png}
+    \caption{Démodulation avec \tc{purple}{sortie modulateur2} et \tc{cyan}{démodulé}}
+\end{figure}
+
+On voit que le modulateur reconstitue le signal modulant à partir l'information qui lui est transmise en sortie du modulateur1.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.4\textwidth]{./object/g27.png}
+    \caption{Démodulation avec porteuse avec $C=1\ nF$}
+\end{figure}
+
+On voit que la trnasmission se fait également mais ils faut modifier la valeur des capacitances pour que le démodulateur puisse propremment démodulé le signal.
+
+Entre ces deux transmission on voit cependant qu'avec la porteuse le signal démodulé est plus conforme au signal modulant. Sans la porteuse, l'amplitude du signal est affaiblie.
+
+
+testing again
+\end{document}

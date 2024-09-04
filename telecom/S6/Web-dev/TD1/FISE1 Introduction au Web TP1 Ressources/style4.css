@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";/* CSS Document */
+html{
+	color:#000;
+	background:#FFF;
+}
+
+body{
+	display: flex;
+}
+
+div {
+	margin: 15px;
+}
+
+img {
+	border: 0;
+}
+
+#n {
+	background-color: gray;
+}

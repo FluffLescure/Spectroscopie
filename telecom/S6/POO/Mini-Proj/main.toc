@@ -1,0 +1,34 @@
+\babel@toc {english}{}\relax 
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {1}Specification du jeu}{5}{section.0.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {1.1}Principe}{5}{subsection.0.1.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {1.2}Fonctionnalités}{5}{subsection.0.1.2}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {2}Diagramme de classes}{6}{section.0.2}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {3}Description des classes}{7}{section.0.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.1}Config - Lucas Lescure}{7}{subsection.0.3.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.2}GameGrid - Tom Paillet}{7}{subsection.0.3.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.3}GameLetter - Tom Paillet}{7}{subsection.0.3.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.4}GameLevel - Lucas Lescure}{8}{subsection.0.3.4}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.5}GameLogs - Tom Paillet}{8}{subsection.0.3.5}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.6}GameScore - Lucas Lescure}{8}{subsection.0.3.6}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.7}Input - Tom Paillet}{8}{subsection.0.3.7}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.8}LetterBlock - Lucas Lescure}{9}{subsection.0.3.8}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.9}MainGame - Lucas Lescure}{9}{subsection.0.3.9}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.10}Wordle - Tom Paillet}{9}{subsection.0.3.10}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {4}Annexe}{10}{section.0.4}%
+\contentsfinish 

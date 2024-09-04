@@ -1,0 +1,41 @@
+\addvspace {5\p@ }
+\contentsline {chapter}{\numberline {1}Interférences de deux sources}{3}{chapter.1}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1.1}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {2}Fentes de Young}{3}{section.1.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {2.1}Rappel théorique}{3}{subsection.1.2.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {2.2}Mesures}{4}{subsection.1.2.2}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {3}Interférence de deux sources ponctuelles par biprisme de Fresnel}{5}{section.1.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.1}Le biprisme de Fresnel}{5}{subsection.1.3.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.2}Travail préparatoire}{5}{subsection.1.3.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.3}Mesures}{5}{subsection.1.3.3}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {4}Annexe}{7}{section.1.4}%
+\addvspace {5\p@ }
+\contentsline {chapter}{\numberline {2}Interféromètre de Michelson}{9}{chapter.2}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {1}Introduction}{9}{section.2.1}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {2}Théorie et travail préparatoire}{10}{section.2.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {2.1}Rappel théorique}{10}{subsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.a}Figure d'interférence}{10}{subsubsection.2.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.b}Cohérence}{11}{subsubsection.2.2.1.2}%
+\addvspace {-10\p@ }
+\contentsline {section}{\numberline {3}Test et mesures}{12}{section.2.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.1}Tests préliminaires}{12}{subsection.2.3.1}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.2}Détermination de la longueur d'onde de la source laser}{12}{subsection.2.3.2}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.3}Détermination du coefficient de dilatation thermique de l'aluminium}{13}{subsection.2.3.3}%
+\addvspace {1\p@ }
+\contentsline {subsection}{\numberline {3.4}Interférences avec une source LED cohérente}{14}{subsection.2.3.4}%
+\contentsfinish 

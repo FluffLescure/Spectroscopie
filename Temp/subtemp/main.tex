@@ -1,0 +1,559 @@
+\documentclass[11pt, openright]{book}
+
+
+    \usepackage{bodegraph}
+    \usepackage{xcolor}
+    \usepackage{pgfplots}
+    \usepackage[]{amsmath}
+
+    \usepackage[]{circuitikz}
+
+
+\begin{document}
+
+
+\newpage
+
+%\newpage
+%\begin{figure}[ht!]
+%    \begin{tikzpicture}
+%        \begin{axis}[
+%                grid=both,
+%                width=0.8\textwidth, height=0.4\textwidth,
+%                xlabel={Temps ($ms$)},
+%                ylabel={Amplitude ($mA$)},
+%                xmin=0,
+%                xmax=50,
+%                ymin=-50,
+%                ymax=50,
+%                legend pos=south east,
+%            ]
+%
+%            \addplot [blue,thick] table [x expr=\thisrowno{0}*1e3, y expr=\thisrowno{1}*1e3, col sep=space] {../data/circuit-pb1.txt};
+%            \addlegendentry[]{$I_{casque}  $};
+%        \end{axis}
+%    \end{tikzpicture}
+%\end{figure}
+%
+%\begin{tikzpicture}[scale=.8]
+%    \begin{axis}[xmode=log,
+%            width=0.6\textwidth, height=0.35\textwidth,
+%            minor x tick num=9,
+%            xtick pos=bottom,
+%            xtick align=outside,
+%            ytick pos=bottom,
+%            ytick align=outside,
+%            xmin=10,
+%            xmax=1e5,
+%            ymin=-20,
+%            ymax=60,
+%            xlabel={Fréquence ($Hz$)},
+%            x label style={at={(axis description cs:0.5,-0.025)},anchor=north},
+%            ylabel={Gain($dB$)},
+%            grid=both]
+%        \addplot [blue,thin] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}, col sep=space] {../data/g2.txt};
+%        \addplot [red,thin] table [x expr=\thisrowno{0}, y expr=\thisrowno{2}, col sep=space] {../data/g2.txt};
+%        \addlegendentry[]{$V_{out}$};
+%        \addlegendentry[]{$V_{th}$};
+%    \end{axis}
+%\end{tikzpicture}
+%
+%\begin{tikzpicture}[scale=.8]
+%    \begin{axis}[xmode=log,ymode=log,
+%            width=0.6\textwidth, height=0.35\textwidth,
+%            minor x tick num=9,
+%            xtick pos=bottom,
+%            xtick align=outside,
+%            ytick pos=bottom,
+%            ytick align=outside,
+%            ytick={0.001,0.01,0.1,1,10,100},
+%            yticklabels={ ,$10^{-2}$,$10^{-1}$,$1$,$10$,$100$},
+%            xmin=10,
+%            xmax=1e5,
+%            ymin=0,
+%            ymax=100,
+%            xlabel={Fréquence ($Hz$)},
+%            x label style={at={(axis description cs:0.5,-0.025)},anchor=north},
+%            ylabel={erreur($\%$)},
+%            grid=both]
+%        \addplot [blue,thin] table [x expr=\thisrowno{0}, y expr=abs(\thisrowno{1}-\thisrowno{2})/\thisrowno{2}*100, col sep=space] {../data/g2.txt};
+%        \addlegendentry[]{$e_r$};
+%    \end{axis}
+%\end{tikzpicture}
+%
+%%
+%%\begin{tikzpicture}[scale=.8]
+%%    \begin{axis}[xmode=log,
+%%            width=0.6\textwidth, height=0.35\textwidth,
+%%            minor x tick num=9,
+%%            xtick pos=bottom,
+%%            xtick align=outside,
+%%            ytick pos=bottom,
+%            ytick align=outside,
+%            xmin=10,
+%            xmax=1e5,
+%            ymin=0,
+%            ymax=70,
+%            xlabel={Fréquence ($Hz$)},
+%            x label style={at={(axis description cs:0.5,-0.025)},anchor=north},
+%            ylabel={Gain($dB$)},
+%            legend pos=south east,
+%            grid=both]
+%        \addplot [blue,thin] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}, col sep=space] {../data/g3.txt};
+%        \addlegendentry[]{$V_{out}/V_E$};
+%    \end{axis}
+%\end{tikzpicture}
+%\newpage
+%\begin{figure}[ht!]
+%    \begin{tikzpicture}
+%        \begin{axis}[
+%                grid=both,
+%                minor x tick num=1,
+%                width=0.8\textwidth, height=0.4\textwidth,
+%                xlabel={Temps ($ms$)},
+%                ytick={-750,-500,-250,0,250,500,750},
+%                ylabel={Amplitude ($mV$)},
+%                xmin=0,
+%                xmax=10,
+%                ymin=-900,
+%                ymax=900,
+%                legend pos=south east,
+%            ]
+%
+%            \addplot [blue,thick] table [x expr=\thisrowno{0}*1e3, y expr=\thisrowno{1}*1e3, col sep=space] {../data/g3-1.txt};
+%            \addlegendentry[]{$V_{out}$};
+%        \end{axis}
+%    \end{tikzpicture}
+%\end{figure}
+%
+%\newpage
+%\begin{figure}[ht!]
+%    \begin{tikzpicture}
+%        \begin{axis}[
+%                grid=both,
+%                minor x tick num=1,
+%                width=0.8\textwidth, height=0.4\textwidth,
+%                xlabel={Temps ($\mu s$)},
+%                ytick={-750,-500,-250,0,250,500,750},
+%                ylabel={Amplitude ($mV$)},
+%                xmin=0,
+%                xmax=500,
+%                ymin=-900,
+%                ymax=900,
+%                legend pos=south east,
+%            ]
+%
+%            \addplot [blue,thick] table [x expr=\thisrowno{0}*1e6, y expr=\thisrowno{1}*1e3, col sep=space] {../data/g3-2.txt};
+%            \addlegendentry[]{$V_{out}$};
+%        \end{axis}
+%    \end{tikzpicture}
+%\end{figure}
+%
+%\begin{figure}[ht!]
+%    \begin{tikzpicture}
+%        \begin{axis}[
+%                grid=both,
+%                minor x tick num=1,
+%                width=0.8\textwidth, height=0.4\textwidth,
+%                xlabel={Temps ($ms$)},
+%                ytick={-750,-500,-250,0,250,500,750},
+%                ylabel={Amplitude ($mV$)},
+%                xmin=0,
+%                xmax=500,
+%                ymin=-900,
+%                ymax=900,
+%                legend pos=south east,
+%            ]
+%
+%            \addplot [blue,thick] table [x expr=\thisrowno{0}*1e6, y expr=\thisrowno{1}*1e3, col sep=space] {../data/g3-2.txt};
+%            \addlegendentry[]{$V_{out}$};
+%        \end{axis}
+%    \end{tikzpicture}
+%\end{figure}
+%
+%
+%\newpage
+%%
+%\begin{figure}[ht!]
+%    \begin{tikzpicture}
+%        \begin{axis}[
+%                grid=both,
+%                minor x tick num=1,
+%                width=0.8\textwidth, height=0.4\textwidth,
+%                xlabel={Temps ($ms$)},
+%                ytick={-75,-50,-25,0,25,50,75},
+%                ylabel={Amplitude ($mA$)},
+%                xmin=0,
+%                xmax=10,
+%                ymin=-100,
+%                ymax=100,
+%                legend pos=south east,
+%            ]
+%
+%            \addplot [blue,thick] table [x expr=\thisrowno{0}*1e3, y expr=\thisrowno{1}*1e3, col sep=space] {../data/Draft1.txt};
+%            \addlegendentry[]{$I_{out}$};
+%        \end{axis}
+%    \end{tikzpicture}
+%\end{figure}
+%
+
+$\displaystyle{ {THD =100\cdot \frac{\sqrt{ \sum_{k=2}^{N} \nu_{k}^{2}}}{\sqrt{\nu_{1}^2+\sum_{k=2}^{N} \nu_{k}^2}}}}$
+
+
+\newpage
+
+\begin{tikzpicture}
+    \begin{axis}[
+            width=0.6\textwidth, height=0.35\textwidth,
+            minor x tick num=4,
+            xtick pos=bottom,
+            xtick align=outside,
+            xmin=0,
+            xmax=23,
+            ymin=-80,
+            ymax=10,
+            xlabel={Fréquence ($kHz$)},
+            x label style={at={(axis description cs:0.5,0)},anchor=north},
+            ylabel={Puissance($dBm$)},
+            grid=both]
+        \addplot[blue] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}, col sep=space] {../data/Van-halen.txt};
+        \addlegendentry[]{FT Audio};
+        \draw [red, thick] (axis cs: 0, -67) -- (axis cs: 23, -67);
+        \draw [red, thick] (axis cs: 0,-24) -- (axis cs: 23, -24);
+        \node at (axis cs: 18,-35) {\textcolor{red}{\scriptsize$SNR=43\,dB$}};
+        \node at (axis cs: 3,-61) {\textcolor{red}{\scriptsize$-67\,dBm$}};
+        \node at (axis cs: 3,-18) {\textcolor{red}{\scriptsize$-24\,dBm$}};
+    \end{axis}
+\end{tikzpicture}
+
+\begin{figure}[ht!]
+    \begin{tikzpicture}
+        \begin{axis}[
+                grid=both,
+                minor x tick num=1,
+                width=0.8\textwidth, height=0.4\textwidth,
+                xlabel={Temps ($ms$)},
+                %ytick={-75,-50,-25,0,25,50,75},
+                ylabel={Amplitude ($mV$)},
+                xmin=0,
+                xmax=100,
+                ymin=-400,
+                ymax=400,
+                legend pos=south east,
+            ]
+
+            \addplot [blue] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}, col sep=space] {../data/temporel.txt};
+            \addlegendentry[]{$V_{out}$};
+            \draw [red, thick] (axis cs: 0, -180) -- (axis cs: 100, -180);
+            \draw [red, thick] (axis cs: 0, 180) -- (axis cs: 100, 180);
+            \node at (axis cs: 20,230) {\textcolor{red}{\scriptsize$V_{cc}^{max}=360\,mV$}};
+        \end{axis}
+    \end{tikzpicture}
+\end{figure}
+
+
+\begin{figure}[ht!]
+    \begin{tikzpicture}
+        \begin{axis}[
+                grid=both,
+                minor x tick num=1,
+                extra y ticks={2.5},
+                extra y tick style={grid=none,tick label style={color=blue,font=\footnotesize}},
+                width=0.8\textwidth, height=0.4\textwidth,
+                xlabel={Temps ($ms$)},
+                ytick={0,1,2,3,4,5},
+                ylabel={Amplitude ($V$)},
+                xmin=0,
+                xmax=5,
+                ymin=0,
+                ymax=5,
+                legend pos=south east,
+            ]
+
+            \addplot [blue] table [x expr=\thisrowno{0}+2.5, y expr=\thisrowno{1}, col sep=space] {../data/PGA.txt};
+            \addlegendentry[]{$V_{PGA}$};
+            \draw[blue,thick,dashed] (axis cs: 0, 2.5) -- (axis cs: 5, 2.5);
+            \draw[blue] (axis cs: 2.63,0.45) -- (axis cs: 2.63,4.35);
+            \draw[blue,thick](axis cs: 2.53,4.4) -- (axis cs: 2.73,4.4)  (axis cs: 2.73,0.4) -- (axis cs: 2.53,0.4) (axis cs: 2.63,4.65) node[] {\footnotesize$V_{cc}=4V$};
+        \end{axis}
+    \end{tikzpicture}
+\end{figure}
+
+
+
+\newpage
+
+\begin{figure}[ht!]
+    \begin{tikzpicture}
+        \begin{axis}[
+                grid=both,
+                minor x tick num=1,
+                extra y ticks={0},
+                width=0.8\textwidth, height=0.4\textwidth,
+                xlabel={Temps ($ms$)},
+                ytick={-2,-1,1,2},
+                ylabel={Amplitude ($V$)},
+                xmin=-2.6,
+                xmax=2.6,
+                ymin=-2.5,
+                ymax=2.5,
+                legend pos=south east,
+            ]
+
+            \addplot [blue] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}-2.5, col sep=space] {../data/CNA.txt};
+            \addlegendentry[]{$V_{CNA}$};
+            \draw[blue] (axis cs: 0,0.45-2.5) -- (axis cs: 0,4.35-2.5);
+            \draw[blue,thick](axis cs: -0.1,4.4-2.5) -- (axis cs: 0.1,4.4-2.5)  (axis cs: 0.1,0.4-2.5) -- (axis cs: -0.1,0.4-2.5) (axis cs: 0,4.65-2.5) node[] {\footnotesize$V_{cc}=4V$};
+
+            \draw[orange] (axis cs: -1,-0.25) -- (axis cs: -1,0.25);
+            \draw[orange,thick](axis cs: -1.1,0.25) -- (axis cs: -0.9,0.25)  (axis cs: -0.9,-0.25) -- (axis cs: -1.1,-0.25) (axis cs: -1,0.58) node[] {\footnotesize$V_{cc}=0.5V$};
+            \addplot [orange] table [x expr=\thisrowno{0}, y expr=\thisrowno{2}/1e3, col sep=space] {../data/CNA.txt};
+            \addlegendentry[]{$V_{in}$};
+        \end{axis}
+    \end{tikzpicture}
+\end{figure}
+
+tt
+\begin{figure}[ht!]
+    \begin{tikzpicture}
+        \begin{axis}[
+                grid=both,
+                minor x tick num=1,
+                width=0.8\textwidth, height=0.4\textwidth,
+                xlabel={Temps ($\mu s$)},
+                ytick={0,1,2,3,4,5},
+                ylabel={Amplitude ($V$)},
+                xmin=-50,
+                xmax=50,
+                ymin=-1,
+                ymax=5,
+                legend pos=south east,
+            ]
+
+            \draw[thick, dashed] (axis cs: 0,-1) -- (axis cs: 0,5) (axis cs: -16,-1) -- (axis cs: -16,5);
+            \draw[thick, latex-latex] (axis cs: -16,2) -- (axis cs: 0,2) node[midway,above] {\scriptsize$\Delta t = 16\mu s$};
+            \addplot [blue] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}, col sep=space] {../data/PWM.txt};
+            \addlegendentry[]{$V_{PWM}$};
+        \end{axis}
+    \end{tikzpicture}
+\end{figure}
+
+\pgfplotsset{
+    legend image code/.code={
+            \draw[mark repeat=2,mark phase=2]
+            plot coordinates {
+                    (0cm,0cm)
+                    (0.15cm,0cm)        %% default is (0.3cm,0cm)
+                    (0.3cm,0cm)         %% default is (0.6cm,0cm)
+                };%
+        }
+}
+
+\begin{figure}[ht!]
+    \begin{tikzpicture}
+        \begin{axis}[
+                grid=both,
+                minor x tick num=1,
+                width=0.8\textwidth, height=0.4\textwidth,
+                xlabel={Temps ($\mu s$)},
+                ytick={0,1,2,3,4,5,6,7,8,9,10,11},
+                yticklabels={\textcolor{orange}{0},\textcolor{orange}{1},\textcolor{orange}{2},\textcolor{orange}{3},\textcolor{orange}{4},\textcolor{orange}{5},\textcolor{blue}{0},\textcolor{blue}{1},\textcolor{blue}{2},\textcolor{blue}{3},\textcolor{blue}{4},\textcolor{blue}{5}},
+                ylabel={Amplitude ($V$)},
+                xmin=-1.5,
+                xmax=2.5,
+                ymin=-1,
+                ymax=12,
+                legend pos=south east,
+            ]
+
+
+            \draw[dashed] (axis cs: -0.83+0.165,-1) -- (axis cs: -0.83+0.165,12);
+            \draw[dashed] (axis cs: -0.5+0.165,-1) -- (axis cs: -0.5+0.165,12);
+            \draw[dashed] (axis cs: -0.17+0.165,-1) -- (axis cs: -0.17+0.165,12);
+            \draw[dashed] (axis cs: 0.16+0.165,-1) -- (axis cs: 0.16+0.165,12);
+            \draw[dashed] (axis cs: 0.49+0.165,-1) -- (axis cs: 0.49+0.165,12);
+            \draw[dashed] (axis cs: 0.82+0.165,-1) -- (axis cs: 0.82+0.165,12);
+            \draw[dashed] (axis cs: 1.15+0.165,-1) -- (axis cs: 1.15+0.165,12);
+            \draw[dashed] (axis cs: 1.48+0.165,-1) -- (axis cs: 1.48+0.165,12);
+            \draw[dashed] (axis cs: 1.81+0.165,-1) -- (axis cs: 1.81+0.165,12);
+
+            \node[] at (axis cs: -1.16+0.33,4) {\scriptsize\texttt{Start}};
+            \node[] at (axis cs: -0.83+0.33,4) {\texttt{0}};
+            \node[] at (axis cs: -0.50+0.33,4) {\texttt{0}};
+            \node[] at (axis cs: -0.17+0.33,4) {\texttt{1}};
+            \node[] at (axis cs: 0.16+0.33,4) {\texttt{1}};
+            \node[] at (axis cs: 0.49+0.33,4) {\texttt{0}};
+            \node[] at (axis cs: 0.82+0.33,4) {\texttt{1}};
+            \node[] at (axis cs: 1.15+0.33,4) {\texttt{0}};
+            \node[] at (axis cs: 1.48+0.33,4) {\texttt{1}};
+            \node[] at (axis cs: 1.81+0.33,4) {\scriptsize\texttt{Stop}};
+
+            \node[] at (axis cs: -1.125,8) {\scriptsize$\Delta t=330ns$};
+
+            \addplot [blue] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}+6, col sep=space] {../data/TXDATA2.txt};
+            \addplot [orange] table [x expr=\thisrowno{0}, y expr=\thisrowno{2}, col sep=space] {../data/TXDATA2.txt};
+            \addlegendentry[]{\scriptsize \texttt{DataClk}};
+            \addlegendentry[]{\scriptsize \texttt{Data}};
+        \end{axis}
+    \end{tikzpicture}
+\end{figure}
+
+\newpage
+
+\begin{figure}[ht!]
+    \begin{tikzpicture}
+        \begin{axis}[
+                grid=both,
+                minor x tick num=1,
+                width=0.8\textwidth, height=0.4\textwidth,
+                xlabel={Temps ($\mu s$)},
+                ytick={0,1,2,3,4,5,6,7,8,9,10,11},
+                yticklabels={\textcolor{orange}{0},\textcolor{orange}{1},\textcolor{orange}{2},\textcolor{orange}{3},\textcolor{orange}{4},\textcolor{orange}{5},\textcolor{blue}{0},\textcolor{blue}{1},\textcolor{blue}{2},\textcolor{blue}{3},\textcolor{blue}{4},\textcolor{blue}{5}},
+                ylabel={Amplitude ($V$)},
+                xmin=-20,
+                xmax=20,
+                ymin=-1,
+                ymax=12,
+                legend pos=south east,
+            ]
+
+            \draw[dashed,thick] (axis cs: -15.75,-1) -- (axis cs: -15.75,12);
+            \draw[dashed,thick] (axis cs: -4,-1) -- (axis cs: -4,12);
+            \draw[thick,latex-latex] (axis cs: -15.75,7) -- (axis cs: -4,7) node[midway,above] {$\Delta t = 11.75\mu s$};
+
+            \addplot [orange] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}, col sep=space] {../data/TXOUT.txt};
+            \addplot [blue] table [x expr=\thisrowno{0}, y expr=\thisrowno{2}+6, col sep=space] {../data/TXOUT.txt};
+            \addlegendentry[]{\scriptsize \texttt{DataClk}};
+            \addlegendentry[]{\scriptsize \texttt{PWM}};
+
+
+        \end{axis}
+    \end{tikzpicture}
+\end{figure}
+
+\begin{figure}[ht!]
+    \begin{tikzpicture}
+        \begin{axis}[
+                grid=both,
+                minor x tick num=1,
+                width=0.8\textwidth, height=0.4\textwidth,
+                xlabel={Temps ($\mu s$)},
+                ytick={0,1,2,3,4,5,6,7,8,9,10,11},
+                yticklabels={\textcolor{orange}{0},\textcolor{orange}{1},\textcolor{orange}{2},\textcolor{orange}{3},\textcolor{orange}{4},\textcolor{orange}{5},\textcolor{blue}{0},\textcolor{blue}{1},\textcolor{blue}{2},\textcolor{blue}{3},\textcolor{blue}{4},\textcolor{blue}{5}},
+                ylabel={Amplitude ($V$)},
+                xmin=0,
+                xmax=50,
+                ymin=-1,
+                ymax=12,
+                legend pos=south east,
+            ]
+
+            \addplot [blue] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}+6, col sep=space] {../data/TXRX.txt};
+            \addplot [orange] table [x expr=\thisrowno{0}, y expr=\thisrowno{2}, col sep=space] {../data/TXRX.txt};
+            \addlegendentry[]{\scriptsize \texttt{TX Output}};
+            \addlegendentry[]{\scriptsize \texttt{RX Input}};
+
+        \end{axis}
+    \end{tikzpicture}
+\end{figure}
+
+\begin{figure}[ht!]
+    \begin{tikzpicture}
+        \begin{axis}[
+                grid=both,
+                minor x tick num=1,
+                width=0.8\textwidth, height=0.4\textwidth,
+                xlabel={Temps ($\mu s$)},
+                ytick={0,1,2,3,4,5,6,7,8,9,10,11},
+                yticklabels={\textcolor{orange}{0},\textcolor{orange}{1},\textcolor{orange}{2},\textcolor{orange}{3},\textcolor{orange}{4},\textcolor{orange}{5},\textcolor{blue}{0},\textcolor{blue}{1},\textcolor{blue}{2},\textcolor{blue}{3},\textcolor{blue}{4},\textcolor{blue}{5}},
+                ylabel={Amplitude ($V$)},
+                xmin=0,
+                xmax=50,
+                ymin=-1,
+                ymax=12,
+                legend pos=south east,
+            ]
+
+            \addplot [blue] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}+6, col sep=space] {../data/TXRX2.txt};
+            \addplot [orange] table [x expr=\thisrowno{0}, y expr=\thisrowno{2}, col sep=space] {../data/TXRX2.txt};
+            \addlegendentry[]{\scriptsize \texttt{TX Output}};
+            \addlegendentry[]{\scriptsize \texttt{RX Output}};
+
+        \end{axis}
+    \end{tikzpicture}
+\end{figure}
+
+\newpage
+
+\begin{figure}[ht!]
+    \begin{tikzpicture}
+        \begin{axis}[
+                grid=both,
+                minor x tick num=1,
+                extra y ticks={2.5},
+                extra y tick style={grid=none,tick label style={color=blue,font=\footnotesize}},
+                width=0.8\textwidth, height=0.4\textwidth,
+                xlabel={Temps ($m s$)},
+                ytick={0,1,2,3,4,5,6,7,8,9,10,11},
+                yticklabels={0,1,2,3,4,5},
+                ylabel={Amplitude ($V$)},
+                xmin=-5,
+                xmax=5,
+                ymin=-1,
+                ymax=5,
+                legend pos=south east,
+            ]
+
+            \draw[blue,thick,dashed] (axis cs: -5, 2.5) -- (axis cs: 5, 2.5);
+            \draw[blue] (axis cs: 0,0.45) -- (axis cs: 0,4.35);
+            \draw[blue,thick](axis cs: -0.1,4.4) -- (axis cs: 0.1,4.4)  (axis cs: 0.1,0.4) -- (axis cs: -0.1,0.4) (axis cs: 0,4.65) node[] {\footnotesize$V_{cc}=4V$};
+
+            \draw[orange] (axis cs: -1,-0.25) -- (axis cs: -1,0.25);
+            \draw[orange,thick](axis cs: -1.1,0.25) -- (axis cs: -0.9,0.25)  (axis cs: -0.9,-0.25) -- (axis cs: -1.1,-0.25) (axis cs: -1,-0.58) node[] {\footnotesize$V_{cc}=0.5V$};
+
+            \addplot [orange] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}/1e3*1.316, col sep=space] {../data/RX-In.txt};
+            \addplot [blue] table [x expr=\thisrowno{0}, y expr=\thisrowno{2}*1.19-0.496, col sep=space] {../data/RX-In.txt};
+            \addlegendentry[]{\scriptsize \texttt{Input}};
+            \addlegendentry[]{\scriptsize PGA};
+
+        \end{axis}
+    \end{tikzpicture}
+\end{figure}
+
+
+
+
+\newpage
+
+\begin{figure}[ht!]
+    \begin{tikzpicture}
+        \begin{axis}[
+                grid=both,
+                minor x tick num=1,
+                width=0.8\textwidth, height=0.4\textwidth,
+                xlabel={Temps ($m s$)},
+                ytick={0,1,2,3,4,5,6,7,8,9,10,11},
+                yticklabels={\textcolor{orange}{-2},\textcolor{orange}{-1},\textcolor{orange}{0},\textcolor{orange}{1},\textcolor{orange}{2},,\textcolor{blue}{-2},\textcolor{blue}{-1},\textcolor{blue}{0},\textcolor{blue}{1},\textcolor{blue}{2}, },
+                ylabel={Amplitude ($V$)},
+                xmin=-1,
+                xmax=1,
+                ymin=-1,
+                ymax=12,
+                legend pos=south east,
+            ]
+
+            \addplot [blue] table [x expr=\thisrowno{0}, y expr=\thisrowno{1}+8, col sep=space] {../data/filter-in-out.txt};
+            \addplot [orange] table [x expr=\thisrowno{0}, y expr=\thisrowno{2}-0.5, col sep=space] {../data/filter-in-out.txt};
+            \addlegendentry[]{\scriptsize \texttt{Filter Input}};
+            \addlegendentry[]{\scriptsize \texttt{Filter Output}};
+        \end{axis}
+    \end{tikzpicture}
+\end{figure}
+
+test
+
+
+
+
+
+\end{document}

@@ -1,0 +1,11 @@
+\addvspace {-10\p@ }
+\contentsline {section}{Exercise 1 : Transmission Ethernet}{3}{section*.1}%
+\addvspace {-10\p@ }
+\contentsline {section}{Exercise 2 : Plusieurs systèmes raccordés par un HUB}{3}{section*.2}%
+\addvspace {-10\p@ }
+\contentsline {section}{Exercise 3 : Plusieurs systèmes raccordés par un SWITCH}{4}{section*.3}%
+\addvspace {-10\p@ }
+\contentsline {section}{Exercise 4 : Système Complet}{4}{section*.6}%
+\addvspace {-10\p@ }
+\contentsline {section}{Exercise 5}{5}{section*.10}%
+\contentsfinish 

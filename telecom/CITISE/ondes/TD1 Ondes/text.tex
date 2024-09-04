@@ -1,0 +1,73 @@
+\documentclass[11pt]{book}
+
+% Cover Variables
+	\newcommand{\ctitle}{Tittle}
+	\newcommand{\cautor}{Autor}
+% TOC Variables
+	\newcommand{\toctitle}{Table of Content}
+% Chapter Variables
+	\newcommand{\chvar}{Chapter -}
+
+\input{\string~/Projects/common/.style.tex}
+
+\input{\string~/Projects/common/.math.tex}
+
+\input{\string~/Projects/common/.header.tex}
+	\pagestyle{fancy}
+	\fancyhf{}
+	\fancyhead[RE, LO]{Telecom St-Etienne \hfill CiTiSE 2}
+	\fancyfoot[LE, RO]{\textbf{Page \thepage}}
+	\fancyfoot[LO, RE]{\text{\rightmark}}
+	
+\input{\string~/Projects/common/.toc.tex}
+
+% figure support
+\usepackage{import}
+\usepackage{xifthen}
+\pdfminorversion=7
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+	\def\svgwidth{\columnwidth}
+	\import{./figures/}{#1.pdf_tex}
+}
+
+\pdfsuppresswarningpagegroup=1
+
+\begin{document}
+	% Spacing 
+	\input{\string~/Projects/common/.begin.tex}
+	
+	\section{TD1 Ondes}
+
+		\subsection{Exercise 1 : Ondes progressive}
+		Montrer que $\ds{a(x,t)=f(x-ct)-f(x+ct)}$ est solution de l'équation d'Alembert : $\ds{\frac{\partial^2 a}{\partial x^2}-\frac{1}{c^2}\frac{\partial^2 a}{\partial t^2}=0}$.
+		
+		En considérant $\ds{ a(x,t)=f(x-ct)+g(x+ct)}$ comme solution de l'équation,
+		 on applique les changement de variables suivant : $\ds{u=x-ct}$ et $\ds{v=x+ct}$
+
+		Ainsi on développe: \\
+		\centerline{$\ds{\Large\begin{cases}
+			\frac{\partial a }{\partial x}=\frac{\partial f}{\partial u} \cdot \frac{\partial u}{\partial x} +\frac{\partial g}{\partial v} \cdot \frac{\partial v}{\partial x} =f'(u)+g'(v) \\
+			\frac{\partial a}{\partial t} = \frac{\partial f}{\partial u} \cdot \frac{\partial u}{\partial t} + \frac{\partial g}{\partial v} \cdot \frac{\partial v}{\partial t} = -cf''(u)+cg''(v)  \end{cases}}$}
+		Soit : \\
+		\centerline{$\ds{\begin{cases}\begin{aligned}
+					\frac{\partial^2 a}{\partial x^2}&=f''(u)\cdot \frac{\partial u}{\partial x} + g''(v)\cdot \frac{\partial v}{\partial x} = f''(u)+g''(v)\\
+					\frac{\partial^2 a}{\partial t^2}&=-cf''(u)\cdot \frac{\partial u}{\partial t} +cg''(v)\cdot \frac{\partial v}{\partial t} =c^2\left( g''(v)+f''(u) \right) 
+		\end{cases}\end{aligned}}$}
+
+		On retrouve alors $\ds{f''(u)+g''(v)-\frac{1}{c^2}\cdot c^2\left( f''(u)+g''(v) \right)=0 }$ \\
+		Ce qui est bien solution de l'équation d'Alembert. 
+
+		\subsection{Exercise 2 : Relation de dispersion}
+
+		En considérant une onde plane progressive monochromatique (OPPM) en notation complexe, retrouver la relation de dispersion caractéristique de l'équation d'Alembert $\ds{\omega =kx}$.
+
+
+
+
+		
+
+
+
+\end{document}

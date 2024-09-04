@@ -1,0 +1,418 @@
+\documentclass[11pt, openright]{book}
+
+	% Cover Variables
+	\newcommand{\ctitle}{REPORT TP ENER}
+	\newcommand{\cautor}{Lucas Lescure - Charlie Durand}
+	\newcommand{\ctoptitle}{}
+
+	% Header Variables
+		\newcommand{\headRE}{\emph{\thepage}}
+		\newcommand{\headLE}{\emph{\thesection. \rightmark}}
+		\newcommand{\footRE}{}
+		\newcommand{\footLE}{}
+
+	% TOC Variables
+		\newcommand{\toctitle}{Table of Content}
+		\newcommand{\tocchapter}{Chapter}
+		\newcommand{\toccount}{3}
+  
+	% Chapter Variables
+		\newcommand{\chvar}{Chapter -}
+
+\input{/root/.config/latex-utils/common/style.tex}
+\input{/root/.config/latex-utils/common/math.tex}
+\input{/root/.config/latex-utils/common/header.tex}
+\input{/root/.config/latex-utils/common/toc.tex}
+
+	% figure support
+	\usepackage{import}
+	\usepackage{xifthen}
+	\pdfminorversion=7
+	\usepackage{pdfpages}
+	\usepackage{transparent}
+	\newcommand{\incfig}[1]{%
+			\def\svgwidth{\columnwidth}
+			\import{./figures/}{#1.pdf_tex}
+	}
+
+	\pdfsuppresswarningpagegroup=1
+
+\begin{document}
+% Spacing
+\input{/root/.config/latex-utils/common/begin.tex}
+
+% Cover
+\input{/root/.config/latex-utils/common/cover.tex}
+
+\vspace*{\fill}
+
+\section{Abstract}
+
+In order to understand the concept and purpose of rectifying a signal we'll be on a first hand studying the role of diodes to rectify a signal. Next we'll study the case of a bridge rectifier giving us an intuition for \verb|AC| to \verb|DC| conversions. 
+
+\newpage
+
+\section{Preparation}
+
+Theoretical expressions for the root mean squared and the time-averaged potential diffrence are defined as :
+$$\ds{<V>=\frac{1}{T}\Int^{T}_{0}V\ dt}\qquad \qquad \ds{V_{rms}=\sqrt{<V^2>}}=\ds{\lr{\frac{1}{T}\Int^{T}_{0} V^2\ dt}^{1/2}}$$
+
+We can also find the ripple voltage as being : $\ds{V_{ripple}=\sqrt{V_{rms}^{2}-<V>^2}}$
+
+In addition to this we can find the ripple coefficient since :\\ $$V^{2}_{ripple}=V^{2}_{rms}-<V>^2\quad \implies \quad \tau^2=F^2-1\quad \implies \quad \tau=\sqrt{F^2-1} $$
+
+
+\section{Simple Rectification}
+\subsection{Resistive charge}
+
+\begin{figure}[ht]
+	\begin{floatrow}
+		\ffigbox{
+			\adjustbox{scale=0.8}{
+			
+				\includegraphics{./Data/C1.jpeg}
+				
+				\caption{Simple Single Phased Circuit}
+				
+			}
+		}
+		
+		\ffigbox{
+			\adjustbox{scale=0.8}{
+				\begin{tikzpicture}
+					\begin{axis}[
+							legend pos=south east,
+							legend entries={$V_e$, $V_{D}$},
+							axis lines = middle,
+							grid=both,
+							xtick={-0.016,-0.012,-0.008,-0.004,0.004,0.008,0.012,0.016},
+							ytick={-60,-40,-20,0,20,40,60},
+							yticklabels={ ,-40, , 0, , 40, },
+							xmin=-0.02, xmax=0.02,
+							ymin=-80, ymax=80, height=0.3\textwidth, width=0.5\textwidth,
+							change x base,
+							x SI prefix=milli,x unit=s,
+							ylabel=\large{$V$},
+							label style ={at={(ticklabel cs:1.15)}}]
+						
+						
+						\addplot[blue, smooth, domain=-0.012:-0.004] {-39*sin(deg(2*pi/0.016*x+pi/2))};
+						\addplot[red, smooth, domain=-0.02:-0.012] {-39*sin(deg(2*pi/0.016*x+pi/2))};
+						\addplot[blue, smooth, domain=0.004:0.012] {-39*sin(deg(2*pi/0.016*x+pi/2))};
+						\addplot[red, smooth, domain=-0.004:0.004] {-39*sin(deg(2*pi/0.016*x+pi/2))};
+						\addplot[red, smooth, domain=0.012:0.02] {-39*sin(deg(2*pi/0.016*x+pi/2))};
+						
+						\addplot[blue, smooth, domain=-0.02:-0.012] {0};
+						\addplot[blue, smooth, domain=-0.004:0.004] {0};
+						\addplot[blue, smooth, domain=0.012:0.02] {0};
+						
+						\addplot[red, smooth, domain=-0.012:-0.004] {0};
+						\addplot[red, smooth, domain=0.012:0.004] {0};
+						
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Chronographs $V_e$ and $V_{D}$}
+			}
+		}
+		
+	\end{floatrow}
+\end{figure}
+
+\begin{figure}[ht]
+	\begin{floatrow}
+		\ffigbox{
+			\adjustbox{scale=0.8}{
+				\begin{tikzpicture}
+					\begin{axis}[
+							legend pos=south east,
+							legend entries={$V_e$, $V_{ch}$},
+							axis lines = middle,
+							grid=both,
+							xtick={-0.016,-0.012,-0.008,-0.004,0.004,0.008,0.012,0.016},
+							ytick={-60,-40,-20,0,20,40,60},
+							yticklabels={ ,-40, , 0, , 40, },
+							xmin=-0.02, xmax=0.02,
+							ymin=-80, ymax=80, height=0.3\textwidth, width=0.5\textwidth,
+							change x base,
+							x SI prefix=milli,x unit=s,
+							ylabel=\large{$V$},
+							label style ={at={(ticklabel cs:1.15)}}]
+						
+						
+						\addplot[blue, smooth, domain=-0.0124:-0.0044] {-39*sin(deg(2*pi/0.016*x+1.7))};
+						\addplot[red, smooth, domain=-0.012:-0.004] {-39*sin(deg(2*pi/0.016*x+pi/2))};
+						\addplot[blue, smooth, domain=0.0036:0.0116] {-39*sin(deg(2*pi/0.016*x+1.7))};
+						\addplot[red, smooth, domain=0.004:0.012] {-39*sin(deg(2*pi/0.016*x+pi/2))};
+						
+						
+						\addplot[blue, smooth, domain=-0.02:-0.012] {0};
+						\addplot[blue, smooth, domain=-0.004:0.004] {0};
+						\addplot[blue, smooth, domain=0.012:0.02] {0};
+						
+						\addplot[red, smooth, domain=-0.02:-0.012] {0};
+						\addplot[red, smooth, domain=-0.004:0.004] {0};
+						\addplot[red, smooth, domain=0.012:0.02] {0};
+						
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Chronographs $V_e$ and $V_{ch}$}
+			}
+		}
+		
+		\ffigbox{
+			\adjustbox{scale=1.2}{
+				\centering
+				\begin{tabular}{|c|c|}
+					\hline
+					$<V_{ch}>$                 & $12.4\ V$ \\
+					\hline
+					$V_{ripple}$               & $15.3\ V$ \\
+					\hline
+					$V_{rms}$                  & $19.4\ V$ \\
+					\hline
+					$\sqrt{V_{rms}^{2}-<V>^2}$ & $14.9\ V$ \\
+					\hline
+					$\tau$                     & $1.203$   \\
+					\hline
+				\end{tabular}
+				\caption{Measured Properties}
+			}
+		}
+		
+	\end{floatrow}
+\end{figure}
+To extract these results we've used the oscilloscope in different coupling modes:\vspace{-10pt}
+\begin{itemize}
+	\setlength{\itemsep}{-2pt}
+	\item[$\cdot$] \texttt{AC} coupling : used to determine the ripple voltage
+	\item[$\cdot$] \texttt{DC} coupling : used to determine the time average voltage
+	\item[$\cdot$] \texttt{AC+DC} coupling : used to determine the root mean square of the voltage
+\end{itemize}
+
+\newpage
+
+\subsection{Capacitive Charge}
+
+\begin{figure}[ht]
+	\begin{floatrow}
+		\ffigbox{
+			\adjustbox{scale=0.8}{
+			
+				\includegraphics{./Data/C3.jpeg}
+				
+				\caption{Simple Single Phased Circuit}
+				
+			}
+		}
+		
+		\ffigbox{
+			\adjustbox{scale=0.8}{
+				\begin{tikzpicture}
+					\begin{axis}[
+							legend pos=south east,
+							legend entries={$V_e$, $V_{D}$},
+							axis lines = middle,
+							grid=both,
+							xtick={-0.016,-0.012,-0.008,-0.004,0.004,0.008,0.012,0.016},
+							ytick={-60,-40,-20,0,20,40,60},
+							yticklabels={ ,-40, , 0, , 40, },
+							xmin=-0.02, xmax=0.02,
+							ymin=-80, ymax=80, height=0.3\textwidth, width=0.5\textwidth,
+							change x base,
+							x SI prefix=milli,x unit=s,
+							ylabel=\large{$V$},
+							label style ={at={(ticklabel cs:1.15)}}]
+						
+						\addplot[blue,smooth] table[x=TIME, y=Ve, col sep=space]{./Data/2-2.txt};
+						\addplot[red,smooth] table[x=TIME, y=Vs, col sep=space]{./Data/2-2.txt};
+						
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Chronographs $V_e$ and $V_{D}$}
+			}
+		}
+		
+	\end{floatrow}
+\end{figure}
+
+\begin{figure}[ht]
+	\begin{floatrow}
+		\ffigbox{
+			\adjustbox{scale=0.8}{
+				\begin{tikzpicture}
+					\begin{axis}[
+							legend pos=south east,
+							legend entries={$V_e$, $V_{ch}$},
+							axis lines = middle,
+							grid=both,
+							xtick={-0.016,-0.012,-0.008,-0.004,0.004,0.008,0.012,0.016},
+							ytick={-60,-40,-20,0,20,40,60},
+							yticklabels={ ,-40, , 0, , 40, },
+							xmin=-0.02, xmax=0.02,
+							ymin=-80, ymax=80, height=0.3\textwidth, width=0.5\textwidth,
+							change x base,
+							x SI prefix=milli,x unit=s,
+							ylabel=\large{$V$},
+							label style ={at={(ticklabel cs:1.15)}}]
+						
+						
+						\addplot[blue,smooth] table[x=TIME, y=Ve, col sep=space]{./Data/2-1.txt};
+						\addplot[red,smooth] table[x=TIME, y=Vs, col sep=space]{./Data/2-1.txt};
+						
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Chronographs $V_e$ and $V_{ch}$}
+			}
+		}
+		
+		\ffigbox{
+			\adjustbox{scale=1.2}{
+				\centering
+				\begin{tabular}{|c|c|}
+					\hline
+					$<V_{ch}>$                 & $33.8\ V$ \\
+					\hline
+					$V_{ripple}$               & $4\ V$    \\
+					\hline
+					$V_{rms}$                  & $34.1\ V$ \\
+					\hline
+					$\sqrt{V_{rms}^{2}-<V>^2}$ & $4.5\ V$  \\
+					\hline
+					$\tau$                     & $0.133$   \\
+					\hline
+				\end{tabular}
+				\caption{Measured Properties}
+			}
+		}
+		
+	\end{floatrow}
+\end{figure}
+
+Using the same method as before we can extract the preceding results.
+
+However an aspect to notice about this configuration is that the curve for our potentials aren't smooth. This can be explained by the fact the the transformer can not keep up with the power that is demanded by the capacitor, therefore it sort of lags a little before outputting the required potential to the charge. 
+
+
+\section{Graetz Bridge Rectifier}
+
+\begin{figure}[ht]
+	\begin{floatrow}
+		\ffigbox{
+			\adjustbox{scale=0.8}{
+			
+				\includegraphics{./Data/C2.jpeg}
+				
+				\caption{Single Phased Graetz Rectifying }
+				
+			}
+		}
+		
+		\ffigbox{
+			\adjustbox{scale=0.8}{
+				\begin{tikzpicture}
+					\begin{axis}[
+							legend pos=south east,
+							legend entries={$V_{ch}$, $I_{ch}$},
+							axis lines = middle,
+							grid=both,
+							xtick={-0.016,-0.012,-0.008,-0.004,0.004,0.008,0.012,0.016},
+							ytick={-60,-40,-20,0,20,40,60},
+							yticklabels={ ,-40, , 0, , 40, },
+							xmin=-0.02, xmax=0.02,
+							ymin=-80, ymax=80, height=0.3\textwidth, width=0.5\textwidth,
+							change x base,
+							x SI prefix=milli,x unit=s,
+							ylabel=\large{$V$},
+							label style ={at={(ticklabel cs:1.15)}}]
+						
+						
+						\addplot[blue, smooth, domain=-0.012:-0.004] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[red, smooth, domain=-0.012:-0.004] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))+5};
+						\addplot[blue, smooth, domain=-0.02:-0.012] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[blue, smooth, domain=0.004:0.012] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[blue, smooth, domain=-0.004:0.004] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[blue, smooth, domain=0.012:0.02] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))};
+						
+						\addplot[red, smooth, domain=-0.012:-0.004] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))+5};
+						\addplot[red, smooth, domain=-0.02:-0.012] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))+5};
+						\addplot[red, smooth, domain=0.004:0.012] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))+5};
+						\addplot[red, smooth, domain=-0.004:0.004] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))+5};
+						\addplot[red, smooth, domain=0.012:0.02] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))+5};
+						
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Chronographs $V_{ch}$ and $I_{ch}$}
+			}
+		}
+		
+	\end{floatrow}
+\end{figure}
+
+\begin{figure}[ht!]
+	\begin{floatrow}
+		\ffigbox{
+			\adjustbox{scale=0.8}{
+				\begin{tikzpicture}
+					\begin{axis}[
+							legend pos=south east,
+							legend entries={$V_e$, $V_{ch}$},
+							axis lines = middle,
+							grid=both,
+							xtick={-0.016,-0.012,-0.008,-0.004,0.004,0.008,0.012,0.016},
+							ytick={-60,-40,-20,0,20,40,60},
+							yticklabels={ ,-40, , 0, , 40, },
+							xmin=-0.02, xmax=0.02,
+							ymin=-80, ymax=80, height=0.3\textwidth, width=0.5\textwidth,
+							change x base,
+							x SI prefix=milli,x unit=s,
+							ylabel=\large{$V$},
+							label style ={at={(ticklabel cs:1.15)}}]
+						
+						
+						\addplot[blue, smooth, domain=-0.012:-0.004] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[red, smooth, domain=-0.012:-0.004] {abs(-4*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[blue, smooth, domain=-0.02:-0.012] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[blue, smooth, domain=0.004:0.012] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[blue, smooth, domain=-0.004:0.004] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[blue, smooth, domain=0.012:0.02] {abs(-28*sin(deg(2*pi/0.016*x+pi/2)))};
+						
+						\addplot[red, smooth, domain=-0.012:-0.004] {abs(-4*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[red, smooth, domain=-0.02:-0.012] {abs(-4*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[red, smooth, domain=0.004:0.012] {abs(-4*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[red, smooth, domain=-0.004:0.004] {abs(-4*sin(deg(2*pi/0.016*x+pi/2)))};
+						\addplot[red, smooth, domain=0.012:0.02] {abs(-4*sin(deg(2*pi/0.016*x+pi/2)))};
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Chronographs $V_e$ and $V_{ch}$}
+			}
+		}
+		
+		\ffigbox{
+			\adjustbox{scale=1}{
+				\centering
+				\begin{tabular}{|c|c|c|c|}
+					\hline
+					$<V_{ch}>$                 & $24\ V$   & $<I_{ch}>$                 & $239\ A$ \\
+					\hline
+					$V_{ripple}$               & $12.7\ V$ & $I_{ripple}$               & $127\ A$ \\
+					\hline
+					$V_{rms}$                  & $27.1\ V$ & $I_{rms}$                  & $271\ A$ \\
+					\hline
+					$\sqrt{V_{rms}^{2}-<V>^2}$ & $12.6\ V$ & $\sqrt{I_{rms}^{2}-<I>^2}$ & $128\ A$ \\
+					\hline
+					$\tau_V$                   & $0.529$   & $\tau_I$                   & $0.531$  \\
+					\hline
+				\end{tabular}
+				\caption{Measured Properties}
+			}
+		}
+		
+	\end{floatrow}
+\end{figure}
+When the input signal delivers a positive potential to the circuit, both diodes 1 and 4 are conducting this way the current can travel from the point of higher potential to the lowest without interruption.
+
+On the flip side, if the signal starts delivering a negative potential then the previously mentioned diodes are then blocked, however diodes 2 and 3 become conducting, this way the charge is delivered the same potential difference, and any negative component is corrected to have a positive voltage on the charge.
+
+
+
+\end{document}

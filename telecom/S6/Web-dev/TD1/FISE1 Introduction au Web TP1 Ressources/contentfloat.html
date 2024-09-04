@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<title>Page Web pour l'exercice 2 du TP 1</title>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<link rel="stylesheet" href="mystylefloat.css" type="text/css" media="all" />
+		 <!--
+		<meta http-equiv="refresh" content="1" >
+		-->
+	</head>
+	<body>
+
+		<div id="header">
+			<h1>This title will disappear !</h1>
+			<p>Welcome to my Float Page.
+				The page's head with a logo on the right<br/>
+				The header of the page must be 80% as large as the page
+			</p>
+			<!--Image Telecom au format Base64-->
+			<img src="data:image/png;base64,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" alt="LogoTSE"/>
+		</div>
+
+		<div id=main>
+
+			<div id="left" class="menu">
+				<ul>
+					<li><a href="contentfloat.html">Float</a></li>
+					<li><a href="contentflexbox.html">Flexbox</a></li>
+					<li><a href="contentgrid.html">Grid</a></li>
+					<li>Page N</li>
+				</ul>
+				<p>Menu width : 15% of the page</p>
+				<p>Margin 10px</p>
+				<p>Teal background color</p>
+				<p>Aqua text color</p>
+			</div>
+
+			<div id="center">
+				<h2>Exercice instructions</h2>
+				<p>White background color</p>
+				<p>Maroon paragraphs background color</p>
+				<p>Green paragraphs text color</p>
+				<pre>The rest of the text must be black
+	This text is just another line of code.</pre>
+				<h2>List samples for verification: only this title must be in purple</h2>
+				<p>With numbers in red</p>
+				<ul>
+					<li>item in blue<sub>1</sub></li>
+					<li>item in blue<sub>2</sub></li>
+					<li>item in green<sub>3</sub></li>
+				</ul>
+
+				<p>Oh and, the content must take the maximum amount of space available.</p>
+			</div>
+
+			<div id="right" class="menu">
+				Some informations on the right site of the page with 20px font and width of 150px
+				<p>Purple background color</p>
+				<p>White text color</p>
+			</div>
+
+		</div>
+		<div id="footer">
+				<h2>Another list samples for verification: </h2>
+				<p>No style here</p>
+				<ul>
+					<li>item<sub>1</sub></li>
+					<li>item<sub>2</sub></li>
+					<li>item<sub>3</sub></li>
+				</ul>
+		</div>
+
+	</body>
+</html>

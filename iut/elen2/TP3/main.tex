@@ -1,0 +1,504 @@
+\documentclass[11pt, openright]{book}
+
+	% Cover Variables
+	\newcommand{\ctitle}{Second Order Passive Filters}
+	\newcommand{\cautor}{Lucas Lescure - Charlie Durand}
+	\newcommand{\ctoptitle}{}
+
+	% Header Variables
+		\newcommand{\headRE}{\emph{\thepage}}
+		\newcommand{\headLE}{\emph{\thesection. \rightmark}}
+		\newcommand{\footRE}{}
+		\newcommand{\footLE}{}
+
+	% TOC Variables
+		\newcommand{\toctitle}{Table of Content}
+		\newcommand{\tocchapter}{Chapter}
+		\newcommand{\toccount}{3}
+  
+	% Chapter Variables
+		\newcommand{\chvar}{Chapter -}
+
+\input{/root/.config/latex-utils/common/style.tex}
+\input{/root/.config/latex-utils/common/math.tex}
+\input{/root/.config/latex-utils/common/header.tex}
+\input{/root/.config/latex-utils/common/toc.tex}
+
+	% figure support
+	\usepackage{import}
+	\usepackage{xifthen}
+	\pdfminorversion=7
+	\usepackage{pdfpages}
+	\usepackage{transparent}
+	\newcommand{\incfig}[1]{%
+			\def\svgwidth{\columnwidth}
+			\import{./figures/}{#1.pdf_tex}
+	}
+
+	\pdfsuppresswarningpagegroup=1
+
+\begin{document}
+% Spacing
+\input{/root/.config/latex-utils/common/begin.tex}
+
+% Cover
+\input{/root/.config/latex-utils/common/cover.tex}
+
+\vspace*{\fill}
+
+\section{Abstract}
+
+The goal of this report is to introduce ourselves to second order passive filters in an effort to understand and manipulate the effects of damping on these kinds of filters. We will also be seeing first order active filters and understand what makes them different from other first order filters previously studied.
+
+
+\newpage
+
+\section{$2^{nd}$ Order Passive Filters}
+
+\subsection{Study of low pass filter}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{./Circuit/Circuit1.jpeg}
+	\caption{\underline{Low pass RLC-C filter}}
+\end{figure}
+
+Using the formulas found in the preparation of the experiment we calculate the critical damping resistance:\\
+$R_C=2\lr{\frac{L}{C}}^{1/2}$ such as $R_C=632\Omega$
+
+However since we aren't experimenting in ideal conditions we must account for the resistance of the coil ($22\Omega$) and the signal generator ($50\Omega$). As such the resistance needed to assure an overall resistance of $630\Omega$ is $570\Omega$. We obtain this value using two resistors in series, one being $100\Omega$ and the other $470\Omega$.
+
+Using the same procedure we calculate the characteristic frequency of the circuit : $f_0=\frac{1}{2\pi\sqrt{LC}}$ such as $f_0=5.0\ kH_z$
+
+\subsubsection{Study in sinusoidal regime}
+
+We measure, on the first hand, the following values where $R=100\Omega$:\vspace{-5pt}
+
+\begin{wrapfigure}{l}{0pt}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=left,
+				grid=both, ymax=5, 
+				xlabel= Frequency ($H_z$), ylabel= Gain ($dB$)]
+			
+			\addplot[blue, smooth] table[x=Frequence, y=Gain, col sep=space] {./Data/Bode/RLC_C1.txt};
+		\end{axis}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=right,
+				grid=none, ymax=25, ymin=-225,
+				xlabel= Frequency ($H_z$), ylabel= Phase]
+			
+			\addplot[red, smooth] table[x=Frequence, y=Phase, col sep=space] {./Data/Bode/RLC_C1.txt};
+			\addplot[black, dashed,very thick] coordinates {(5000,-225) (5000,25)};
+			\addplot[blue, dashed,very thick] coordinates {(5000,0) (100000,-225)};
+			\addplot[red, dashed, very thick] coordinates {(3000,0) (7500,-160)};
+		\end{axis}
+	\end{tikzpicture}
+\end{wrapfigure}
+
+Using the formulas from the preparation we easily find the damping coefficient: $m=\frac{1}{2}R\lr{\frac{C}{L}}^{1/2}$ such as $m=0.16$
+
+On top of this we can clearly observe the cut-off frequency around $5\ kH_z$ with a slope of $-40\ dB/dec$.
+
+\newgeometry{width=18.625cm, bottom=2cm, top=2cm}
+
+On a second hand, we measure the following values where $R=R_C$:
+
+\begin{wrapfigure}[5]{l}{0pt}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=left,
+				grid=both, ymax=5, 
+				xlabel= Frequency ($H_z$), ylabel= Gain ($dB$)]
+			
+			\addplot[blue, smooth] table[x=Frequence, y=Gain, col sep=space] {./Data/Bode/RLC_C2.txt};
+		\end{axis}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=right,
+				grid=none, ymax=25, ymin=-212.25,
+				xlabel= Frequency ($H_z$), ylabel= Phase]
+			
+			\addplot[red, smooth] table[x=Frequence, y=Phase, col sep=space] {./Data/Bode/RLC_C2.txt};
+			\addplot[black, dashed,very thick] coordinates {(5000,-225) (5000,25)};
+			\addplot[blue, dashed,very thick] coordinates {(5000,0) (100000,-225)};
+			\addplot[red, dashed, very thick] coordinates{(700,0) (100000,-180)};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{\vspace{-5pt} Bode Diagram for $R=R_C$}
+\end{wrapfigure}
+
+Using the formulas from the preparation we easily find the damping coefficient: $m=\frac{1}{2}R_C\lr{\frac{C}{L}}^{1/2}$ such as $m=0.9$
+
+On top of this we can clearly observe the cut-off frequency around $5\ kH_z$ with a slope of $-40\ dB/dec$.
+
+\vspace{4.5cm}
+
+On the last hand, we measure the following values where $R=10\ k\Omega$:
+
+\begin{wrapfigure}[9]{l}{0pt}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=left,
+				grid=both, ymax=5, 
+				xlabel= Frequency ($H_z$), ylabel= Gain ($dB$)]
+			
+			\addplot[blue, smooth] table[x=Frequence, y=Gain, col sep=space] {./Data/Bode/RLC_C3.txt};
+		\end{axis}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=right,
+				grid=none, ymax=25, ymin=-272.5,
+				xlabel= Frequency ($H_z$), ylabel= Phase]
+			
+			\addplot[red, smooth] table[x=Frequence, y=Phase, col sep=space] {./Data/Bode/RLC_C3.txt};
+			\addplot[black, dashed,very thick] coordinates {(350,-272.5) (350,0)};
+			\addplot[black, dashed,very thick] coordinates {(30000,-272.5) (30000,-175)};
+			\addplot[blue, dashed,very thick] coordinates {(30000,-180) (100000,-272.5)};
+			\addplot[blue, dashed,very thick] coordinates {(30000,-180) (350,0)};
+			\addplot[red, dashed, very thick] coordinates{(100,-15) (1000,-80)};
+			\addplot[red, dashed, very thick] coordinates{(1000,-80) (15000,-90)};
+			\addplot[red, dashed, very thick] coordinates{(15000,-90) (100000,-140)};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{\vspace{-5pt} Bode Diagram for $R=10\ k\Omega$}
+\end{wrapfigure}
+
+Using the formulas from the preparation we easily find the damping coefficient: $m=\frac{1}{2}R\lr{\frac{C}{L}}^{1/2}$ such as $m=15.8$
+
+This time we notice two distinct cut-off frequencies, the first being at around $350\ H_z$ and the second at $30\ kH_z$.
+
+The slope between both cut-off frequencies is about $-20\ dB/dec$ and $-40\ dB/dec$ after the second cut-off frequency. 
+
+\vspace{3.5cm}
+
+We can therefore conclude that by modifying the damping coefficient, we can alternate between a underdamped, critically damped, or overdamped signal response. This is done by tweaking values of the resistor.
+
+\vspace{5cm}
+
+\subsubsection{Study in impulsive regime}
+
+We'll now proceed to study the same circuit in an impulsive regime, to do so we'll send a square signal $2\ V_{pp}$ with frequency $100 H_z$ such as to neglect the negative gain which will allow us to view the response signal without having to worry about any voltage loss. 
+
+\begin{wrapfigure}[5]{l}{0pt}
+	\begin{tikzpicture}
+		\begin{axis}[
+				legend pos=south east,
+				legend entries={$V_e$, $V_s$},
+				axis lines = middle,
+				ytick={1.75,1.5,1.25,1,0.75,0.5,0.25,-0.25,-0.5,-0.75,-1,-1.25,-1.5,-1.75},
+				yticklabels={ ,1.5, , 1, , 0.5, , , -0.5, , -1, , -1.5, },
+				xtick={-0.0075, -0.005, -0.0025, 0.0025, 0.005, 0.0075, 0.01, 0.0125},
+				xticklabels={ , -5, , , 5, , 10, },
+				xmin=-0.005, xmax=0.0075,
+				ymin=-2, ymax=2, height=0.3\textwidth, width=0.5\textwidth,
+				change x base,
+				x SI prefix=milli,x unit=s,
+				ylabel=\large{$V$},
+				label style ={at={(ticklabel cs:1.1)}}]
+			
+			\addplot[blue, smooth] table[x=TIME, y=Ve, col sep=space]{./Data/resistance 100.txt};
+			\addplot[orange, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/resistance 100.txt};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Chronograms of $V_s$ and $V_e$}
+\end{wrapfigure}
+
+Using the oscilloscope we measure the rise time to be at $41.8\ \mu s$. 
+
+On top of this we can clearly see that the signal response oscillates heavily upon a radical change of voltage before setting back down to its respective value.
+
+
+\begin{wrapfigure}[4]{l}{0pt}
+	\begin{tikzpicture}
+		\begin{axis}[
+				legend pos=south east,
+				legend entries={$V_e$, $V_s$},
+				axis lines = middle,
+				ytick={1.75,1.5,1.25,1,0.75,0.5,0.25,-0.25,-0.5,-0.75,-1,-1.25,-1.5,-1.75},
+				yticklabels={ ,1.5, , 1, , 0.5, , , -0.5, , -1, , -1.5, },
+				xtick={-0.0075, -0.005, -0.0025, 0.0025, 0.005, 0.0075, 0.01, 0.0125},
+				xticklabels={ , -5, , , 5, , 10, },
+				xmin=-0.005, xmax=0.0075,
+				ymin=-2, ymax=2, height=0.3\textwidth, width=0.5\textwidth,
+				change x base,
+				x SI prefix=milli,x unit=s,
+				ylabel=\large{$V$},
+				label style ={at={(ticklabel cs:1.1)}}]
+			
+			\addplot[blue, smooth] table[x=TIME, y=Ve, col sep=space]{./Data/resistance 570.txt};
+			\addplot[orange, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/resistance 570.txt};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Chronograms of $V_s$ and $V_e$}
+\end{wrapfigure}
+
+\vspace{3.5cm}
+
+Using the oscilloscope we measure the rise time to be at $106.5\ \mu s$. 
+
+This time no oscillation is seen and the signal response follows quickly the input signal
+
+\begin{wrapfigure}[6]{l}{0pt}
+	\begin{tikzpicture}
+		\begin{axis}[
+				legend pos=south east,
+				legend entries={$V_e$, $V_s$},
+				axis lines = middle,
+				ytick={1.75,1.5,1.25,1,0.75,0.5,0.25,-0.25,-0.5,-0.75,-1,-1.25,-1.5,-1.75},
+				yticklabels={ ,1.5, , 1, , 0.5, , , -0.5, , -1, , -1.5, },
+				xtick={-0.0075, -0.005, -0.0025, 0.0025, 0.005, 0.0075, 0.01, 0.0125},
+				xticklabels={ , -5, , , 5, , 10, },
+				xmin=-0.005, xmax=0.0075,
+				ymin=-2, ymax=2, height=0.3\textwidth, width=0.5\textwidth,
+				change x base,
+				x SI prefix=milli,x unit=s,
+				ylabel=\large{$V$},
+				label style ={at={(ticklabel cs:1.1)}}]
+			
+			\addplot[blue, smooth] table[x=TIME, y=Ve, col sep=space]{./Data/resistance 10k.txt};
+			\addplot[orange, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/resistance 10k.txt};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Chronograms of $V_s$ and $V_e$}
+\end{wrapfigure}
+
+\vspace{5.5cm}
+
+Using the oscilloscope we measure the rise time to be at $2.04\  ms$. 
+
+No oscillation is seen, however the time needed for the response to follow the input signal is drastically slowed, resulting in a response that can barely catch up to its respective value. 
+
+\newgeometry{width=18.625cm, bottom=2cm, top=2cm}
+
+\subsection{Study of high pass filter}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{./Circuit/Circuit2.jpeg}
+	\caption{High pass RLC-L filter}
+\end{figure}
+
+\subsubsection{Study in sinusoidal regime}
+
+We measure the following values where $R=100\Omega$:
+
+\begin{wrapfigure}[10]{l}{0pt}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=left,
+				grid=both, ymax=7.5,
+				xlabel= Frequency ($H_z$), ylabel= Gain ($dB$)]
+			
+			\addplot[blue, smooth] table[x=Frequence, y=Gain, col sep=space] {./Data/Bode/RLC_L.txt};
+		\end{axis}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=right,
+				grid=none, ymax=213, ymin=-30.5,
+				xlabel= Frequency ($H_z$), ylabel= Phase]
+			
+			\addplot[red, smooth] table[x=Frequence, y=Phase, col sep=space] {./Data/Bode/RLC_L.txt};
+			\addplot[black, dashed,very thick] coordinates {(5000,-30.5) (5000,213)};
+			\addplot[blue, dashed,very thick] coordinates {(5000,180) (350,-30.5)};
+			\addplot[red, dashed, very thick] coordinates{(3000,160) (8500,10)};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{\vspace{-5pt} Bode Diagram for $R=100\Omega$}
+\end{wrapfigure}
+
+
+Using the formulas from the preparation we easily find the damping coefficient: $m=\frac{1}{2}R\lr{\frac{C}{L}}^{1/2}$ such as $m=0.16$
+
+Compared to the other Bode diagrams from the loss pass filter we still have the cut-off frequency around $5\ kh_z$ with a slope of $40\ dB/dec$. 
+
+We can also notice that the phase diagram has been offset by 180 degrees, and that due to the nature of the high pass frequency filter the gain curve has been mirrored. 
+
+
+\newgeometry{width=18.625cm, bottom=2cm, top=2cm}
+
+\section{$1^{st}$ Order Active Filters}
+
+\subsection{Study of high pass filter}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{./Circuit/Circuit3.jpeg}
+	\caption{High pass operational amplifier filter}
+\end{figure}
+
+\subsubsection{Study in sinusoidal regime}
+
+Our measurements will be done with a $15\ V$ entry signal such as to accurately trace the following Bode diagrams:
+
+\begin{wrapfigure}[8]{l}{0pt}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=left,
+				grid=both, ymax=22.5, 
+				xlabel= Frequency ($H_z$), ylabel= Gain ($dB$)]
+			
+			\addplot[blue, smooth] table[x=Frequence, y=Gain, col sep=space] {./Data/Bode/O1_C.txt};
+		\end{axis}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=right,
+				grid=none, ymax=-75, ymin=-252,
+				xlabel= Frequency ($H_z$), ylabel= Phase]
+			
+			\addplot[red, smooth] table[x=Frequence, y=Phase, col sep=space] {./Data/Bode/O1_C.txt};
+			\addplot[black, dashed,very thick] coordinates {(300,-110) (300,-250)};
+			\addplot[black, dashed,very thick] coordinates {(40000,-110) (40000,-250)};
+			\addplot[blue, dashed,very thick] coordinates {(30,-250) (300,-110)};
+			\addplot[red, dashed, very thick] coordinates{(60, -100) (400,-170)};
+			\addplot[red, dashed, very thick] coordinates{(400, -170) (40000,-190)};
+			\addplot[red, dashed, very thick] coordinates{(40000, -190) (100000,-210)};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{\vspace{-5pt} Bode Diagram}
+\end{wrapfigure}
+
+We can see the an expected cut-off circuit at around $300\ H_z$, however we can also notice that the gain and phase start dropping at higher frequencies. 
+
+This is due to the limitation of our operational amplifier, which, at high frequencies, can no longer output the intended output voltage in time. 
+
+As a result of this our filter is only applicable over a limited bandwidth. 
+
+\vspace{2.5cm}
+
+\subsubsection{Study in impulsive regime}
+
+We'll now proceed to study the same circuit in an impulsive regime, to do so we'll send a square signal $2\ V_{pp}$ with frequency $100 H_z$ such as to make sure that we have a clear and amplified signal response.
+
+
+\begin{wrapfigure}[6]{l}{0pt}
+	\begin{tikzpicture}
+		\begin{axis}[
+				legend pos=south east,
+				legend entries={$V_e$, $V_s$},
+				axis lines = middle,
+				ytick={15,12.5, 10, 7.5, 5, 2.5, 0, -2.5, -5, -7.5, -10, -12.5, -15},
+				yticklabels={15 , ,10, , 5, , 0, , -5, , -10, ,-15 },
+				xtick={-0.0075, -0.005, -0.0025, 0.0025, 0.005, 0.0075, 0.01, 0.0125},
+				xticklabels={ , -5, , , 5, , 10, },
+				xmin=-0.005, xmax=0.0075,
+				ymin=-17.5, ymax=17.5, height=0.3\textwidth, width=0.5\textwidth,
+				change x base,
+				x SI prefix=milli,x unit=s,
+				ylabel=\large{$V$},
+				label style ={at={(ticklabel cs:1.1)}}]
+			
+			\addplot[blue, smooth] table[x=TIME, y=Ve, col sep=space]{./Data/Passe haut/passe haut 1ordre.txt};
+			\addplot[orange, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/Passe haut/passe haut 1ordre.txt};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Chronograms of $V_s$ and $V_e$}
+\end{wrapfigure}
+
+
+\newgeometry{width=18.625cm, bottom=2cm, top=2cm}
+
+
+\subsection{Study of low pass filter(mistakes were made)}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{./Circuit/Circuit4.jpeg}
+	\caption{Low pass operational amplifier filter}
+\end{figure}
+
+\subsubsection{Study in sinusoidal regime}
+
+Our measurements will be done with a $15\ V$ entry signal such as to accurately trace the following Bode diagrams:
+
+\begin{wrapfigure}[4]{l}{0pt}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=left,
+				grid=both, xmax=50000,
+				xlabel= Frequency ($H_z$), ylabel= Gain ($dB$)]
+			
+			\addplot[blue, smooth] table[x=Frequence, y=Gain, col sep=space] {./Data/Bode/O1_C2.txt};
+		\end{axis}
+		\begin{axis}[
+				width=0.45\textwidth, height=0.35\textwidth,
+				xmode=log, log x ticks with fixed point,
+				axis x line=bottom, axis y line=right,
+				grid=none, xmax=50000,
+				xlabel= Frequency ($H_z$), ylabel= Phase]
+			
+			\addplot[red, smooth] table[x=Frequence, y=Phase, col sep=space] {./Data/Bode/O1_C2.txt};
+			
+		\end{axis}
+	\end{tikzpicture}
+	\caption{\vspace{-5pt} Bode Diagram}
+\end{wrapfigure}
+
+Due to the curves of the phase and gain we can quickly determine that the intended circuit was improperly cabled and is responsible for the absurdity of the graph.
+
+\vspace{5.5cm}
+
+\subsubsection{Study in impulsive regime}
+
+Due to the same cabling mistake the chronograms make no sense whatsoever
+
+
+\begin{wrapfigure}[6]{l}{0pt}
+	\begin{tikzpicture}
+		\begin{axis}[
+				legend pos=south east,
+				legend entries={$V_e$, $V_s$},
+				axis lines = middle,
+				ytick={2.5,2,1.5,1,0.5,-0.5,-1,-1.5,-2,-2.5},
+				yticklabels={ , 2, , 1, , , 1, , 2, },
+				xtick={-0.0075, -0.005, -0.0025, 0.0025, 0.005, 0.0075, 0.01, 0.0125},
+				xticklabels={ , -5, , , 5, , 10, },
+				xmin=-0.005, xmax=0.0075,
+				ymin=-3, ymax=3, height=0.3\textwidth, width=0.5\textwidth,
+				change x base,
+				x SI prefix=milli,x unit=s,
+				ylabel=\large{$V$},
+				label style ={at={(ticklabel cs:1.1)}}]
+			
+			\addplot[blue, smooth] table[x=TIME, y=Ve, col sep=space]{./Data/Passe haut/passe bas 1ordre.txt};
+			\addplot[orange, smooth] table[x=TIME, y=Vs, col sep=space]{./Data/Passe haut/passe bas 1ordre.txt};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Chronograms of $V_s$ and $V_e$}
+\end{wrapfigure}
+
+
+
+
+
+
+
+\end{document}
+
+
+
+

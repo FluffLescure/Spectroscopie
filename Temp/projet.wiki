@@ -1,0 +1,191 @@
+<div style = "text-align: justify; font-family: 'Computer Modern', serif; font-size:12.5pt; line-height: 1.3;" >
+
+=<span style="font-weight: 600;">Recherche et découverte</span>=
+
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Vinyles: lecture et préamplification ==
+</span></div>
+
+<div style="font-weight: 400; text-decoration: underline;font-size:13pt;">
+===Lecture (Séances 1&2)===
+</div>
+
+Inventé en 1890 par E. Berliner, le vinyle a été le premier support d'enregistrement, et diffusion, de musique.<sup><small><a href="#ref1" name="vinyl-history">&#91;1]</a></sup> Ce dernier est lu par une platine, sur laquelle une aiguille parcourt les sillons du disque pour en reconstituer la musique sous forme de signal électrique. Ce signal est alors utilisé par les haut-parleurs pour reproduire le son désiré. Or, même avec le lecteur le plus précis et le haut-parleur le plus fidèle, le son obtenu verra ses basses affaiblies et ses hautes accentuées, ce qui détériore l'expérience auditive.<sup><small><a href="#ref2" name="phono-problem">&#91;2]</a></sup>  <p></p>
+
+<div style="float: right; margin: 10px;">
+  <img src="https://i.imgur.com/D97ALop.png" alt="Image description" width="300" height="300">
+<p style="font-size:14px;text-align:center;"><i><br>Figure 1.1 Structure de base de la cellule<br>$$\hspace{0.7cm}$$ à double aimant mobile</i></p>
+</div>
+
+À l'intérieur de la cellule stéréo à aimant mobile, on retrouve deux aimants inclinés de $$\pm45º$$, chacun se déplaçant à l'intérieur d'une bobine. Lorsque l'aiguille parcourt les sillons, elle fait bouger ces deux aimants produisant donc un flux magnétique variant. Ainsi, d'après la loi de Lenz-Faraday, une tension est induite aux bornes de la bobine. Il s'agit du son gravé qui a été converti en signal électrique.  <p></p>
+
+L'étude dans le domaine fréquentiel de la loi de Lenz-Faraday révèle le problème lors de la lecture des vinyles. En appliquant la transformée de Fourier à la loi de Lenz-Faraday on retrouve l'expression suivante:
+
+<center>
+$$\displaystyle{\mathcal{F}\left\{e(t)\right\}=\mathcal{F}\left\{-\frac{d\ }{dt}\phi(t)\right\} \implies  \boxed{E(\omega) =- j\omega\ \Phi(\omega)}}$$
+</center>  <p></p>
+
+L'amplitude de la tension induite dépend directement de la fréquence du son qui est lu.  Sur un diagramme de Bode <a href="#Fig1.2" style="color:black;">&#91;Figure 1.2]</a>, la réponse fréquentielle de la cellule est mise en évidence à partir de la fonction de transfert $$T(\omega)=\frac{E(\omega)}{\Phi(\omega)}=-j\omega$$. <p></p>
+
+<div style="float: left; margin: 10px;">
+  <a name="Fig1.2" style="color:balck;"><img src="https://i.ibb.co/S0Xvp73/Screenshot-2023-11-06-134851.png" alt="Image description" width="370" height="200"></a>
+<p style="font-size:14px;text-align:center;"><i><br>Figure 1.2 Réponse fréquentielle de la cellule de <br>$$\hspace{0.8cm}$$ lecture et préamplification idéale</i></p>
+</div>
+
+On constate que le gain de la cellule de lecture possède une pente de $$+20\,dB/dec$$ responsable de l'amplification des hautes fréquences et de l'atténuation des basses fréquences.  <p></p>
+
+Afin de corriger ce problème, on dispose d'un pré-amplificateur phono. Celui-ci permet d'égaliser l'ampli-fication des hautes et basses fréquences. 
+ <p></p>
+
+Il serait idéal d'obtenir une réponse fréquentielle plate où le gain reste constant pour toutes les fréquences. Pour ce faire il suffit d'appliquer une fonction de transfert inverse avec un gain constant permettant de centrer l'amplification en $$1\,kHz$$. 
+
+La résultante du gain de la cellule et du préamplificateur est donnée par la droite en bleu pointillée de gain constant à $$76\,dB$$ <a href="#Fig1.2" style="color:black;">&#91;Figure 1.2]</a>. Cependant, à cause des limitations matérielles de l'époque, il n'était pas possible d'appliquer une pente de $$-20\,dB/dec$$ sur une telle plage de fréquence, la différence de gain de $$60\,dB$$ étant trop grande.<sup><small><a href="#ref2" name="phono-problem">&#91;2]</a></sup> C'est pourquoi l'égalisation RIAA n'est pas une pente linéaire, on parle alors de courbe RIAA.  <p></p>
+
+<div style="font-weight: 400; text-decoration: underline;font-size:13pt;">
+===Préamplification RIAA(Séance 3)===
+</div> 
+
+Avant 1954, chaque compagnie appliquait sa propre méthode d'égalisation avec plus de 100 méthodes différentes. Pour standardiser celles-ci, la RIAA(Recording Industry Association of America) a alors imposé l'égalisation RIAA, dans laquelle figurent 3 fréquences de coupure bien définies.<sup><small><a href="#ref3" name="RIAA-diversity">&#91;3]</a></sup>
+
+<div style="float: right; margin: 10px;">
+  <a name="Fig1.3"><img src="https://i.ibb.co/3CtGGZ3/Screenshot-2023-11-06-133249.png" alt="Image description" width="370" height="200"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Figure 1.3 Réponse fréquentielle de la cellule de <br>$$\hspace{0.8cm}$$ lecture et préamplification RIAA</i></p>
+</div>
+
+À cause des limitations matérielles, plutôt que d'effectuer une égalisation de $$-20\,dB/dec$$ sur toute la plage de fréquence, la courbe RIAA s'en approche en réalisant deux pentes de $$-20\,dB/dec$$ espacées par un palier entre $$&#91;500\,Hz;2122\,Hz]$$. La différence de gain ne devient alors plus que $$40\,dB$$, ce qui était possible pour les amplificateurs de l'époque. 
+
+On obtient alors la courbe rouge possédant les fréquences de coupure $$f_{c_1} = 50\,Hz$$, $$f_{c_2}=500\,Hz$$ et $$f_{c_3}=2122\,Hz$$. La combinaison avec la réponse fréqu-entielle de la cellule de lecture donne la courbe en bleu pointillé <a href="#Fig1.3" style="color:black;">&#91;Figure 1.3]</a>. Celle-ci n'est pas complètement constante mais reste tout de même proche de la ligne de gain constant <a href="#Fig1.2" style="color:black;">&#91;Figure 1.2]</a>. <p></p>
+
+La fonction de transfert de la courbe RIAA est donnée par : $$\displaystyle{\boxed{T(s)=\frac{1+s\tau_2}{(1+s\tau_1)(1+s\tau_3)}}}$$<p></p>
+
+où $$\tau_1=3180\,\mu s$$, $$\tau_2=318\,\mu s$$ et $$\tau_3=75\,\mu s$$
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Circuits préamplificateurs (Séance 3) ==
+</span></div>
+
+<a name="sec1.2"></a>
+Pour réaliser l'égalisation RIAA plusieurs circuits peuvent être choisis pour réaliser le préamplificateur. Le circuit le plus simple, mais aussi le plus coûteux est simplement de réaliser trois filtres différents pour chaque fréquence de coupure. Le souci de ce circuit est le nombre d'amplificateurs nécessaires: entre chaque filtre il faudrait ajouter un suiveur afin de séparer chaque circuit. De plus le 2<sup>nd</sup> filtre possède une pente de $$20\,dB/dec$$ qui tend vers l'infini pour des hautes fréquences. On souhaite éviter un tel filtre pour ne pas amplifier le bruit.<p></p>
+
+<div style="float: right; margin: 10px;">
+  <a name="Fig1.4"><img src="https://i.ibb.co/WxQLyHT/Screenshot-2023-11-13-201509.png" alt="Image description" width="245" height="190"></a>
+<p style="font-size:14px;text-align:center;"><i><br>Figure 1.4 Filtre 2<sup>nd</sup> ordre d'étude</i></p>
+</div>
+
+C'est pour cela qu'il est préférable d'utiliser un circuit plus efficace grâce à des filtres de $$2^{\text{nd}}$$ ordre. L'une des configurations les plus communes <a href="#Fig1.4" style="color:black;">&#91;Figure 1.4]</a>  est l'utilisation d'un second ordre possédant une fonction de transfert similaire à celle de la courbe RIAA:<p></p>
+
+ $$\hspace{0cm}\displaystyle{\boxed{T(s)=(R_1+R_2)\cdot\frac{1+s\tau_2}{(1+s\tau_1)(1+s\tau_3)}}}\ \ \ $$ où $$\ \ \displaystyle{\tau_2=\frac{\tau_1R_2+\tau_3R_1}{R_1+R_2}}$$ 
+
+Puisqu'un amplificateur suffit et que peu de composants sont utilisés, c'est celui que nous utiliserons pour notre préamplificateur durant le projet.  <p></p>
+
+D'autres circuits existent, notamment notre idée de départ qui consistait en un filtre passe-bas de 2<sup>nd</sup> ordre couplé avec un filtre passe-haut possédant comme fonction de transfert : $$\displaystyle{T(s)=\overbrace{(1+s\tau_2)}^{Filtre\ 1}\cdot\underbrace{\frac{1}{(1+s\tau_1)(1+s\tau_3)}}_{Filtre\ 2}}$$
+
+=<span style="font-weight: 600;">Reformulation du cahier des charges(Séance 3)</span>=
+
+<div style="font-weight: 400; text-decoration: underline;font-size:15pt;bold;">
+<h5>Cahier des charges<h5>
+</div>
+
+Possédant une cellule à aimant mobile <i>Ortofon 2M Black (2008)</i> on cherche à réaliser un préamplificateur RIAA pour une chaîne HiFi n'ayant pas d'entrée phono dédiée, et pour un casque <i>HiFi AKG K-121 Studio</i>. Le niveau des deux sorties pouvant être réglable de 0 à leur valeur maximale.
+
+Leurs données techniques sont listées comme suit:
+----
+<div style="float: left; margin: 10px;">
+<div style="font-weight: 400; text-decoration: underline;font-size:13pt;margin-right: 250px;"> Cellule de lecture: </div>
+*Tension de sortie à  $$1\,kHz$$: $$5\,mV$$
+*Plage de fréquences: $$20\,Hz\ -\ 31\,kHz$$
+*Impédance d'entrée: $$1.2\,k\Omega$$
+*Inductance d'entrée: $$630\, mH$$
+*Résistance de charge: $$47\,k\Omega$$
+*Capacitance de charge: $$150\ -\ 300\,pF$$
+</div>
+
+<div style="float:center; margin: 10px;margin-right: 0px;">
+<font color="white">cache-misère</font><br>
+<div style="font-weight: 400; text-decoration: underline;font-size:13pt;"> Haut-parleurs HiFi:</div>
+*Sensibilité: $$0.5\,V$$
+*Résistance d'entrée: $$47\,k\Omega$$
+
+<div style="font-weight: 400; text-decoration: underline;font-size:13pt;"> Casque HiFi:</div>
+*Puissance d'entrée max: $$220\,mW$$
+*Impédance interne: $$55\,\Omega$$
+</div>
+----
+<div style="font-weight: 400; text-decoration: underline;font-size:15pt;bold;">
+<h5>Reformulation<h5>
+</div>
+
+Parmi ces données techniques du cahier des charges, certaines informations sont moins pertinentes que d'autres pour la réalisation du projet. Pour la cellule de lecture l'information des impédances et inductances d'entrées ne seront pas utiles car le préamplificateur se situe à sa sortie. De ce fait on retient la résistance et la capacitance de charge recommandées, car celles-ci devront figurer sur notre circuit. On retient également les impédances d'entrée du casque et du haut-parleur HiFi, que l'on devra respecter sur nos deux sorties dédiées. 
+
+Autre que les impédances d'entrée/sortie, il est aussi important de noter que la sensibilité du haut-parleur est à $$0.5\,V$$ tandis que la tension de sortie de la cellule de lecture n'est qu'à $$5\,mV$$. On en déduit qu'il faut amplifier le signal d'entrée du préamplificateur par un facteur $$100$$, soit un gain de $$40\,dB$$. 
+
+Pour le casque HiFi, aucune valeur explicite n'est donnée sur la tension d'entrée, mais on les retrouve par la relation $$P_{max}\cdot R_{int}=V_{max}^2$$, soit $$V_{max}=3.3\,V$$ et $$I_{max}=60\,mA$$. Il faudra donc certainement réaliser un amplificateur sur la sortie des casques pour passer du $$0.5\,V$$ de sortie du préamplificateur au $$3.3\,V$$, et veiller à ce que la tension de sortie ne dépasse pas les $$60\,mA$$.
+
+En dernier lieu il faudra s'assurer que le niveau à la sortie soit réglable, on pensera donc à utiliser un potentiomètre adéquat pour la fonction à réaliser.
+
+=<span style="font-weight: 600;">Conception du circuit</span>=
+
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Circuit préliminaire (Séance 4)==
+</span></div>
+
+Comme vu dans la <a href="#sec1.2"><font color="black">partie 1.2</font></a>, nous choisirons de réaliser un préamplificateur avec un seul filtre de 2<sup>nd</sup> ordre <a href="#Fig1.4"><font color="black">&#91;Figure 1.4]</font></a>. Afin de respecter le cahier des charges, on crée un premier circuit dont la forme est donnée ci-dessous <a href="#Fig3.1"><font color="black">&#91;Figure 3.1]</font></a>:
+
+<div style="margin: 10px">
+  <center><a name="Fig3.1"><img src="https://i.ibb.co/XF8LsGZ/Screenshot-2023-11-18-135659.png" alt="Image description" width="600" height="200"></a><center>
+<p style="font-size:14px;text-align:center;"><i><br>Figure 3.1 Circuit préliminaire du préamplificateur</i></p>
+</div>  
+
+Ce circuit est séparé en trois parties différentes qui ont chacun une fonction particulière. La première partie est dédiée à respecter la résistance et la capacitance de charge avec $$R_{in}$$ et $$C_{in}$$. La deuxième compose le filtre de 2<sup>nd</sup> ordre qui donne l'égalisation RIAA. Et en dernier, une troisième partie qui a pour fonction de satisfaire les contraintes de sortie du haut-parleur et du casque.  <p></p>
+
+<div style="font-weight: 400; text-decoration: underline;font-size:15pt;bold;">
+<h5>Étude de circuit(Séance 3)<h5>
+</div>
+
+On notera l'apparition d'une résistance variable $$R3$$ à l'entrée du circuit préamplificateur. On utilisera un potentiomètre pour pouvoir ajuster le gain de notre préamplificateur afin de régler le niveau de sortie du haut-parleur et du casque. Pour déterminer sa valeur adéquate on rappelle que l'amplification de notre préamplificateur sans $$R_3$$ est donnée par: $$A=R_1+R_2$$. En rajoutant $$R_3$$ au circuit l'amplification devient: $$A=-\frac{R_1+R_2}{R_3}$$. Puisque l'amplification cherchée est $$|A|=100$$ pour $$1\,kHz$$ on retrouve $$R_3=\frac{1}{1000}(R_1+R_2)$$.
+
+Pour déterminer les valeurs de $$R_1$$ et $$R_2$$ on pose le système suivant: 
+
+<center>$$\begin{cases}
+\tau_1=R_1C_1\\
+\tau_2=\frac{R_1R_2}{R_1+R_2}(C_1+C_2)\qquad\\
+\tau_3=R_2C_2\\
+\end{cases}$$ On résout pour $$R_2$$: $$\qquad \displaystyle{\frac{R_2}{R_1}=\frac{\tau_3-\tau_2}{\tau_2-\tau_1}\approx 0.085}$$</center>
+<p></p>
+
+On a alors $$R_3=\frac{1}{1000}1.085R_1$$ et $$R_2=0.085R_1$$. Puisque l'on cherche des résistances de l'ordre de $$10\,k\Omega$$ on choisira de prendre  $$R_1=1\,M\Omega$$, ainsi on a $$R_2=85\,k\Omega$$ et $$R_3=10.085\,k\Omega$$. On déduit de ceci la capacitance nécessaire pour nos condensateurs: $$C_1=3.18\,nF$$ et $$C_2=882\,pF$$.
+
+Il nous reste donc plus que de trouver les valeurs des résistances $$R_4$$ et $$R_5$$ pour l'amplification à la sortie des casques. On rappelle que l'amplification cherchée est $$|A|=6.6$$. Ainsi en utilisant un montage amplificateur inverseur $$T(s)=-\frac{R_4}{R_5}$$, on a $$R_4=66\,k\Omega$$ et $$R_5=10\,k\Omega$$
+
+<div style="font-weight: 400; text-decoration: underline;font-size:15pt;bold;">
+<h5>Problèmes de circuit<h5>
+</div>
+
+Le premier grand problème sur le circuit préliminaire réalisé est la présence de la résistance variable $$R_3$$ sur l'entrée du circuit. Celle-ci est en parallèle avec $$R_{in}$$ ce qui modifie l'impédance d'entrée du circuit et le gain de notre préamplificateur. Afin de résoudre ceci on utilisera alors un suiveur pour séparer les deux circuits, permettant alors de garder une résistance d'entrée $$R_{in}$$ et un gain ne dépendant que de $$R_3$$.  <p></p>
+
+<div style="float: right; margin: 10px;">
+  <a name="Fig3.2"><img src="https://i.ibb.co/KmHK9Jm/Screenshot-2023-11-19-152657.png" alt="Image description" width="330" height="150"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Figure 3.2 Simulation LTSpice temporelle <br>$$\hspace{1.5cm}$$ du courant à la sortie casque</i></p>
+</div>
+
+Le second souci avec le montage vient lorsque l'on effectue une simulation du montage avec des AOP réels (LT1007) sur la sortie casque<a href="#Fig3.2"><font color="black">&#91;Figure 3.2]</font></a>. On constate que le courant fourni n'atteint pas les $$60\,mA$$ spécifiés dans le cahier des charges car le courant maximum délivré par l'AOP est à $$30\,mA$$. Pour cela on utilisera un buffer de courant, qui nous permettra d'atteindre les $$60\,mA$$ de courant de sortie. Celui-ci permet séparer la sortie de l'amplificateur et la charge $$R_{out}$$ mais s'assure que le courant délivré soit suffisant de façon à ce que la tension puisse rester à $$3.3\,V$$  <p></p>
+
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Circuit final (Séance 5)==
+</span></div>
+
+Après avoir trouvé et résolu les failles dans notre circuit préliminaire, nous avons alors construit le circuit final de notre préamplificateur. Il est donné par la figure ci-dessous <a href="#Fig3.3"><font color="black">&#91;Figure 3.3]</font></a>. En tant que suiveur nous mettrons un autre LT1007 et comme buffer de courant on utilisera le LT1010 permettant de fournir le courant requis.  <p></p>
+
+<div style="margin: 10px">
+  <center><a name="Fig3.3"><img src="https://i.ibb.co/vzN9SV9/Screenshot-2023-11-20-113219.png" alt="Image description" width="725" height="200"></a><center>
+<p style="font-size:14px;text-align:center;"><i><br>Figure 3.3 Circuit finalisé du préamplificateur</i></p>
+</div>  
+
+
+=<span style="font-weight: 600;">Simulation</span>=
+
+Après avoir réalisé le circuit final, il nous manque plus que de verifier son bon fonctionnement en effectuant des simulations sur LTSpice. On commence par vérifier que le circuit respecte bien l'égalisation RIAA. Pour cela on applique un signal sinusoïdal de $$5\,mV$$ à $$1\,kHz$$ sur l'entrée du circuit. On obtient alors le graphe suivant <a href="#Fig3.4"><font color="black">&#91;Figure 3.4]</font></a>
+
+<div style="float: right; margin: 10px;">
+  <a name="Fig4.1"><img src="https://i.ibb.co/svKKT8m/Screenshot-2023-11-20-160424.png" alt="Image description" width="330" height="150"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Figure 4.1 Simulation LTSpice frequentielle <br>$$\hspace{1cm}$$ du circuit à la sortie casque</i></p>
+</div>

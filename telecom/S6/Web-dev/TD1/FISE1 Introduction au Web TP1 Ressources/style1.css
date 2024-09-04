@@ -1,0 +1,17 @@
+@charset "ISO-8859-1";/* CSS Document */
+html{
+	color:#FFF;
+	background:#000;
+}
+
+body {
+	border-width: 5px;
+	border-style: solid;
+	border-color: green;
+}
+
+div {
+	border-width: 2px;
+	border-style: dotted;
+	border-color: red;
+}

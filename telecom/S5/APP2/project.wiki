@@ -1,0 +1,238 @@
+<div style = "text-align: justify; font-family: 'Computer Modern', serif; font-size:12.5pt; line-height: 1.3;" >
+
+=<span style="font-weight: 600;">Session n°1 (28/11)</span>=
+
+<div style = "text-align: justify; font-family: 'Computer Modern', serif; font-size:12.5pt; line-height: 1.3;" >
+
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Travaux en groupe==
+</span></div>
+<div style="font-weight: 400; text-decoration: underline;font-size:13pt;">
+===Quiz===
+</div>
+Lecture de la documentation technique et avancement dans les quiz.
+Complétion du Quiz 0, 1
+
+<div style="font-weight: 400; text-decoration: underline;font-size:13pt;">
+===Découverte du sujet===
+</div>
+
+Avant toute transmission d'information, il est nécessaire de caractériser le signal à transmettre afin de pouvoir identifier les besoins de la chaîne de transmission. Puisqu'il s'agit de transmettre un signal audio, nous cherchons donc à charactériser celui-ci. Pour ce faire, on effectue une analyse de la chanson <i>"Eruption"</i> de Van Halen dans le domaine temporel <a href="#Fig1.1"><font color="black">&#91;Figure 1.1]</font></a> et fréquentiel <a href="#Fig1.2"><font color="black">&#91;Figure 1.2]</font></a>. 
+
+
+<div style="float: right; margin: 0px;">
+  <a name="Fig1.2"><img src="https://i.ibb.co/3hx2Dk8/Screenshot-2023-12-16-190118.png" alt="Image description" width="380" height="190"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Fig1.2 Transformée de Fourier du signal audio</i></p>
+</div>
+
+<div style="float: left; margin: 0px;">
+  <a name="Fig1.1"><img src="https://i.ibb.co/kVZBzSm/Screenshot-2023-12-16-185708.png" alt="Image description" width="400" height="190"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Fig1.1 Analyse temporelle du signal audio</i></p>
+</div>
+
+À partir de l'analyse temporelle du signal on constate que celui-ci est de valeur moyenne nulle, et que sa valeur crête-à-crête est de $$360\,mV$$. La première remarque que l'on peut donc faire c'est qu'il va nous falloir une amplification quelquepart sur la chaine de transmission car l'amplitude de $$360\,mV$$ est une valeur assé faible pour pouvoir être numérisée.  <p></p>
+
+Ensuite, en s'intéréssant à l'analyse fréquentielle du signal, on remarque que celui-ci est composé de plusieurs fréquences, mais surtout qu'il semble y avoir un bruit de fond constant s'allongeant à plus de $$20\,kHz$$. Pour pouvoir determiner ce qui est ou pas du bruit de fond, on va donc devoir définir un rapport signal/bruit arbitrairement. En regardant le spectre du signal, on retrouve se bruit de fond à $$-71\,dBm$$ et une puissance maximale de $$-24dBm$$. Pour être certain de ne pas inclure trop de bruit sur notre signal de départ on impose un rapport signal/bruit de $$43\,dBm$$, considérant que tout signal en dessous de $$-67\,dBm$$ soit du bruit. Ceci correspond alors à une bande passante de &#91;0 Hz, 20 kHz]. <p></p>
+
+=<span style="font-weight: 600;">Session n°2 (5/12)</span>=
+
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Mise en commun de groupe==
+</span></div>
+
+Sur notre chaîne de transmission il nous faudra forcément un convertisseur analogique-numérique (CAN) car la modulation de notre signal sur la chaine de transmission se fera en numérique par l'intermédiaire d'un modulateur optique à modulation interne On-Off Keying(OOK). Cependant le CAN ne peut pas forcément recevoir le signal audio tel quel, en entrée il ne peut que recevoir des tensions entre $$0\,V$$ et $$5\,V$$, ainsi il faudra donc que l'on amplifie le signal audio et que l'on centre sa valeur moyenne à $$2.5\,V$$. Ceci vient du fait que l'on cherche la résolution la plus haute possible pour notre CAN, et que celui-ci ne peut pas recevoir de tension négative. <p></p>
+
+Pour respecter ses contraintes on utilisera donc le Programmable Gain Amplifier (PGA) du PSoC ainsi qu'un additionneur pour centrer la valeur moyenne du signal à $$2.5\,V$$. <p></p> 
+<div style="float: center; margin: 10px;">
+  <a name="Fig2.1"><img src="https://i.ibb.co/ryLhhFT/Screenshot-2024-01-03-114630.png" alt="Image description" width="700" height="95"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Fig2.1 Chaîne de transmission cherchée</i></p>
+</div>
+
+Il faudra aussi que l'on fasse attention au critère de Shannon quand à la fréquence d'échantillonnage du signal audio utilisé par le CAN. Pour ceci il faut bient s'assurer que $$f_e\geq2f_{max}$$ où $$f_e$$ est donné par l'horloge d'échantillonnage
+
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Travaux réalisés==
+</span></div>
+
+Dans un premier temps pour recentrer la valeur moyenne à $$2.5\,V$$ on peut s'aider des circuit sur la carte de dévleppement. L'intérupteur de recentrage du BNC1, celui-ci permet de recentrer notre signal à $$\frac{V_{dd}}{2}$$ où $$V_{dd}=5V$$ est la tension d'alimentation de la carte de développement. 
+
+<div style="float: right; margin: 10px;">
+  <a name="Fig2.2"><img src="https://i.ibb.co/vHXtFtg/Screenshot-2024-01-03-162905.png" alt="Image description" width="340" height="190"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Fig2.2 Circuit du PGA de sa datasheet</i></p>
+</div>
+
+Dans un second temps on s'intéresse au fonctionnement du PGA <a href="#Fig2.2"><font color="black">&#91;Figure 2.2]</font></a>. Celui-ci est composé de deux entrées $$\texttt{Input}$$ et $$\texttt{Reference}$$. L'entrée $$\texttt{Input}$$ est l'entrée sur laquelle on veut amplifier le signal, tandis que l'entrée $$\texttt{Reference}$$ est la masse de référence du PGA. Puisque celui ci se situe après l'additionneur on rappelle que le signal audio est de valeur moyenne non nulle, pour alors amplifier le signal correctement il faut que la référence du signal soit celle de la valeur moyenne. Pour ceci on utilise la masse analogique du signal $$\texttt{AGND}$$ de façon à correctement amplifier notre signal audio.  <p></p>
+
+Dans l'idéal il serait convenable d'avoir une amplification d'environ $$13$$ pour avoir la résolution la plus haute possible avec un signal de $$V_{cc}=360\,mV$$, cependant le PSoC ne peut qu'amplifier par des puissances de $$2$$. On choisra donc une amplification de $$8$$ pour ne pas sortir de la plage de tension du CAN. On règle alors le $$\texttt{Gain}$$ à $$8$$. <p></p>
+
+Pour démarrer le PGA on programme le PSoC dans le fichier $$\texttt{main.c}$$ de la façon suivante : <p></p>
+
+
+<div style="float: left; margin-left: 25px; border: 1px solid #000;margin:10px">
+<span style="padding-left: 5px;"><font color="gray">1</font><span style="padding-left: 20px;"><font color="blue"><tt>#include</tt></font><font color="red"> <tt>&lt;m8c.h&gt;</tt></font> <br>
+<span style="padding-left: 5px;"><font color="gray">2</font><span style="padding-left: 20px;"><font color="blue"><tt>#include</tt></font><font color="red"> <tt>"PSoCAPI.h"</tt></font> <br>
+<span style="padding-left: 5px;"><font color="gray">3</font><span style="padding-left: 20px;"> <br>
+<span style="padding-left: 5px;"><font color="gray">4</font><span style="padding-left: 20px;"><font color="blue"><tt>void</tt></font> <tt>main</tt>(<font color="blue"><tt>void</tt></font><tt>)</tt> { <br>
+    <span style="padding-left: 5px;"><font color="gray">5</font><span style="padding-left: 20px;"><span style="padding-left: 20px;"><font color="green"><tt>// Enable Global Interrupts</tt></font></span> <br>
+    <span style="padding-left: 5px;"><font color="gray">6</font><span style="padding-left: 20px;"><span style="padding-left: 20px;"><font color="black"><tt>M8C_EnableGInt;</tt></font></span> <br>
+    <span style="padding-left: 5px;"><font color="gray">7</font><span style="padding-left: 20px;"><span style="padding-left: 20px;"><font color="green"><tt>// Insert your main routine code here.</tt></font></span> <br>
+    <span style="padding-left: 5px;"><font color="gray">8</font><span style="padding-left: 20px;"><span style="padding-left: 20px;"><font color="black"><tt>PGA_1_Start(PGA_1_HIGHPOWER);</tt></span> <br>
+    <span style="padding-left: 5px;"><font color="gray">9</font><span style="padding-left: 20px;"><span style="padding-left: 20px;"><font color="blue"><tt>while</tt></font><tt>(1);</tt> </span><br>
+<span style="padding-left: 5px;"><font color="gray">10</font><span style="padding-left: 12px;">}
+</div>
+On remarque que l'on démarre le PGA sur un paramêtre $$\texttt{HIGHPOWER}$$. Ceci permet d'avoir une bande passante plus élevée sur l'amplification du signal pour un $$\texttt{Gain}$$ de $$8$$, comme décrit dans la datasheet sur la réponse fréquentielle du PGA. <p></p>
+
+<<<<<<< HEAD
+Pour pouvoir observer si le circuit complet fonctionne correctement un tilise la sortie $$\texttt{Analog Bus}$$ que l'on relie sur un des pins de la carte de développement. On oberserve alors le signal suivant à l'oscilloscope <a href="#Fig2.3"><font color="black">&#91;Figure 2.3]</font></a> pour un signal d'entrée de fréquence $$1\,kHz$$ et amplitude $$0.25\,V$$.  <p></p>
+=======
+Puisque nous avions un signal de valeur crête-à-crête $$0.5V$$ on cherche un gain de $$10$$ pour maximiser la précision du CAN. CEpendant le PGA ne fournit que certains gains dont 8 ou 16. On choisira alors le gain à 8 pour ne pas sortir de la plage de tension du CAN.        ºº
+>>>>>>> babed3558fb47e65f83c370c20d2239cde141fed
+
+<div style="float: right; margin: 10px;">
+  <a name="Fig2.3"><img src="https://i.ibb.co/2SN2KdM/Screenshot-2024-01-03-174710.png" alt="Image description" width="400" height="190"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Fig2.3 Sortie du PGA relevée sur oscilloscope</i></p>
+</div>
+
+On voit donc bien que le signal à été recentrée à $$2.5\,V$$ de valeur moyenne et que l'amplitude crête è crête du signal à été amplifiée à $$4V$$ ce qui corrspond bien à une amplification de $$8$$. Le PGA fonctionne donc bien comme il faut. <p></p>
+
+<font color="white">On voit donc bien que le signal à été recentrée à $$2.5\,V$$ de valeur moyenne et que l'amplitude crête è crête du signal à été amplifiée à $$4V$$ ce qui corrspond bien à une amplification de $$8$$. Le PGA fonctionne donc bien comme il faut. </font><p></p>
+=<span style="font-weight: 600;">Session n°3 (11/12)</span>=
+
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Types de CAN==
+</span></div>
+
+Après avoir fait correctement fonctionner le PGA et l'additionneur dans la séance précédente afin de réspecter les contraintes d'entrée du CAN, on s'intéresse donc maintenant à la numérisation. Pour cette étape nous disposons de plusieur choix de CAN, les trois grand groupes étant les CAN à approximation, les CAN à incrémentation et les CAN Delta-Sigma. <p></p>
+
+* Les CAN à approximation utilisent l'horloge donnée pour traiter la valeur du signal à numériser. Le principe de fonctionnement est le suivant : on compare la valeur du signal à numériser ($$4\,V$$ pour l'exemple) avec une référence, par exmeple $$2.5\,V$$ qui codé sur $$4$$ bits donne $$\texttt{1000}$$, si la valeur du signal est inféreieur à la référence on met le premier bit traité à $$0$$ et le bit suivant à $$1$$, sinon le bit traité est laissé à sa valeur et le bit suivant est mis à $$1$$. On recommence l'opération en prennant le prochain bit du mot comme le bit à traiter jusqu'à avoir un mot de $$4$$ bits: <p></p> 
+<center> <font color="blue"><tt>1</tt></font><tt>000</tt> (début) $$\overset{V_{in}>V_{ref}}{\longrightarrow}$$ <font color="green"><tt>1</tt></font><font color="blue"><tt>1</tt></font><tt>00</tt> $$\overset{V_{in}>V_{ref}}{\longrightarrow}$$ <font color="green"><tt>11</tt></font><font color="blue"><tt>1</tt></font><tt>0</tt> $$\overset{V_{in} &lt; V_{ref}}{\longrightarrow}$$ <font color="green"><tt>110</tt></font><font color="blue"><tt>1</tt></font> $$\overset{V_{in} &lt; V_{ref}}{\longrightarrow}$$  <font color="green"><tt>1100</tt></font>  </center>
+<p></p>
+
+* Les CAN à incrémentation sont les plus simples à mettre en place, ils sont composés d'un comparateur et d'un registre à décalage. Le principe de fonctionnement est le suivant : on compare la valeur du signal à numériser avec une référence, si la valeur du signal est supérieure à la référence on met un $$1$$ dans le registre à décalage, sinon on met un $$0$$. On décale alors la référence de moitié et on recommence l'opération jusqu'à avoir un registre à décalage de la taille voulue. <p></p>
+
+* Les CAN Delta-Sigma, sont composés similairement mais sur-échantillonnent le signal de façon à avoir une meilleure résolution. Le sur-échantillonage permet d'étendre l'erreure de quantification sur un spectre plus large, en appliquant alors un filtre décimateur passe-bas on élimine alors le bruit de quantification se trouvant en haute fréquence et on garde un signal numérisé de meilleure qualité et d'une fréquence d'échantillonage inférieure à celle du sur-échantillonage. <p></p>
+
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Choix du CAN==
+</span></div>
+
+<div style="float: right; margin: 10px;">
+  <a name="Fig3.1"><img src="https://i.ibb.co/wy20Y4s/Screenshot-2024-01-04-170922.png" alt="Image description" width="340" height="250"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Fig3.1 Resolution et fréquence d'échantillonage<br> de CAN différents $$\hspace{2cm}$$</i></p>
+</div>
+
+Afin de choisir le CAN le plus adapté pour notre signal audio on se réfère au graphe comparant chaque CAN disponible sur le PSoC <a href="#Fig3.1"><font color="black">&#91;Figure 3.1]</font></a>. Puisque notre signal audio peut aller jusqu'à $$20\,kHz$$, d'aprèsle critère de Shannon il est donc impératif d'avoir une fréquence d'échantillonage au dessus de $$40\,kHz$$. On constate alors que l'on à le choix entre trois CAN : le $$\texttt{SAR}$$, le $$\texttt{DelSig_1}$$ à modulateur simple, et le $$\texttt{DelSig_2}$$ à modulateur double. <p></p>
+
+Puisque le PSoC possède un procésseur $$8$$bits, il serai plus judicieux d'utiliser un CAN $$8$$bits. Le seul de ces CAN qui réspècte cette contrainte est le $$\texttt{DelSig_2}$$, on choisira donc celui-ci.  <p></p>
+
+D'après la documentation du $$\texttt{DelSig_2}$$, pour que le CAN puisse échantillonner à $$62 500\,sps$$ il faut que l'horloge soit à $$8\,MHz$$. On lui fournis donc l'horloge $$\texttt{VC1}$$ qui divise l'horloge du systeème par $$3$$. Le format de sortie du CAN peut-être choisis entre $$\texttt{unsigned}$$ et $$\texttt{signed}$$ ce qui signifie que les valeurs de sortie du CAN sera entre $$0$$ et $$256$$ ou entre $$-128$$ et $$127$$. On choisira donc un format de sortie $$\texttt{unsigned}$$, mais $$\texttt{signed}$$ peut être également choisit, tant que l'on adapte la CNA de la même façon.  <p></p>
+
+Pour $$\texttt{ClockPhase}$$ mettra sur $$\texttt{Normal}$$ de façon à ce que chaque bit se situe sur le front montant de l'horloge à différence du $$\texttt{Swapped}$$ qui décale les bits par rapport au front montant de l'horloge. Les entrées positives et négatives ($$\texttt{PosInput}$$ et $$\texttt{NegInput}$$) seront déconnéctées ($$\texttt{NegInputGain : Disconnected}$$) car on ne veut pas de comparateur sur le CAN, on veut que celui-ci échantillonne le signal directement ($$\texttt{PosInput: ACB00}$$).  <p></p> 
+
+On fera également le choix d'utiliser le PWM (Pulse Width Modulation) avec un cycle $$\alpha = 50%$$ et on reliera également la sortie du CAN au CNA qui sera réglé avec un horloge de $$2\,MHz$$ ce qui se situe entre la l'horloge maximale du CNA ($$3.2\,MHz$$) et la fréquence minimale pour $$62 500\,sps$$ à $$8$$bits ($$1.6\,MHz$$).  <p></p>
+
+<div style="float: left; margin-left: 25px; border: 1px solid #000;margin:10px">
+<span style="padding-left: 5px;"><font color="gray">1</font><span style="padding-left: 20px;"><font color="blue"><tt>#include</tt></font><font color="red"> <tt>&lt;m8c.h&gt;</tt></font> <br>
+<span style="padding-left: 5px;"><font color="gray">2</font><span style="padding-left: 20px;"><font color="blue"><tt>#include</tt></font><font color="red"> <tt>"PSoCAPI.h"</tt></font> <br>
+<span style="padding-left: 5px;"><font color="gray">3</font><span style="padding-left: 20px;"> <br>
+<span style="padding-left: 5px;"><font color="gray">4</font><span style="padding-left: 20px;"><font color="blue"><tt>char</tt></font><tt> dataOUT=0;</tt><br>
+<span style="padding-left: 5px;"><font color="gray">5</font><span style="padding-left: 20px;"><font color="blue"><tt>void</tt></font> <tt>main</tt>(<font color="blue"><tt>void</tt></font><tt>) {</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">6</font><span style="padding-left: 40px;"><font color="green"><tt>// Enable Global Interrupts</tt></font> <br>
+    <span style="padding-left: 5px;"><font color="gray">7</font><span style="padding-left: 40px;"><tt>M8C_EnableGInt;</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">8</font><span style="padding-left: 40px;"><font color="green"><tt>// Insert your main routine code here.</tt></font><br>
+    <span style="padding-left: 5px;"><font color="gray">9</font><span style="padding-left: 40px;"><tt>PGA_1_Start(PGA_1_HIGHPOWER);</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">10</font><span style="padding-left: 32px;"><tt>DAC8_Start(DAC8_HIGHPOWER);</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">11</font><span style="padding-left: 32px;"><tt>DelSig_2_Start(DelSig_2_HIGHPOWER);</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">12</font><span style="padding-left: 32px;"><tt>DelSig_2_StartAD();</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">13</font><span style="padding-left: 32px;"> <br>
+    <span style="padding-left: 5px;"><font color="gray">14</font><span style="padding-left: 32px;"><font color="blue"><tt>while</tt></font><tt>(1) {</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">15</font><span style="padding-left: 52px;"><font color="blue"><tt>if</tt></font><tt> (DelSig_2_fIsDataAvailable()) {</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">16</font><span style="padding-left: 72px;"><tt>dataOUT = DelSig_2_cGetDataClearFlag();</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">17</font><span style="padding-left: 72px;"><tt>DAC8_WriteBlind(dataOUT);</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">18</font><span style="padding-left: 52px;"><tt>}</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">19</font><span style="padding-left: 32px;"><tt>}</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">20</font><span style="padding-left: 12px;"><tt>}</tt>
+</div>
+
+Premierement on déclare une varirable $$\texttt{dataOUT}$$ qui nous servira à stocker la valeur numérique du signal audio. Ensuite on démarre le PGA, le CNA et le CAN en mode $$\texttt{HIGHPOWER}$$, pour le CNA en particulier cela permet d'avoir une horloge maximale à $$3.2\,MHz$$. On démarre également le modulateur DelSig du CAN avec $$\texttt{StartAD()}$$.  <p></p>
+
+Avec ceci on peut alors récuperer la valeur numérique du signal directement du CAN avec $$\texttt{DelSig_2_cGetDataClearFlag()}$$, et pour verifier que ce signal soit correctement numérisé on revoit celui-ci sur le CNA avec $$\texttt{DAC8_WriteBlind(dataOUT)}$$.  <p></p>
+
+Les branchement nécéssaires sont ensuite éfféctuées sur le PSoC de façon à pouvoir observer le PWM du CAN, la sortie du CNA et le signal audio de départ.  <p></p>
+
+<div style="float: right; margin: 0px;">
+  <a name="Fig3.3"><img src="https://i.ibb.co/yshQ7ZQ/Screenshot-2024-01-05-163605.png" alt="Image description" width="390" height="190"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Fig3.3 Sortie du CNA relevée sur oscilloscope</i></p>
+</div>
+
+<div style="float: left; margin: 0px;">
+  <a name="Fig3.2"><img src="https://i.ibb.co/KVLm5GK/Screenshot-2024-01-05-170114.png" alt="Image description" width="390" height="190"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Fig3.2 Sortie du PWM relevée sur oscilloscope</i></p>
+</div>
+
+
+=<span style="font-weight: 600;">Session n°4 (12/12)</span>=
+
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Problèmes d'horloge==
+</span></div>
+
+Conitnuer le projet à été difficile nous avions rechargé les données du projet que nous avion sauvegardé la séance précédente mais l'une des clock au CNA était mal réglée par rapport au multiplexeur d'horloge sur le circuit du PGA. Puisqu'il ne coincidait pas avec l'horloge passée en paramêtre sur le block du CNA, le CNA n'avais pas la bonne horloge pour reconvertir les données en Analogique. <p></p>
+
+<b>1H30 de perdue sur la résolution de ce problème</b>
+
+<div style="margin-left: 1.5cm;">
+== <span style="font-weight: 600;">Transmission Optique==
+</span></div>
+
+Jusqu'ici nous avons reussi à numériser le signal audio et d'effectuer une conversion en signal analogique rapide. Pour réaliser la communication entre deux appareils il faut cependant pouvoir transmettre ce signal à travers une fibre optique. La liaison en série s'effectuera en suivant la norme RS-232 à l'aide d'un serialiseur ainsi qu'un UART, demanière à pouvoir transmettre le signal de façon asynchrone. <p></p>
+
+Pour ceci nous utiliserons le bloc émetteur $$\texttt{TX8}$$ ainsi qu'un bloc recepteur $$\texttt{RX8}$$. La transmission se fera à $$\texttt{BAUDS}\,bps$$, avec un bit de start, $$8$$ bits de données et un bit de stop. On ne fera pas l'utilisation du bit de paritée pour l'instant car il n'y a pas besoin de vérifier l'intégrité du signal. <p></p>
+
+Afin de transmettre ce signal on configurera l'horloge liée au $$\texttt{TX8}$$ et $$\texttt{RX8}$$ à $$48\,MHz$$ ($$\textt{2*SysClock}$$) de façon a réaliser la communication en asynchrone. Alors $$\texttt{ClockSync}$$ sera désynchronisé, et on relèvera des intéruption lorsque le buffer du $$\texttt{TX8}$$ aura fini de trasnmètre les données, avec $$\texttt{TXComplete}$$. <p></p>
+
+La sortie est alors cablée sur la carte de développement à la borne $$\texttt{TX}$$, ce qui enverra le signal directement à l'émetteur optique($$\texttt{T-1521Z}$$). On remarquera que lors de la reception ($$\texttt{R-2521Z}$$), la photodiode qui récupère l'information optique en branché sur la base d'un transistor en mode pull-up  ce qui implique que lorsque la photodiode reçois de la lumière la sortie est directement connéctée à la masse $$0\, V$$, et vaut $$5\,V$$ sinon.   <p></p>
+
+
+<div style="float: left; margin: 0px;">
+  <a name="Fig4.1"><img src="https://i.ibb.co/B3mcwJc/Screenshot-2024-01-10-111959.png" alt="Image description" width="390" height="190"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Fig4.1 Sortie de $$\texttt{OutputDataClock}$$ et $$\texttt{Output}$$ du $$\texttt{TX8}$$</i></p>
+</div>
+
+<div style="float: right; margin: 0px;">
+  <a name="Fig4.1"><img src="https://i.ibb.co/7KHCCzW/Screenshot-2024-01-10-114321.png" alt="Image description" width="390" height="190"> </a>
+<p style="font-size:14px;text-align:center;"><i><br>Fig4.2 Sortie de $$\texttt{OutputDataClock}$$ du $$\texttt{TX8}$$ et $$\texttt{PWM}$$ du CAN</i></p>
+</div>
+
+
+
+
+
+<div style="float: left; margin-left: 25px; border: 1px solid #000;margin:10px">
+<span style="padding-left: 5px;"><font color="gray">1</font><span style="padding-left: 20px;"><font color="blue"><tt>#include</tt></font><font color="red"> <tt>&lt;m8c.h&gt;</tt></font> <br>
+<span style="padding-left: 5px;"><font color="gray">2</font><span style="padding-left: 20px;"><font color="blue"><tt>#include</tt></font><font color="red"> <tt>"PSoCAPI.h"</tt></font> <br>
+<span style="padding-left: 5px;"><font color="gray">3</font><span style="padding-left: 20px;"> <br>
+<span style="padding-left: 5px;"><font color="gray">4</font><span style="padding-left: 20px;"><font color="blue"><tt>char</tt></font><tt> dataOUT=0;</tt><br>
+<span style="padding-left: 5px;"><font color="gray">5</font><span style="padding-left: 20px;"><font color="blue"><tt>void</tt></font> <tt>main</tt>(<font color="blue"><tt>void</tt></font><tt>) {</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">6</font><span style="padding-left: 40px;"><font color="green"><tt>// Enable Global Interrupts</tt></font> <br>
+    <span style="padding-left: 5px;"><font color="gray">7</font><span style="padding-left: 40px;"><tt>M8C_EnableGInt;</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">8</font><span style="padding-left: 40px;"><font color="green"><tt>// Insert your main routine code here.</tt></font><br>
+    <span style="padding-left: 5px;"><font color="gray">9</font><span style="padding-left: 40px;"><tt>PGA_Start(PGA_HIGHPOWER);</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">10</font><span style="padding-left: 32px;"><tt>DelSig_2_Start(DelSig_2_HIGHPOWER);</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">11</font><span style="padding-left: 32px;"><tt>DelSig_2_StartAD();</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">12</font><span style="padding-left: 32px;"><tt>TX8_Start(TX8_PARITY_NONE);</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">13</font><span style="padding-left: 32px;"> <br>
+    <span style="padding-left: 5px;"><font color="gray">14</font><span style="padding-left: 32px;"><font color="blue"><tt>while</tt></font><tt>(1) {</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">15</font><span style="padding-left: 52px;"><font color="blue"><tt>if</tt></font><tt> (DelSig_2_fIsDataAvailable()) {</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">16</font><span style="padding-left: 72px;"><tt>dataOUT = DelSig_2_cGetDataClearFlag();</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">17</font><span style="padding-left: 72px;"><tt>TX8_SendData(dataOUT);</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">18</font><span style="padding-left: 52px;"><tt>}</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">19</font><span style="padding-left: 32px;"><tt>}</tt> <br>
+    <span style="padding-left: 5px;"><font color="gray">20</font><span style="padding-left: 12px;"><tt>}</tt>
+</div>
+
+On démare le $$\texttt{TX8}$$ en mode $$\texttt{PARITY_NONE}$$ ce qui permet donc de ne pas utiliser le bit de parité. On envoit ensuite les données du CAN directement sur le $$\texttt{TX8}$$ avec $$\texttt{TX8_SendData(dataOUT)}$$. Ce qui permet de serialiser la donnée de manière être lisible par l'UART de réception.  <p></p>
+
+On constatera <a href="#Fig4.1"><font color="black">&#91;Figure 4.1]</font></a> que la tramme du signal de sortie du $$\texttt{TX8}$$ est plus long que les $8$bits de donnée initialement envoyé par le CAN. Ceci vient du fait que l'on est en liaision asynchrone entre UART, ce qui veut dire que l'on doit envoyer un bit de start et un bit de stop pour chaque donnée envoyée. Pour determiner parmit la tramme envoyé quels sont les bits de données on peut s'aider de l'horloge des données $$\texttt{DataClockOut}$$ qui sur chaque front montant de l'horloge désigne les bits de donnés.  <p></p>
+
+De plus on remarque aussi <a href="#Fig4.2"><font color="black">&#91;Figure 4.2]</font></a> qu'il existe un délai entre l'envoi des données du CAN et l'envoi de la tramme du $$\texttt{TX8}$$. Ce délai, souvent appelé le <i>temps critique</i>, vient du fait que le code mets un certain temps non-négligeable à commander le $$\texttt{TX8}$$ d'envoyer la tramme. C'est pourquoi en utilisant une fonction plus lente ($$\texttt{TX8_PutChar()}$$) à la place du $$\texttt{TX8_SendData()}$$ on a des soucis de d'envoi de la tramme. Le temps critique devient trop grand et la tramme envoyé est coupée par l'envoi de la tramme suivante (indiqué par le PWM du CAN).  <p></p>

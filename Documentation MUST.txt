@@ -1,0 +1,13 @@
+Documentation should include:
+
+1. Description: Provide a clear and concise description of what the program/library is supposed to do. Explain its purpose and the problem it solves.
+
+2. User API: Describe the user API, including the functions, classes, and methods available for users to interact with the program/library. Provide detailed usage instructions, including tutorials and examples to help users understand how to use it effectively.
+
+3. Implementation Strategy: Provide a high-level description of the implementation strategy used in the program/library. Explain the overall architecture, design patterns, and algorithms employed to achieve the desired functionality.
+
+4. Rationale and Motivation: Clearly state the rationale and motivation behind the design and implementation choices. Explain why certain features were included or excluded, and how they align with the overall goals and objectives of the program/library.
+
+5. References and External Resources: Include references to any external resources, such as documentation, specifications, or related research papers, that were used during the development of the program/library.
+
+Remember to keep the documentation up-to-date and aligned with the latest version of the program/library.

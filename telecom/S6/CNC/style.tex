@@ -1,0 +1,280 @@
+\usepackage[a4paper, total={16cm, 22.125cm}]{geometry}
+
+% Page Style
+\usepackage[]{environ}
+% Cover Page 
+\usepackage{tikz}
+\makeatletter
+\def\parsecomma#1,#2\endparsecomma{\def\page@x{#1}\def\page@y{#2}}
+\tikzdeclarecoordinatesystem{page}{
+    \parsecomma#1\endparsecomma
+    \pgfpointanchor{current page}{north east}
+    % Save the upper right corner
+    \pgf@xc=\pgf@x%
+    \pgf@yc=\pgf@y%
+    % save the lower left corner
+    \pgfpointanchor{current page}{south west}
+    \pgf@xb=\pgf@x%
+    \pgf@yb=\pgf@y%
+    % Transform to the correct placement
+    \pgfmathparse{(\pgf@xc-\pgf@xb)/2.*\page@x+(\pgf@xc+\pgf@xb)/2.}
+    \expandafter\pgf@x\expandafter=\pgfmathresult pt
+    \pgfmathparse{(\pgf@yc-\pgf@yb)/2.*\page@y+(\pgf@yc+\pgf@yb)/2.}
+    \expandafter\pgf@y\expandafter=\pgfmathresult pt
+}
+\makeatother
+
+
+% Object formatting
+\usepackage[12pt]{moresize}
+\usepackage[]{anyfontsize}
+\usepackage{titlesec}
+\usepackage{import}
+\usepackage{floatrow}
+\usepackage{enumitem}
+\usepackage{changepage}
+\usepackage[normalem]{ulem}
+\usepackage{array}
+\newcommand{\ul}[1]{\underline{#1}}
+
+\usepackage[]{chngcntr}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\usepackage[format=plain, labelfont=it, textfont=it]{caption}
+\makeatletter
+\def\@makecaption#1#2{%
+    \vskip\abovecaptionskip
+    \sbox\@tempboxa{\textit{#1. #2}}
+    \ifdim \wd\@tempboxa >\hsize
+        #1. #2\par
+    \else
+        \global \@minipagefalse
+        \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}
+    \fi
+    \vskip\belowcaptionskip}
+\makeatother
+
+\DeclareCaptionFormat{underline}{\uline{#1#2#3}\par}
+
+% Sections
+\titleformat{\section}{\fontsize{16}{19.2}\bfseries}{\thesection.}{0.25em}{}
+\titleformat{\subsection}{\fontsize{14}{16.8}\bfseries}{\tab\thesubsection.}{0.25em}{}
+\titleformat{\subsubsection}{\fontsize{10}{12}}{\uline{\thesubsubsection)\enspace}}{0em}{\uline}
+
+
+
+
+
+% Geometry
+
+% Typewritting
+
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
+
+\newenvironment{items}[3][0pt]
+{\def\closesep{#3}
+    \vspace{#2}
+    \begin{itemize}
+        \setlength{\itemsep}{#1}
+        \setlength{\topsep}{0pt}
+        \setlength{\partopsep}{0pt}}
+        {\end{itemize}
+    \vspace{\closesep}}
+
+\newenvironment{enum}[3][0pt]
+{\defclosesep{#3}
+    \vspace{#2}
+    \begin{enumerate}
+        \setlength{\itemsep}{#1}
+        \setlength{\topsep}{0pt}
+        \setlength{\partopsep}{0pt}}
+        {\end{enumerate}
+    \vspace{\closesep}}
+
+\newenvironment{eq}[2]
+{\def\closesep{#2}
+    \vspace{#1}
+    \begin{align*}}
+        {\end{align*}
+    \vspace{\closesep}}
+
+\newenvironment{lfeq}[2]
+{\def\closesep{#2}
+    \vspace{#1}
+    \begin{flalign*}}
+        {\end{flalign*}
+    \vspace{\closesep}}
+% List Formatting
+
+
+\NewEnviron{dent}[1]{
+    \vspace{-10pt}
+    \begin{adjustwidth}{7mm}{7mm}
+        \uline{#1}\hspace{2mm}
+        \BODY
+    \end{adjustwidth}
+    \vspace{-10pt}
+}
+
+
+\usepackage[framemethod=tikz]{mdframed}
+\newcounter{count_theorem}[section]\setcounter{count_theorem}{0}
+\newcommand{\thetheorem}{\arabic{count_theorem}}
+
+\newcounter{count_exercise}[section]\setcounter{count_exercise}{0}
+\newcommand{\theexercise}{\arabic{count_exercise}}
+
+
+\newenvironment{theorem}[1][]{
+    \refstepcounter{count_theorem}
+    \mdfsetup{
+        linecolor=red!30,
+        innerbottommargin=10pt,
+        linewidth=2pt,
+        topline=false,
+        bottomline=false,
+        rightline=false,
+        shadow=true,
+        shadowsize=4.5pt,
+        frametitlerule=false,
+        apptotikzsetting={
+                \tikzset{
+                    mdfbackground/.append style={
+                            left color=red!8,right color=red!3
+                        }
+                }
+            }
+    }
+    \begin{mdframed}[]\relax
+        \ifstrempty{#1}
+        {\textbf{Theorem~\thetheorem.} }
+        {\textbf{Theorem~\thetheorem.~#1} }
+        }
+        {\end{mdframed}\vspace{-10pt}
+}
+
+\newenvironment{note}{
+    \mdfsetup{innertopmargin=5pt,
+        linecolor=gray!30,
+        linewidth=2pt,
+        topline=false,
+        bottomline=false,
+        rightline=false,
+        frametitleaboveskip=0pt,
+        shadow=false,
+        shadowsize=4pt,
+        frametitlerule=false,
+        apptotikzsetting={
+                \tikzset{
+                    mdfbackground/.append style={
+                            left color=gray!8,right color=gray!3
+                        }
+                }
+            }
+    }
+    \begin{mdframed}[]\relax
+        \textbf{Note. }
+        }
+        {\end{mdframed}\vspace{-10pt}
+}
+
+\newenvironment{example}{
+    \mdfsetup{innertopmargin=5pt,
+        linecolor=green!30,
+        linewidth=2pt,
+        topline=false,
+        bottomline=false,
+        rightline=false,
+        frametitleaboveskip=0pt,
+        shadow=false,
+        shadowsize=4pt,
+        frametitlerule=false,
+        apptotikzsetting={
+                \tikzset{
+                    mdfbackground/.append style={
+                            left color=green!7,right color=green!2
+                        },
+                    mdfframetitlebackground/.append style={
+                            left color=green!7,right color=green!2
+                        }
+                }
+            }
+    }
+    \begin{mdframed}[]\relax
+        \textbf{Example. }
+        }
+        {\end{mdframed}\vspace{-10pt}
+}
+
+
+\usetikzlibrary{calc,arrows}
+
+\tikzset{
+    excursus arrow/.style={%
+            line width=2pt,
+            draw=gray!40,
+            rounded corners=2ex,
+        },
+    excursus head/.style={
+            fill=white,
+            font=\bfseries\sffamily,
+            text=gray!80,
+            anchor=base west,
+        },
+    excursus line/.style={%
+            line width=2pt,
+            draw=gray!40,
+            rounded corners=2ex,
+        }
+}
+
+\newenvironment{exercise}[1][]{%
+    \refstepcounter{count_exercise}
+    \mdfsetup{
+        singleextra={
+                \path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+                \path let \p1=(Q), \p2=(O) in (\x1,{(\y1-\y2)/2}) coordinate (M);
+                \path [excursus line] ($(O)+(5em,0ex)$) -| (M) |- ($(Q)+(20em,0ex)$);
+                \node [excursus head] at ($(Q)+(2.5em,-0.75pt)$) {\ifstrempty{#1}{Exercise \theexercise}{Exercise \theexercise:~#1}};},
+        firstextra={
+                \path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+                \path [excursus arrow,-to] (O) |- ($(Q)+(12em,0ex)$) .. controls +(0:16em) and +(185:6em) .. ++(23em,2ex);},
+        middlelinewidth=2.5em,middlelinecolor=white,
+        hidealllines=true,topline=true,
+        innertopmargin=0.5ex,
+        innerbottommargin=2.5ex,
+        innerrightmargin=2pt,
+        innerleftmargin=2ex,
+        skipabove=0.87\baselineskip,
+        skipbelow=0.62\baselineskip,
+    }
+    \begin{mdframed}[]\relax}
+        {\end{mdframed}\vspace{-10pt}
+}
+
+% Functions and Data Plotting
+\usepackage{subfig,wrapfig,adjustbox,multirow}
+
+
+% Plotting Style
+\usepackage{graphicx,pgfplots}
+\usetikzlibrary{arrows}
+\usetikzlibrary {patterns,patterns.meta}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{compat=1.18}
+
+\usepgfplotslibrary{units}
+% Logarithmic Scale
+\pgfplotsset{
+    log x ticks with fixed point/.style={
+            xticklabel={
+                    \pgfkeys{/pgf/fpu=true}
+                    \pgfmathparse{exp(\tick)}%
+                    \pgfmathprintnumber[fixed relative, precision=3]{\pgfmathresult}
+                    \pgfkeys{/pgf/fpu=false}
+                }
+        }
+}
+

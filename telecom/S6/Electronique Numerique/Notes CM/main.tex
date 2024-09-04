@@ -1,0 +1,63 @@
+\documentclass[11pt, openright]{book}
+
+    % Cover Variables
+    \newcommand{\ctoptitle}{}
+    \newcommand{\ctitle}{Title}
+    \newcommand{\cautor}{Author}
+    \newcommand{\cdate}{day.month.year}
+    \newcommand{\sectittle}{Second Title}
+
+
+    % Header Variables
+        \newcommand{\headRE}{Main Topic}
+        \newcommand{\headLE}{\emph{\rightmark}}
+        \newcommand{\footRE}{Lucas Lescure $-$ \cdate}
+        \newcommand{\footLE}{\emph{\thepage}}
+
+    % TOC Variables
+        \newcommand{\toctitle}{Table of Content}
+        
+        \newcommand{\tocchapter}{Chapter}
+        \newcommand{\toccount}{3}
+  
+    % Chapter Variables
+        \newcommand{\chvar}{Chapter -}
+
+\input{/root/.config/latex-utils/common/style.tex}
+\input{/root/.config/latex-utils/common/math.tex}
+\input{/root/.config/latex-utils/common/header.tex}
+\input{/root/.config/latex-utils/common/toc.tex}
+
+    % figure support
+    \usepackage{import}
+    \usepackage{xifthen}
+    \pdfminorversion=7
+    \usepackage{pdfpages}
+    \usepackage{transparent}
+    \newcommand{\incfig}[1]{%
+            \def\svgwidth{\columnwidth}
+            \import{./figures/}{#1.pdf_tex}
+    }
+
+    \pdfsuppresswarningpagegroup=1
+
+
+\begin{document}
+% Spacing
+\input{/root/.config/latex-utils/common/begin.tex}
+
+% Cover
+\input{/root/.config/latex-utils/common/cover.tex}
+    
+    \newpage
+
+    
+
+\end{document}
+
+
+
+
+
+
+
