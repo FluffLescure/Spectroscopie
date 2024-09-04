@@ -1,0 +1,84 @@
+\documentclass[11pt, openright]{book}
+
+    % Cover Variables
+    \newcommand{\ctoptitle}{}
+    \newcommand{\ctitle}{Title}
+    \newcommand{\cautor}{Author}
+    \newcommand{\cdate}{day.month.year}
+    \newcommand{\sectittle}{Second Title}
+
+
+    % Header Variables
+        \newcommand{\headRE}{Mucas Lescure $-$ k}
+        \newcommand{\headLE}{\emph{\rightmark}}
+        \newcommand{\footRE}{Lcdate}
+        \newcommand{\footLE}{\emph{\thepage}}
+
+    % TOC Variables
+        \newcommand{\toctitle}{Table of Content}
+        
+        \newcommand{\tocchapter}{Chapter}
+        \newcommand{\toccount}{3}
+  
+    % Chapter Variables
+        \newcommand{\chvar}{Chapter -}
+        \newcommand{\figcountdepth}{1}
+
+\input{~/.config/latex-utils/common/style.tex}
+\input{~/.config/latex-utils/common/math.tex}
+\input{~/.config/latex-utils/common/header.tex}
+\input{~/.config/latex-utils/common/toc.tex}
+
+    % figure support
+    \usepackage{import}
+    \usepackage{xifthen}
+    \pdfminorversion=7
+    \usepackage{pdfpages}
+    \usepackage{transparent}
+    \newcommand{\incfig}[1]{%
+            \def\svgwidth{\columnwidth}
+            \import{./figures/}{#1.pdf_tex}
+    }
+
+    \pdfsuppresswarningpagegroup=1
+
+
+\begin{document}
+% Spacing
+\input{~/.config/latex-utils/common/begin.tex}
+
+% Cover
+\input{~/.config/latex-utils/common/cover.tex}
+    
+\pagestyle{fancy}
+    \newpage
+
+        \section{Title4}
+            \subsection{title5}
+                \subsubsection{title6}
+
+        $\frac{1}{2x}$ $\ds{\frac{1}{2x}}$  
+
+         \begin{figure}[ht!]
+            \centering
+            \includegraphics[width=0.6\textwidth]{./figs/banner.png}
+            \caption{khkjhkjhkjhkjh}
+            \label{fig:img}
+        \end{figure}
+
+        Figure \ref{fig:img} shows a banner. Cats are dumb\cite{catslove}.  
+
+        \begin{thebibliography}
+
+        \bibitem{catslove}{Cite any page or article with a single click right from your browser. The extension does the hard work for you by automatically grabbing the title, author(s), publication date, and everything else needed to whip up.}
+
+        \end{thebibliography}
+
+        
+
+        
+
+
+        
+
+\end{document}
