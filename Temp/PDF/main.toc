@@ -1,8 +1,0 @@
-\babel@toc {english}{}\relax 
-\addvspace {-10\p@ }
-\addvspace {-10\p@ }
-\addvspace {-10\p@ }
-\contentsline {section}{\numberline {1}Décomposition en éléments simples}{6}{section.0.1}%
-\addvspace {1\p@ }
-\contentsline {subsection}{\numberline {1.1}Exercise 1}{6}{subsection.0.1.1}%
-\contentsfinish 
